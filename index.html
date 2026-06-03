@@ -1278,6 +1278,180 @@ const FOODS = [
     desc:"Rich classical sauce with Madeira, mushrooms, olives, and cock's combs (crête de coq); garnish for vol-au-vent and quenelles. Not the dessert.",
     r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"n" },
     notes:{ kosher:"Madeira wine (must be kosher) and cock's combs require certification; rarely prepared kosher.", halal:"Madeira wine makes it non-halal in traditional form." }},
+
+  // ─── FISH: ENGLISH / JAPANESE — KOSHER STATUS ─────────────────────────────
+  // Kosher rule: must have fins AND cycloid/ctenoid scales removable without tearing skin.
+
+  { name:"Salmon / Sake",              cat:"Fish",
+    desc:"Atlantic or Pacific salmon (鮭 / サーモン). One of the most popular sushi fish worldwide; rich, fatty flesh with prominent cycloid scales.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Salmon has clearly visible cycloid scales easily separated from the skin — a textbook kosher fish." }},
+
+  { name:"Saba / Mackerel",            cat:"Fish",
+    desc:"Japanese mackerel (鯖 / サバ). Oily, strongly flavoured; served cured (shime-saba), as battera pressed sushi, salt-grilled, or simmered.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Well-developed cycloid scales; fully kosher." }},
+
+  { name:"Tai / Red Sea Bream",        cat:"Fish",
+    desc:"Red sea bream (真鯛 / マダイ). The prestige fish of Japanese cuisine, served at celebrations. Known as dorade royale in France and Spain.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Prominent ctenoid scales easily removed; fully kosher." }},
+
+  { name:"Hirame / Flounder",          cat:"Fish",
+    desc:"Olive flounder (平目 / ヒラメ). Prized flatfish in Japan; subtle, clean white flesh. Left-eyed. The fin-edge muscle, engawa, is a separate delicacy.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Small cycloid scales; kosher." }},
+
+  { name:"Engawa / Flounder Fin",      cat:"Fish",
+    desc:"Fin-edge muscle of flounder (縁側 / エンガワ). Thin, ruffled slices with a rich, slightly chewy texture from the constant movement of the fin. A sushi counter favourite.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cut from flounder, a kosher fish." }},
+
+  { name:"Karei / Japanese Flounder",  cat:"Fish",
+    desc:"Japanese right-eyed flounder (鰈 / カレイ). Milder than hirame; often simmered in soy and mirin (karei nitsuke) or served as karaage.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales; kosher." }},
+
+  { name:"Kohada / Gizzard Shad",      cat:"Fish",
+    desc:"Gizzard shad (小鰭 / コハダ). A quintessential Edo-mae sushi fish; small and silver-skinned, cured in salt and vinegar. The adult form is konoshiro (鰶).",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales; kosher." }},
+
+  { name:"Aji / Horse Mackerel",       cat:"Fish",
+    desc:"Japanese horse mackerel (鯵 / アジ). Staple of izakaya and sushi menus; served as tataki (lightly seared with ginger), sashimi, or salt-grilled whole.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales along lateral line; kosher." }},
+
+  { name:"Shima Aji / Striped Jack",   cat:"Fish",
+    desc:"Striped jack or white trevally (縞鯵 / シマアジ). A premium sushi fish; firm, rich, sweet flesh. Among the most sought-after fish at high-end sushi bars.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Trevally has scales; kosher." }},
+
+  { name:"Kanpachi / Greater Amberjack", cat:"Fish",
+    desc:"Greater amberjack (間八 / カンパチ). Related to hamachi; firmer texture, cleaner and less fatty. Prized for sashimi at premium sushi bars.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Amberjack has scales; kosher." }},
+
+  { name:"Hiramasa / Yellowtail Amberjack", cat:"Fish",
+    desc:"Yellowtail amberjack (平政 / ヒラマサ). Similar to hamachi but leaner and firmer; considered superior by many sushi chefs. Predominantly wild-caught.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Has scales; kosher." }},
+
+  { name:"Buri / Adult Yellowtail",    cat:"Fish",
+    desc:"Adult yellowtail (鰤 / ブリ). The mature form of hamachi; richer and fattier. Winter buri (寒ブリ) from the Sea of Japan is a seasonal delicacy.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Yellowtail family; has scales; kosher." }},
+
+  { name:"Katsuo / Skipjack Tuna",     cat:"Fish",
+    desc:"Skipjack tuna or bonito (鰹 / カツオ). Eaten as katsuo tataki — quickly seared and served with ponzu and ginger. Also the primary source of katsuobushi flakes.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Small cycloid scales; kosher." }},
+
+  { name:"Mebachi / Bigeye Tuna",      cat:"Fish",
+    desc:"Bigeye tuna (目鉢 / メバチ). Higher fat content than yellowfin; the most common source of chūtoro at mid-range sushi bars. Named for its notably large eyes.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Tuna has scales; kosher." }},
+
+  { name:"Kinmedai / Splendid Alfonsino", cat:"Fish",
+    desc:"Splendid alfonsino (金目鯛 / キンメダイ). Named for its golden eyes; a deep-water fish with silky, sweet flesh. Served simmered (nitsuke) or as a luxury sushi topping.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Prominent cycloid scales; kosher." }},
+
+  { name:"Sawara / Spanish Mackerel",  cat:"Fish",
+    desc:"Japanese Spanish mackerel (鰆 / サワラ). Its name means 'spring fish', though winter sawara is also prized. Large and elegant; delicate texture popular as sashimi.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Mackerel family; has scales; kosher." }},
+
+  { name:"Sanma / Pacific Saury",      cat:"Fish",
+    desc:"Pacific saury (秋刀魚 / サンマ). Iconic autumn fish in Japan; salt-grilled whole and served with daikon. The kanji literally means 'autumn sword fish'.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Small but removable cycloid scales; kosher." }},
+
+  { name:"Suzuki / Sea Bass",          cat:"Fish",
+    desc:"Japanese sea bass (鱸 / スズキ). A summer fish in Japan with lean, clean white flesh; a key sushi and sashimi fish. Related to the European branzino.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Prominent ctenoid scales; kosher." }},
+
+  { name:"Ayu / Sweetfish",            cat:"Fish",
+    desc:"Sweetfish (鮎 / アユ). A prized freshwater river fish with a faint, melon-like aroma unique to mountain rivers. Typically salt-grilled whole on skewers. A beloved summer delicacy.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales; kosher." }},
+
+  { name:"Sayori / Halfbeak",          cat:"Fish",
+    desc:"Japanese halfbeak (針魚 / サヨリ). A slender, elegant spring fish; pure white flesh with a distinctive dark inner lining. Served as sashimi or pressed sushi.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales; kosher." }},
+
+  { name:"Iwashi / Sardine",           cat:"Fish",
+    desc:"Japanese sardine (鰯 / イワシ). Small oily fish eaten in Japan as sashimi, tataki, or salt-grilled; prized when ultra-fresh. Also dried as niboshi for stock.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Clear cycloid scales; one of the most abundant kosher fish." }},
+
+  { name:"Nishin / Herring",           cat:"Fish",
+    desc:"Pacific herring (鯡・鰊 / ニシン). In Japan the salted roe (kazunoko) is a New Year delicacy. In Europe smoked as kipper or pickled as rollmops or Bismarck herring.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Prominent scales; one of the most classically kosher fish." }},
+
+  { name:"Tara / Cod",                 cat:"Fish",
+    desc:"Pacific or Atlantic cod (鱈 / タラ). In Japan used in hot pot (tara nabe) and the source of shirako (milt). Globally the fish in fish and chips; dried as bacalà.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Large cycloid scales; unambiguously kosher." }},
+
+  { name:"Masu / Trout",               cat:"Fish",
+    desc:"Cherry salmon or trout (鱒 / マス). Includes sakura masu (cherry salmon) and amago; rich pink flesh. Served as sashimi or salt-grilled.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales; kosher." }},
+
+  { name:"Isaki / Grunt",              cat:"Fish",
+    desc:"Chicken grunt (伊佐木 / イサキ). Popular sushi and grilled fish in Japan; mild, delicate flesh. Most prized in early summer.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Ctenoid scales; kosher." }},
+
+  { name:"Amadai / Tilefish",          cat:"Fish",
+    desc:"Tilefish (甘鯛 / アマダイ). Highly prized in Kyoto cuisine; the scales are left on and fried crisp in matsukasa-yaki ('pine cone grilling'). Delicate, sweet flesh.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Large scales (notably fried on in Kyoto cuisine); kosher." }},
+
+  { name:"Kinki / Thornyhead",         cat:"Fish",
+    desc:"Broadbanded thornyhead (喜知次 / キンキ). A luxury deep-sea fish from Hokkaido and Tohoku; rich, fatty, gelatinous flesh. Served simmered or as sashimi.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Has scales; kosher." }},
+
+  { name:"Managatsuo / Silver Pomfret", cat:"Fish",
+    desc:"Silver pomfret (真魚鰹 / マナガツオ). A disc-shaped silvery fish prized in Kansai cuisine; delicate, rich flesh often served grilled with saikyo miso.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Fine cycloid scales; kosher." }},
+
+  { name:"Tobiuo / Flying Fish",       cat:"Fish",
+    desc:"Flying fish (飛魚 / トビウオ). Wing-like pectoral fins allow it to glide above the surface. Eaten as sashimi or salt-grilled; the roe (tobiko) is a common sushi topping.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales; kosher." }},
+
+  // Non-kosher fish
+  { name:"Anago / Conger Eel",         cat:"Fish",
+    desc:"Sea conger eel (穴子 / アナゴ). A saltwater eel distinct from freshwater unagi; a classic Edo-mae sushi topping — simmered until tender, glazed with sweet soy tare.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    notes:{ kosher:"Eels lack scales entirely; not kosher regardless of species or preparation.", halal:"Permitted under Shafi'i, Maliki, and Hanbali schools; Hanafi restricts non-scaled fish." }},
+
+  { name:"Hamo / Pike Conger",         cat:"Fish",
+    desc:"Pike conger (鱧 / ハモ). A prized Kyoto summer fish resembling an eel; hundreds of fine bones are scored by knife (hone-kiri) before cooking. Served in shabu-shabu or tempura.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    notes:{ kosher:"Pike conger is eel-like and lacks removable scales; not kosher despite its culinary prestige.", halal:"Shafi'i and Maliki permit; Hanafi restricts." }},
+
+  { name:"Tachiuo / Cutlassfish",      cat:"Fish",
+    desc:"Cutlassfish or beltfish (太刀魚 / タチウオ). A long, brilliant silver, sword-shaped fish; the name means 'sword fish'. Popular grilled or as sashimi in Japan.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    notes:{ kosher:"Only minute embedded scales that cannot be removed without tearing the skin; not kosher.", halal:"Most Sunni schools permit as seafood; Hanafi restricts non-scaled fish." }},
+
+  { name:"Fugu / Tiger Pufferfish",    cat:"Fish",
+    desc:"Tiger pufferfish (虎河豚 / トラフグ). Japan's most notorious delicacy; toxic organs require a licensed chef. Served as paper-thin sashimi (fugu-sashi), hot pot, or karaage.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Most fugu species used in restaurants lack visible removable scales and are not kosher; a few species have scales and may be permissible but require expert identification." }},
+
+  { name:"Same / Shark",               cat:"Fish",
+    desc:"Shark (鮫 / サメ). Various species appear in Japanese cuisine: dried fin (フカヒレ) in Chinese-influenced dishes; in the West as fish and chips or flake. Increasingly controversial for finning practices.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    notes:{ kosher:"Sharks have placoid (denticle) scales fused to the skin and not removable; not kosher.", halal:"Permitted as seafood under Shafi'i, Maliki, Hanbali; restricted by Hanafi." }},
 ];
 
 const INGREDIENTS = [
@@ -1496,6 +1670,41 @@ const CONTAINS_DATA = {
   "Périgourdine":         { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"y" },
   "Grand Veneur":         { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"y", alcohol:"y" },
   "Financière (sauce)":   { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"p", pork:"n", lamb:"n", game:"n", alcohol:"y" },
+  // ── new fish ──
+  "Salmon / Sake":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Saba / Mackerel":            { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Tai / Red Sea Bream":        { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Hirame / Flounder":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Engawa / Flounder Fin":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Karei / Japanese Flounder":  { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Kohada / Gizzard Shad":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Aji / Horse Mackerel":       { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Shima Aji / Striped Jack":   { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Kanpachi / Greater Amberjack":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Hiramasa / Yellowtail Amberjack":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Buri / Adult Yellowtail":    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Katsuo / Skipjack Tuna":     { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Mebachi / Bigeye Tuna":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Kinmedai / Splendid Alfonsino":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Sawara / Spanish Mackerel":  { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Sanma / Pacific Saury":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Suzuki / Sea Bass":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Ayu / Sweetfish":            { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Sayori / Halfbeak":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Iwashi / Sardine":           { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Nishin / Herring":           { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Tara / Cod":                 { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Masu / Trout":               { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Isaki / Grunt":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Amadai / Tilefish":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Kinki / Thornyhead":         { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Managatsuo / Silver Pomfret":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Tobiuo / Flying Fish":       { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Anago / Conger Eel":         { gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"p" },
+  "Hamo / Pike Conger":         { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Tachiuo / Cutlassfish":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Fugu / Tiger Pufferfish":    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
+  "Same / Shark":               { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n" },
 };
 FOODS.forEach(f => { f.c = CONTAINS_DATA[f.name] || {}; });
 
