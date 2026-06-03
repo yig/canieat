@@ -80,16 +80,17 @@ body {
 .bar {
   max-width: 1200px; margin: 0 auto;
   padding: 9px 24px;
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; justify-content: space-between;
   color: var(--dim); font-size: 12px;
   border-bottom: 1px solid var(--border);
 }
 #resultCount { color: var(--accent); font-weight: 700; }
+.result-info { font-size: 12px; color: var(--dim); white-space: nowrap; }
 
 .filters {
   max-width: 1200px; margin: 0 auto;
   padding: 10px 24px;
-  display: flex; flex-wrap: wrap; gap: 7px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 7px;
   border-bottom: 1px solid var(--border);
 }
 .fbtn {
@@ -246,7 +247,7 @@ td.sc {
 .gi-text span { font-size: 12px; color: var(--dim); }
 
 /* ── MODE TOGGLE ── */
-.mode-toggle { display: flex; gap: 4px; margin-left: auto; }
+.mode-toggle { display: flex; gap: 4px; }
 .mbtn {
   padding: 3px 12px; border-radius: 20px;
   border: 1px solid var(--border); background: transparent;
@@ -278,16 +279,17 @@ td.sc {
 </header>
 
 <div class="bar">
-  <span>Showing <strong id="resultCount">0</strong> dishes</span>
-  <span style="color:#444">•</span>
-  <span id="colCount">9 dietary restrictions</span>
   <div class="mode-toggle">
     <button class="mbtn on" id="modeDiet">I eat…</button>
     <button class="mbtn" id="modeContains">Contains</button>
   </div>
+  <span id="colCount">9 dietary restrictions</span>
 </div>
 
-<div class="filters" id="filters"></div>
+<div class="filters" id="filters">
+  <span class="result-info">Showing <strong id="resultCount">0</strong> dishes</span>
+  <span style="color:#444">•</span>
+</div>
 
 <div class="table-wrap">
   <table id="tbl">
