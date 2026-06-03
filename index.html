@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Can I Eat It? — Food &amp; Dietary Restriction Compatibility</title>
+<title>Can I Eat ___? — Food &amp; Dietary Restriction Compatibility</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -50,32 +50,31 @@ body {
   font-weight: 900;
   letter-spacing: -1px;
   color: var(--accent);
-  margin-bottom: 2px;
-  user-select: none;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 .logo em { color: #fff; font-style: normal; }
 
-.tagline { color: var(--dim); font-size: 13px; margin-bottom: 14px; }
+.tagline { color: var(--dim); font-size: 13px; margin-top: -10px; margin-bottom: 0; }
 
-.search-wrap { position: relative; max-width: 580px; }
-.search-wrap svg {
-  position: absolute; left: 12px; top: 50%;
-  transform: translateY(-50%);
-  width: 18px; height: 18px; fill: #666; pointer-events: none;
-}
 #searchInput {
-  width: 100%;
-  padding: 11px 14px 11px 40px;
-  font-size: 15px;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.13);
-  border-radius: 7px;
+  font-size: 30px;
+  font-weight: 900;
+  font-family: inherit;
+  letter-spacing: -1px;
   color: #fff;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid var(--accent);
   outline: none;
-  transition: border-color .18s, background .18s;
+  width: 180px;
+  padding: 0 4px 2px;
 }
-#searchInput:focus { border-color: var(--accent); background: rgba(255,255,255,0.1); }
-#searchInput::placeholder { color: #555; }
+#searchInput::placeholder { color: #3a3a3a; }
+#searchInput:focus { border-bottom-color: #7dd87d; }
 
 /* ── STATS / FILTERS ── */
 .bar {
@@ -86,13 +85,18 @@ body {
   border-bottom: 1px solid var(--border);
 }
 #resultCount { color: var(--accent); font-weight: 700; }
+.result-info { font-size: 12px; color: var(--dim); white-space: nowrap; }
 
 .filters {
   max-width: 1200px; margin: 0 auto;
   padding: 10px 24px;
-  display: flex; flex-wrap: wrap; gap: 7px;
+  display: flex; flex-wrap: nowrap; align-items: center; gap: 7px;
   border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.filters::-webkit-scrollbar { display: none; }
 .fbtn {
   padding: 4px 11px;
   border-radius: 20px;
@@ -139,9 +143,9 @@ thead th:not(.name-th) {
   display: flex; flex-direction: column;
   align-items: center; justify-content: flex-end;
   padding: 8px 4px 6px;
-  height: 100px;
+  height: 160px;
 }
-.name-th .th-inner { align-items: flex-start; padding: 8px 12px; justify-content: flex-end; height: 100px; }
+.name-th .th-inner { align-items: flex-start; padding: 8px 12px; justify-content: flex-end; height: 160px; }
 .th-icon { font-size: 16px; margin-bottom: 4px; line-height: 1; }
 .th-label {
   font-size: 10px; font-weight: 700; letter-spacing: .5px;
@@ -156,7 +160,8 @@ thead th:not(.name-th) {
 
 /* BODY */
 tbody tr { border-bottom: 1px solid #2c2c2c; }
-tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
+tbody tr:hover td.name-td { background: rgba(255,255,255,0.06) !important; }
+td.sc:hover { filter: brightness(1.35); }
 
 td.name-td {
   position: sticky; left: 0; z-index: 10;
@@ -167,7 +172,8 @@ td.name-td {
 tbody tr:nth-child(even) td.name-td { background: var(--bg2); }
 
 .food-name  { font-weight: 600; font-size: 13px; display: block; }
-.food-cat   { font-size: 11px; color: var(--dim); margin-top: 1px; }
+.food-cat   { font-size: 11px; color: var(--dim); margin-top: 1px; display: block; }
+.food-desc  { font-size: 11px; color: #555; margin-top: 3px; display: block; line-height: 1.4; }
 
 td.sc {
   width: var(--cellW); min-width: var(--cellW);
@@ -244,6 +250,29 @@ td.sc {
 .gi-text strong { font-size: 13px; color: #ddd; display: block; margin-bottom: 2px; }
 .gi-text span { font-size: 12px; color: var(--dim); }
 
+/* ── MODE TOGGLE ── */
+.mode-toggle { display: flex; gap: 4px; }
+.mbtn {
+  padding: 3px 12px; border-radius: 20px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--dim); font-size: 12px; cursor: pointer;
+  font-family: inherit; transition: all .15s; white-space: nowrap;
+}
+.mbtn:hover { border-color: var(--accent); color: var(--accent); }
+.mbtn.on { background: var(--accentDim); border-color: var(--accent); color: #fff; }
+
+/* In contains mode, "n" (absent) cells are neutral dark, not alarming red */
+.mode-contains .n { background: #242424; }
+.mode-contains .n .ci { color: #484848; }
+
+/* ── SEARCH HIGHLIGHT ── */
+mark {
+  background: #5c4300; color: #ffd166;
+  border-radius: 2px; padding: 0;
+  font-style: normal;
+  box-shadow: 2px 0 0 #5c4300, -2px 0 0 #5c4300;
+}
+
 /* ── DISCLAIMER ── */
 .disc {
   text-align: center; font-size: 12px; color: #666;
@@ -256,22 +285,24 @@ td.sc {
 
 <header class="hdr">
   <div class="hdr-inner">
-    <div class="logo">can i <em>eat</em> it?</div>
+    <div class="logo">can i <em>eat</em> <input id="searchInput" type="text" autocomplete="off" spellcheck="false">?</div>
     <p class="tagline">Dietary restriction compatibility for dishes you might encounter at a restaurant</p>
-    <div class="search-wrap">
-      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" stroke="#666" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-      <input id="searchInput" type="text" placeholder="Search a dish… foie gras, escargot, uni, wagyu…" autocomplete="off" spellcheck="false">
-    </div>
   </div>
 </header>
 
 <div class="bar">
-  <span>Showing <strong id="resultCount">0</strong> dishes</span>
+  <div class="mode-toggle">
+    <button class="mbtn on" id="modeDiet">I eat…</button>
+    <button class="mbtn" id="modeContains">Contains</button>
+  </div>
   <span style="color:#444">•</span>
-  <span>9 dietary restrictions</span>
+  <span id="colCount">9 dietary restrictions</span>
 </div>
 
-<div class="filters" id="filters"></div>
+<div class="filters" id="filters">
+  <span class="result-info">Showing <strong id="resultCount">0</strong> dishes</span>
+  <span style="color:#444">•</span>
+</div>
 
 <div class="table-wrap">
   <table id="tbl">
@@ -287,10 +318,10 @@ td.sc {
 <div class="legend">
   <div class="section-title">Legend</div>
   <div class="legend-row">
-    <div class="lg-item"><div class="sw" style="background:var(--yes);color:var(--yestxt)">✓</div><span>Generally compatible</span></div>
-    <div class="lg-item"><div class="sw" style="background:var(--no);color:var(--notxt)">✗</div><span>Not compatible</span></div>
-    <div class="lg-item"><div class="sw" style="background:var(--partial);color:var(--ptxt)">~</div><span>Depends on preparation or certification</span></div>
-    <div class="lg-item"><div class="sw" style="background:var(--unk);color:var(--unktxt)">?</div><span>Varies by tradition or scholarly opinion</span></div>
+    <div class="lg-item"><div class="sw" style="background:var(--yes);color:var(--yestxt)">✓</div><span id="lgY">Generally compatible</span></div>
+    <div class="lg-item"><div class="sw" style="background:var(--no);color:var(--notxt)">✗</div><span id="lgN">Not compatible</span></div>
+    <div class="lg-item"><div class="sw" style="background:var(--partial);color:var(--ptxt)">~</div><span id="lgP">Depends on preparation or certification</span></div>
+    <div class="lg-item"><div class="sw" style="background:var(--unk);color:var(--unktxt)">?</div><span id="lgU">Varies by tradition or scholarly opinion</span></div>
   </div>
 </div>
 
@@ -316,7 +347,7 @@ const RESTRICTIONS = [
   { id:"vegan",       label:"Vegan",            icon:"🌱",  abbr:"VEGAN",
     def:"No animal products of any kind — no meat, fish, dairy, eggs, honey, or gelatin." },
   { id:"pescatarian", label:"Pescatarian",      icon:"🐟",  abbr:"PESC",
-    def:"No meat or poultry. Fish and all seafood are permitted. Dairy and eggs also OK." },
+    def:"No meat or poultry. Finfish are permitted. Shellfish, crustaceans, and other seafood are not included." },
   { id:"vegequarian", label:"Vegequarian",      icon:"🦐",  abbr:"VEQN",
     def:"Vegetables plus any seafood — fish, shellfish, and crustaceans all OK. Effectively pescatarian with explicit shellfish inclusion." },
   { id:"noRedMeat",   label:"No Red Meat",      icon:"🍗",  abbr:"NRM",
@@ -333,7 +364,7 @@ const RESTRICTIONS = [
 
 const CATS = [
   "Beef & Veal","Lamb & Game","Pork & Charcuterie","Poultry",
-  "Shellfish","Fish","Vegetarian / Vegan","Soup & Broth","Dessert","Other"
+  "Shellfish","Fish","Vegetarian / Vegan","Soup & Broth","Dessert","Cheese","Technique & Sauce","Other"
 ];
 
 // Status: y=yes, n=no, p=partial/depends, u=unknown/varies
@@ -507,55 +538,55 @@ const FOODS = [
   // ─── SHELLFISH ──────────────────────────────────────────────────────────
   { name:"Oysters",          cat:"Shellfish",
     desc:"Raw or cooked bivalve mollusks, typically served on ice with mignonette.",
-    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
     notes:{ vegetarian:"Some vegetarians eat oysters (they lack a central nervous system); others do not — a personal decision.", kosher:"Shellfish without fins and scales are not kosher.", halal:"Shafi'i and Maliki schools permit all sea creatures; Hanafi school restricts shellfish. Oysters are debated." }},
   { name:"Lobster Bisque",   cat:"Shellfish",
     desc:"Rich, creamy soup with lobster meat and shells, often finished with cognac.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
     notes:{ kosher:"Lobster is not kosher (shellfish without scales).", halal:"Shellfish permissibility depends on school of thought; cognac in bisque makes it non-halal unless omitted.", lent:"Shellfish is permitted during Lent." }},
   { name:"Langoustine",      cat:"Shellfish",
     desc:"Small Norwegian lobster (Dublin Bay prawn), grilled or poached with butter.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
     notes:{ kosher:"Crustaceans are not kosher.", halal:"Crustaceans are debated: permitted in Shafi'i jurisprudence, restricted in Hanafi." }},
   { name:"King Crab",        cat:"Shellfish",
     desc:"Steamed Alaskan king crab legs, often served with drawn butter.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
     notes:{ kosher:"Crab is not kosher.", halal:"Crustaceans: permitted (Shafi'i/Maliki), restricted (Hanafi). Personal practice varies." }},
   { name:"Crab Cakes",       cat:"Shellfish",
     desc:"Pan-fried or broiled patties of crab meat with breadcrumbs and Old Bay seasoning.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
     notes:{ kosher:"Crab is not kosher.", halal:"See crab — crustacean permissibility is school-dependent." }},
   { name:"Shrimp Cocktail",  cat:"Shellfish",
     desc:"Chilled poached shrimp served with cocktail sauce.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
     notes:{ kosher:"Shrimp is not kosher.", halal:"Shrimp are crustaceans — permitted under Shafi'i, restricted under Hanafi." }},
   { name:"Scallops",         cat:"Shellfish",
     desc:"Seared sea scallops, typically with beurre blanc or pea purée.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
     notes:{ kosher:"Scallops (bivalves) are not kosher.", halal:"Bivalves are permitted by most schools; some stricter interpretations restrict mollusks." }},
   { name:"Mussels Marinière", cat:"Shellfish",
     desc:"Steamed mussels in white wine, shallots, and parsley.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
     notes:{ kosher:"Mussels are not kosher.", halal:"Mussels are generally considered halal; white wine in the broth makes it non-halal unless substituted." }},
   { name:"Grilled Octopus",  cat:"Shellfish",
     desc:"Chargrilled octopus with lemon, olive oil, and herbs.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
     notes:{ kosher:"Octopus lacks fins and scales — not kosher.", halal:"Shafi'i permits all sea creatures; Hanafi permits only scaled fish, making octopus non-halal in that tradition." }},
   { name:"Calamari",         cat:"Shellfish",
     desc:"Fried or grilled squid rings with aioli or marinara.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
     notes:{ kosher:"Squid lacks fins and scales — not kosher.", halal:"Same as octopus: permitted under Shafi'i, not under Hanafi." }},
   { name:"Clam Chowder",     cat:"Shellfish",
     desc:"Creamy New England or Manhattan-style chowder with clams and potatoes.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"p", vegequarian:"p", noRedMeat:"p", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"p", noRedMeat:"p", jain:"n", kosher:"n", halal:"u", lent:"y" },
     notes:{ pescatarian:"New England chowder often contains bacon — check with the kitchen.", noRedMeat:"Often contains bacon.", kosher:"Clams are not kosher.", halal:"Clams are generally permitted; bacon (if present) makes it non-halal." }},
   { name:"Geoduck",          cat:"Shellfish",
     desc:"Enormous Pacific clam with sweet, crunchy flesh; served as sashimi or crudo.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
     notes:{ kosher:"Clams are not kosher.", halal:"Bivalve mollusks — halal under most schools of thought." }},
   { name:"Abalone",          cat:"Shellfish",
     desc:"Sea snail regarded as a delicacy; served raw, canned, or pan-seared.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
     notes:{ kosher:"Abalone (a sea snail) is not kosher.", halal:"Sea snails are generally considered halal under Shafi'i; Hanafi restricts them." }},
   { name:"Escargot",         cat:"Shellfish",
     desc:"Baked land snails in garlic-herb butter, served in the shell.",
@@ -563,7 +594,7 @@ const FOODS = [
     notes:{ vegequarian:"Land snails are not seafood; most vegequarians would not eat them.", kosher:"Snails are not kosher — they fall under prohibited crawling creatures.", halal:"Land snails are not halal according to the majority of scholars.", lent:"Snails are cold-blooded invertebrates; Catholic Lent abstinence is from warm-blooded animals, so escargot is technically permitted." }},
   { name:"Sea Urchin (Uni)", cat:"Shellfish",
     desc:"Sea urchin roe, served on sushi, toast, or pasta; intensely briny and creamy.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
     notes:{ kosher:"Sea urchin is not kosher.", halal:"Sea urchin (a spiny echinoderm) — Shafi'i permits all sea creatures; Hanafi restricts to scaled fish, making uni non-halal in that tradition." }},
   { name:"Frog Legs",        cat:"Shellfish",
     desc:"Sautéed frog legs in garlic and butter, a classic French bistro dish.",
@@ -613,7 +644,7 @@ const FOODS = [
     notes:{ kosher:"Depends on the fish — if scaled (e.g., sea bass, snapper), kosher; if it includes shellfish, not kosher." }},
   { name:"Bouillabaisse",    cat:"Fish",
     desc:"Provençal fish stew with saffron, fennel, and rouille on toast; typically includes shellfish.",
-    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
     notes:{ kosher:"Traditionally includes shellfish (mussels, crab) and non-kosher fish — not kosher.", halal:"Can be halal if shellfish are included (under Shafi'i) and alcohol-free; traditional recipe often calls for pastis (anise liqueur)." }},
   { name:"Eel / Unagi",      cat:"Fish",
     desc:"Grilled freshwater eel glazed with sweet tare sauce, a sushi staple.",
@@ -807,11 +838,1013 @@ const FOODS = [
     desc:"Provençal saffron and garlic mayonnaise; the traditional accompaniment to bouillabaisse.",
     r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
     notes:{ jain:"Contains garlic — not Jain-compatible.", kosher:"Eggs — may be certified kosher as a pareve condiment; cannot be served alongside unkosher food." }},
+
+  // ─── NEW: OFFAL ──────────────────────────────────────────────────────────
+  { name:"Cervelle de Veau",   cat:"Beef & Veal",
+    desc:"Veal brains, poached or pan-fried; prized for their delicate, creamy texture.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Brain and nerve tissue present insurmountable kashrus difficulties; not prepared kosher in practice.", halal:"Permissible if from a properly slaughtered animal; requires careful cleaning." }},
+
+  { name:"Tête de Veau",       cat:"Beef & Veal",
+    desc:"Calf's head, slow-boiled and served cold or warm with sauce gribiche or ravigote; a Lyonnaise bistro classic.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Head meat involves significant kashrus complexities; virtually never served in kosher establishments.", halal:"Halal if from a properly slaughtered animal." }},
+
+  { name:"Joue de Bœuf",       cat:"Beef & Veal",
+    desc:"Beef cheek, braised very slowly until silky and gelatinous; intensely flavoured with a colloid-rich texture.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Cheek meat is kosher from a certified animal.", halal:"Halal with certified zabiha beef." }},
+
+  { name:"Langue de Bœuf",     cat:"Beef & Veal",
+    desc:"Beef tongue, braised whole then peeled and sliced; a staple of French bistros and Jewish delis alike.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"y", halal:"p", lent:"n" },
+    notes:{ kosher:"Tongue is among the most common and widely available kosher deli meats.", halal:"Halal with certified zabiha beef." }},
+
+  { name:"Andouillette",        cat:"Pork & Charcuterie",
+    desc:"Coarse-grained pork chitterling sausage with a pungent barnyard aroma; a beloved Lyonnaise specialty.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork intestine — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Pied de Cochon",      cat:"Pork & Charcuterie",
+    desc:"Braised pig's trotters, gelatinous and rich; often breaded and grilled after braising.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Guanciale",           cat:"Pork & Charcuterie",
+    desc:"Cured pork jowl or cheek; fattier and more aromatic than pancetta, essential for carbonara and amatriciana.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Lardo di Colonnata",  cat:"Pork & Charcuterie",
+    desc:"Cured pork fatback from the Carrara marble quarry region; aged in marble basins with rosemary and spices.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork fat — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Culatello di Zibello", cat:"Pork & Charcuterie",
+    desc:"Premium Italian cured pork rump from the Po Valley fog; silkier and more refined than prosciutto.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  // ─── NEW: GAME ────────────────────────────────────────────────────────────
+  { name:"Grouse",              cat:"Lamb & Game",
+    desc:"Wild game bird with a deep, heathery, gamey flavour; hung for several days. British season starts 'the Glorious Twelfth' (12 August).",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Wild birds must be slaughtered by shechita to be kosher; shot grouse are not kosher.", halal:"Birds killed by shooting are not considered zabiha — not halal." }},
+
+  { name:"Woodcock",            cat:"Lamb & Game",
+    desc:"Small wading game bird traditionally roasted undrawn with its intestines intact; rich, gamey, and prized.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Wild-shot and not a traditionally recognised kosher bird.", halal:"Shot in the field — not zabiha." }},
+
+  { name:"Faisan / Pheasant",   cat:"Lamb & Game",
+    desc:"Farm-raised or wild game bird; milder than grouse, often hung briefly, roasted with bacon and served with bread sauce.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Wild pheasant is not kosher; farm-raised pheasant can be kosher with shechita slaughter and full certification.", halal:"Farm-raised pheasant can be halal with zabiha slaughter; wild-shot is not." }},
+
+  { name:"Lièvre à la Royale",  cat:"Lamb & Game",
+    desc:"Whole hare boned and stuffed, braised in its own blood with Cognac and wine; one of the grand classics of French cuisine.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Hare is explicitly listed as non-kosher in the Torah.", halal:"Contains blood and alcohol (both prohibited); hare is also considered non-halal by most scholars." }},
+
+  // ─── NEW: FISH ────────────────────────────────────────────────────────────
+  { name:"Saint-Pierre / John Dory", cat:"Fish",
+    desc:"Bony Atlantic fish with firm, sweet white flesh; identified by the dark oval 'thumbprint' on its flank.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"John Dory has fins and scales — kosher." }},
+
+  { name:"Sandre / Zander",     cat:"Fish",
+    desc:"Freshwater pike-perch from European rivers; delicate, boneless white flesh prized in French and Central European cuisines.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Pike-perch has fins and scales — kosher." }},
+
+  { name:"Barbue / Brill",      cat:"Fish",
+    desc:"European flatfish closely related to turbot; sweet, firm flesh considered second only to turbot in quality.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Brill has scales — kosher." }},
+
+  { name:"Nodoguro",            cat:"Fish",
+    desc:"Japanese blackthroat sea perch; exceptionally fatty white flesh earns it the nickname 'the toro of white fish'.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Blackthroat sea perch has fins and scales — kosher." }},
+
+  { name:"Ankimo",              cat:"Fish",
+    desc:"Steamed and pressed monkfish liver, sliced and served cold; called the 'foie gras of the sea' for its richness.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Monkfish is a kosher fish; its liver is a permitted organ." }},
+
+  { name:"Shirako",             cat:"Fish",
+    desc:"Soft roe (milt) of male cod or fugu; custardy, mild, and delicate; a prized Japanese winter delicacy.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"y" },
+    notes:{ kosher:"Milt from a kosher fish such as cod is permitted; fugu (pufferfish) milt is not, as pufferfish lacks kosher scales.", halal:"Fish milt is generally considered halal; some stricter scholars debate it." }},
+
+  { name:"Bottarga",            cat:"Fish",
+    desc:"Pressed and salt-cured grey mullet or bluefin tuna roe, dried until firm and grated or shaved over pasta.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Grey mullet and tuna both have scales — their roe is kosher if certified." }},
+
+  { name:"Colatura di Alici",   cat:"Fish",
+    desc:"Fermented anchovy extract from Cetara, Amalfi Coast; Italy's ancient answer to fish sauce, used in drops as a condiment.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Anchovies have scales (kosher fish); colatura itself requires kosher certification of the production process." }},
+
+  { name:"Karasumi",            cat:"Fish",
+    desc:"Japanese salt-cured and wind-dried grey mullet roe; served thinly sliced with daikon and sake — Japan's answer to bottarga.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Grey mullet has scales — its roe is kosher." }},
+
+  // ─── NEW: POULTRY ─────────────────────────────────────────────────────────
+  { name:"Poularde Demi-Deuil", cat:"Poultry",
+    desc:"Hen poached in broth with black truffle slices slipped under the skin; 'in half-mourning', a Lyon classic of Mère Brazier.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Chicken is kosher if certified; truffle and poaching broth must also meet kosher standards.", halal:"Halal with certified zabiha chicken." }},
+
+  // ─── NEW: SOUPS ────────────────────────────────────────────────────────────
+  { name:"Chawanmushi",         cat:"Soup & Broth",
+    desc:"Japanese silky steamed egg custard cooked in a lidded cup with ginkgo nuts, mitsuba, shrimp, and chicken.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"p", vegequarian:"p", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"p" },
+    notes:{ vegetarian:"Traditional chawanmushi contains shrimp and chicken; vegetarian versions with kombu dashi exist.", pescatarian:"Shrimp-only version without chicken is pescatarian-friendly.", kosher:"Traditional ingredients include shrimp (not kosher) and chicken in a custard (mixing categories); a kosher version requires reformulation.", halal:"Can be made halal with zabiha chicken and appropriate dashi.", lent:"Shrimp or vegetable version is fine for Lent; chicken version is not." }},
+
+  // ─── NEW: MUSHROOMS & VEGETABLES ─────────────────────────────────────────
+  { name:"Cèpes / Porcini",    cat:"Vegetarian / Vegan",
+    desc:"King bolete mushrooms; meaty, earthy, and nutty. Served fresh sautéed in butter or dried in sauces and risotto.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Wild mushrooms must be checked carefully for insect infestation before use." }},
+
+  { name:"Girolles / Chanterelles", cat:"Vegetarian / Vegan",
+    desc:"Golden wild mushrooms with a fruity, apricot-like aroma; sautéed simply in butter, parsley, and garlic.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Wild mushrooms must be checked for insects.", jain:"Garlic in the typical preparation is forbidden; the mushrooms themselves are permitted." }},
+
+  { name:"Trompettes de la Mort", cat:"Vegetarian / Vegan",
+    desc:"Dark, funnel-shaped wild mushrooms — 'trumpets of death' — with a smoky, earthy flavour despite their name.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Must be checked for insects." }},
+
+  { name:"Morels",              cat:"Vegetarian / Vegan",
+    desc:"Honeycomb-capped spring mushrooms with a rich, earthy, nutty flavour; toxic raw — always cooked.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Morels have many cavities that harbour insects — thorough soaking and inspection required for kosher use." }},
+
+  { name:"Salsify",             cat:"Vegetarian / Vegan",
+    desc:"Slender root vegetable with a delicate oyster-like flavour; also called 'oyster plant'. White or black (scorzonera) varieties.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A root vegetable — not permitted in Jain diet." }},
+
+  { name:"Cardoon",             cat:"Vegetarian / Vegan",
+    desc:"Large silver-leaved thistle related to the artichoke; blanched stalks gratin-ed with marrow and cheese.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Cardoon is a thistle stalk — an above-ground vegetable, compatible with Jain diet." }},
+
+  { name:"Agretti",             cat:"Vegetarian / Vegan",
+    desc:"Slender Italian coastal succulent ('monk's beard'); salty, mineral, and faintly grassy — briefly blanched and dressed with lemon.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{} },
+
+  { name:"Fiddlehead Ferns",    cat:"Vegetarian / Vegan",
+    desc:"Tightly coiled tips of young ostrich fern fronds; fleeting spring season, nutty and slightly grassy.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{} },
+
+  // ─── OFFAL (additional) ──────────────────────────────────────────────────
+  { name:"Ris de Veau",         cat:"Beef & Veal",
+    desc:"Veal sweetbreads — specifically the thymus gland; crispy outside, creamy within. The most prized form of sweetbreads.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Thymus requires complex expert preparation (nikur) to be kosher; extremely rare in restaurants.", halal:"Halal if from a properly slaughtered animal." }},
+
+  { name:"Fraise de Veau",      cat:"Beef & Veal",
+    desc:"Veal mesentery (the frilled membrane of the intestine), blanched and pan-fried; a traditional French bistro off-cut.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Intestinal membrane — insurmountable kashrus difficulties in practice.", halal:"Permissible if from a properly slaughtered animal and thoroughly cleaned." }},
+
+  // ─── GAME (additional) ───────────────────────────────────────────────────
+  { name:"Snipe",               cat:"Lamb & Game",
+    desc:"Small wading game bird; extraordinarily difficult to shoot, hence 'sniper'. Traditionally roasted undrawn like woodcock.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Wild-shot bird — cannot be slaughtered by shechita.", halal:"Killed by shooting, not zabiha slaughter." }},
+
+  { name:"Ortolan",             cat:"Lamb & Game",
+    desc:"Tiny songbird once eaten whole in France, covered with a napkin; now a protected species. Serving it is illegal in France and most of Europe.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Not a traditionally recognised kosher bird; wild-caught.", halal:"Wild-caught, not zabiha.", lent:"A bird — warm-blooded, not permitted on Lenten Fridays." }},
+
+  { name:"Sanglier / Wild Boar",cat:"Lamb & Game",
+    desc:"Wild boar, roasted or braised; darker and more flavourful than farmed pork. Common in autumn on French and Italian menus.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Wild boar is the same species as the domestic pig (Sus scrofa) — not kosher.", halal:"Pork family — not halal." }},
+
+  { name:"Perdrix / Partridge", cat:"Lamb & Game",
+    desc:"Small European game bird, red-legged or grey; milder than grouse, often roasted with cabbage and lardons.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Wild-shot partridge is not kosher; farm-raised partridge with shechita slaughter is possible but rare.", halal:"Farm-raised partridge with zabiha slaughter can be halal; wild-shot is not." }},
+
+  // ─── PORK & CHARCUTERIE (additional) ─────────────────────────────────────
+  { name:"Coppa / Capicola",    cat:"Pork & Charcuterie",
+    desc:"Italian cured pork collar or neck; lightly spiced, marble-patterned slices. Named capicola in North America.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Finocchiona",         cat:"Pork & Charcuterie",
+    desc:"Tuscan pork salami with fennel seeds and sometimes red wine; soft and aromatic.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Lomo Ibérico",        cat:"Pork & Charcuterie",
+    desc:"Cured loin of Iberian black-footed pig; leaner than ham but equally intense, with a sweet, paprika-laced flavour.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Cecina",              cat:"Pork & Charcuterie",
+    desc:"Air-dried salted beef from León, Spain; deeply flavoured, served thinly sliced with olive oil — Spain's answer to bresaola.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Beef — kosher if from a certified source.", halal:"Halal with certified zabiha beef." }},
+
+  { name:"Speck",               cat:"Pork & Charcuterie",
+    desc:"South Tyrolean smoked cured ham; lighter than prosciutto with a distinctive cold-smoke and mountain-herb flavour.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Lonza",               cat:"Pork & Charcuterie",
+    desc:"Cured pork loin from central Italy; lean and delicately flavoured, similar to lomo ibérico.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  // ─── FISH (additional) ───────────────────────────────────────────────────
+  { name:"Loup de Mer",         cat:"Fish",
+    desc:"French name for European sea bass — the same fish as branzino. Roasted whole with fennel and pastis on the French Riviera.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"European sea bass has fins and scales — kosher. Same fish as branzino." }},
+
+  { name:"Omble Chevalier",     cat:"Fish",
+    desc:"Alpine char from deep mountain lakes; closely related to Arctic char but with exceptionally delicate, pink flesh. A Swiss and Savoyard speciality.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Char has fins and scales — kosher." }},
+
+  { name:"Grondin / Gurnard",   cat:"Fish",
+    desc:"Armoured sea fish that 'grunts' when caught; firm, sweet, affordable white flesh — a staple of bouillabaisse.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Gurnard has fins and scales — kosher." }},
+
+  { name:"Pageot / Dorade",     cat:"Fish",
+    desc:"Sea bream; a large family of Mediterranean fish — dorade royale (gilt-head), pagre, daurade — all with sweet white flesh.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Sea bream has fins and scales — kosher." }},
+
+  { name:"O-Toro",              cat:"Fish",
+    desc:"The fattiest cut of bluefin tuna belly — the ventral section nearest the head; buttery, melting texture. The most prized sushi cut.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Bluefin tuna has fins and scales — kosher." }},
+
+  { name:"Chu-Toro",            cat:"Fish",
+    desc:"Medium-fatty bluefin tuna belly; richer than lean akami but less fatty than o-toro. Often considered the ideal balance.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Bluefin tuna has fins and scales — kosher." }},
+
+  { name:"Katsuobushi",         cat:"Fish",
+    desc:"Dried, fermented, and smoked skipjack tuna shaved into thin flakes; the base of dashi broth and a ubiquitous Japanese umami garnish.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Skipjack tuna is a kosher fish; the fermentation process requires certification.", jain:"Fish product — not permitted in Jain diet." }},
+
+  { name:"Kombu Dashi",         cat:"Fish",
+    desc:"Vegetarian Japanese broth made solely from dried kombu seaweed; lighter than bonito dashi, with a pure oceanic umami.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Kombu itself is kosher (seaweed); must be checked for insects. Requires certification.", jain:"Seaweed is an aquatic plant — generally considered acceptable in Jain diet." }},
+
+  { name:"Beluga Caviar",       cat:"Fish",
+    desc:"Roe of the beluga sturgeon (Huso huso); the largest and most expensive caviar, pale grey and intensely creamy. Now mostly farmed due to near-extinction.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"y", lent:"y" },
+    notes:{ kosher:"Beluga sturgeon lacks the type of scales required by kashrut — not kosher according to Ashkenazi authorities. Some Sephardic authorities may differ." }},
+
+  { name:"Sevruga Caviar",      cat:"Fish",
+    desc:"Roe of the smallest Caspian sturgeon; smaller, more intensely flavoured grains than osetra or beluga. The most widely available of the classic caviars.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"y", lent:"y" },
+    notes:{ kosher:"Sturgeon lacks kosher scales — not kosher by most authorities." }},
+
+  { name:"Almas Caviar",        cat:"Fish",
+    desc:"Pale gold caviar from albino beluga sturgeon, aged over 60 years; considered the rarest and most expensive food in the world.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"y", lent:"y" },
+    notes:{ kosher:"Albino beluga sturgeon — same kashrus issue as all sturgeon: not kosher by most authorities." }},
+
+  // ─── VEGETARIAN / VEGAN (additional) ─────────────────────────────────────
+  { name:"Crosnes",             cat:"Vegetarian / Vegan",
+    desc:"Tiny segmented tubers (Chinese artichoke / Japanese artichoke); nutty, crunchy, and sweet. Notoriously difficult to peel.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Underground tuber — not permitted in Jain diet." }},
+
+  { name:"Scorzonera",          cat:"Vegetarian / Vegan",
+    desc:"Black-skinned root vegetable (black salsify); sweet, slightly bitter white flesh with an oyster-like flavour when cooked.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A root vegetable — not permitted in Jain diet." }},
+
+  { name:"Ramson / Wild Garlic",cat:"Vegetarian / Vegan",
+    desc:"Wild garlic with broad leaves and white flowers; the leaves, flowers, and buds all eaten. Intense garlic flavour, strong spring season.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Garlic — not permitted in Jain diet." }},
+
+  { name:"Ramps",               cat:"Vegetarian / Vegan",
+    desc:"North American wild leek with a garlicky, onion-like flavour; intensely seasonal in early spring. Hugely popular in New American cooking.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A wild allium (garlic/onion family) — not permitted in Jain diet." }},
+
+  { name:"Matsutake",           cat:"Vegetarian / Vegan",
+    desc:"Prized Japanese pine mushroom harvested in autumn; spicy, cinnamon-like aroma. Among the most expensive mushrooms in the world.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Wild mushrooms must be checked for insects.", jain:"Matsutake grows above ground — permitted in Jain diet." }},
+
+  { name:"Black Truffle",       cat:"Vegetarian / Vegan",
+    desc:"Périgord truffle (Tuber melanosporum); the 'black diamond of the kitchen', intensely earthy and aromatic. Shaved over dishes or cooked whole.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Truffles are fungi — kosher; must be checked for insects.", jain:"Truffles grow underground but are fungi, not root vegetables; accepted by most Jain traditions." }},
+
+  { name:"White Truffle",       cat:"Vegetarian / Vegan",
+    desc:"Alba truffle (Tuber magnatum); more pungent and complex than black truffle, always served raw — shaved tableside. The most expensive truffle.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Fungi — kosher; insect inspection required.", jain:"As with black truffle, accepted by most Jain traditions despite growing underground." }},
+
+  // ─── CHEESE (new category) ───────────────────────────────────────────────
+  { name:"Brillat-Savarin",     cat:"Cheese",
+    desc:"Triple-cream French cow's milk cheese, 75% fat; named after the gastronome. Impossibly rich, like edible butter.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Traditional French cheeses use animal rennet — not strictly vegetarian; microbial rennet versions exist.", kosher:"Requires kosher certification (kosher rennet and rabbinical supervision)." }},
+
+  { name:"Époisses",            cat:"Cheese",
+    desc:"Pungent Burgundian washed-rind cheese rinsed in Marc de Bourgogne; banned on French public transport. Napoleon's favourite.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification; Marc de Bourgogne (marc brandy) wash may be an issue.", halal:"Washed in marc brandy (alcohol) — not halal in the traditional preparation." }},
+
+  { name:"Vacherin Mont-d'Or",  cat:"Cheese",
+    desc:"Seasonal Swiss/French soft cheese sold in a spruce-bark box; eaten by the spoonful, baked in its box in winter.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet in traditional production.", kosher:"Requires kosher certification." }},
+
+  { name:"Reblochon",           cat:"Cheese",
+    desc:"Soft washed-rind Savoyard cheese; the key ingredient of tartiflette. Made from milk of cows that were 'incompletely milked' to avoid a medieval tax.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification." }},
+
+  { name:"Comté",               cat:"Cheese",
+    desc:"French mountain hard cheese from the Jura; nutty, fruity, and complex — aged from 4 to 36 months. France's most consumed AOC cheese.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification." }},
+
+  { name:"Beaufort",            cat:"Cheese",
+    desc:"Alpine hard cheese from Savoie; creamier than Gruyère with a concave rind. Essential in fondue and gratin savoyard.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification." }},
+
+  { name:"Brie de Meaux",       cat:"Cheese",
+    desc:"The original Brie — AOC-protected, with an edible white rind and runny golden paste. Called the 'king of cheeses' by Talleyrand.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification." }},
+
+  { name:"Camembert de Normandie", cat:"Cheese",
+    desc:"Soft Norman cow's milk cheese in a wooden box; must be made from raw milk by hand-ladling to carry the AOC designation.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet; AOC version made with raw (unpasteurised) milk.", kosher:"Raw milk cheeses have additional kashrus considerations; requires certification." }},
+
+  { name:"Ossau-Iraty",         cat:"Cheese",
+    desc:"Firm Basque sheep's milk cheese with a smooth, buttery paste and herbal notes; one of France's oldest recorded cheeses.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification; sheep's milk cheeses are pareve in some traditions but dairy in most." }},
+
+  { name:"Mimolette",           cat:"Cheese",
+    desc:"Bright orange French hard cheese aged up to 36 months; the colour comes from annatto. Its pitted rind is created by cheese mites.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification; the presence of cheese mites on the rind is a specific kashrus concern." }},
+
+  // ─── JAPANESE (additional) ────────────────────────────────────────────────
+  { name:"Kaiseki",             cat:"Other",
+    desc:"Japanese multi-course haute cuisine; a precisely ordered sequence of small dishes celebrating seasonal ingredients. The Japanese equivalent of a tasting menu.",
+    r:{ vegetarian:"p", vegan:"p", pescatarian:"p", vegequarian:"p", noRedMeat:"p", jain:"p", kosher:"p", halal:"p", lent:"p" },
+    notes:{ vegetarian:"Traditional kaiseki includes fish and often meat; vegetarian kaiseki exists (shōjin-ryōri inspired) but must be requested.", vegan:"Vegan kaiseki is rare — request in advance.", kosher:"Virtually never kosher-certified.", halal:"Can accommodate halal requests at some restaurants with advance notice." }},
+
+  { name:"Omakase",             cat:"Other",
+    desc:"'I'll leave it to you' — the diner surrenders all menu decisions to the chef. Common in sushi restaurants but used across Japanese fine dining.",
+    r:{ vegetarian:"p", vegan:"p", pescatarian:"p", vegequarian:"p", noRedMeat:"p", jain:"p", kosher:"p", halal:"p", lent:"p" },
+    notes:{ vegetarian:"Inform the chef of all restrictions when booking; omakase chefs can usually accommodate if warned in advance.", pescatarian:"At a sushi restaurant, omakase is typically all fish and seafood.", kosher:"Virtually never kosher-certified.", halal:"Inform the restaurant when booking." }},
+
+  { name:"Yakitori",            cat:"Poultry",
+    desc:"Japanese skewered grilled chicken — every part of the bird used: breast, thigh, skin, liver, heart, cartilage, and tail.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Chicken is kosher; requires certified shechita slaughter. Tare (soy/mirin glaze) must also be certified.", halal:"Chicken is halal with zabiha slaughter; check that mirin (sweet rice wine) is absent or substituted." }},
+
+  { name:"Sunomono",            cat:"Soup & Broth",
+    desc:"Japanese vinegared salad, most often thinly sliced cucumber dressed with rice vinegar, sugar, and sesame; sometimes with crab or shrimp.",
+    r:{ vegetarian:"p", vegan:"p", pescatarian:"p", vegequarian:"p", noRedMeat:"y", jain:"p", kosher:"p", halal:"y", lent:"p" },
+    notes:{ vegetarian:"Plain cucumber sunomono is vegetarian; versions with crab or shrimp are not.", vegan:"Cucumber-only version is vegan.", jain:"Cucumber is above-ground — permitted; versions with seafood are not Jain.", kosher:"Requires certified ingredients; crab/shrimp versions are not kosher.", lent:"Cucumber-only version and shrimp versions are fine for Lent." }},
+
+  // ─── TECHNIQUE & SAUCE ───────────────────────────────────────────────────
+  { name:"Sous Vide",           cat:"Technique & Sauce",
+    desc:"Vacuum-sealing food in plastic and cooking it in a precisely temperature-controlled water bath; produces exceptionally even, tender results.",
+    r:{ vegetarian:"u", vegan:"u", pescatarian:"u", vegequarian:"u", noRedMeat:"u", jain:"u", kosher:"u", halal:"u", lent:"u" },
+    notes:{ vegetarian:"Sous vide is a cooking technique — dietary compatibility depends entirely on the ingredients, not the method." }},
+
+  { name:"En Papillote",        cat:"Technique & Sauce",
+    desc:"Cooking food sealed inside a folded parchment paper parcel; the food steams in its own juices and is opened at the table.",
+    r:{ vegetarian:"u", vegan:"u", pescatarian:"u", vegequarian:"u", noRedMeat:"u", jain:"u", kosher:"u", halal:"u", lent:"u" },
+    notes:{ vegetarian:"A cooking method — dietary compatibility depends on what is cooked inside the parcel." }},
+
+  { name:"Confit",              cat:"Technique & Sauce",
+    desc:"Preserving and slow-cooking meat (classically duck or goose) submerged in its own fat at low temperature; produces incomparably tender, flavourful results.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"p", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ vegetarian:"Confit nearly always refers to meat; vegetables can be confited in oil but this is rarely what the word means on a menu.", noRedMeat:"Duck or goose confit is no-red-meat; pork confit is not.", kosher:"Duck and goose confit can be kosher if all components are certified.", halal:"Halal with certified poultry; pork confit is never halal." }},
+
+  { name:"Meunière",            cat:"Technique & Sauce",
+    desc:"'Miller's wife style' — fish dredged in flour and pan-fried, finished with brown butter (beurre noisette), lemon juice, and parsley.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"A fish preparation — not vegetarian.", kosher:"Butter cannot be served with meat; meunière on fish is kosher if the fish is kosher and butter is certified. Cannot follow a meat course." }},
+
+  { name:"Grenobloise",         cat:"Technique & Sauce",
+    desc:"A variation of meunière sauce: brown butter with capers, diced lemon segments, and croutons. Classically served with skate wing.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"A fish sauce — the dish is not vegetarian.", kosher:"Same dairy-fish considerations as meunière; skate (ray) is not kosher (lacks scales)." }},
+
+  { name:"Beurre Blanc",        cat:"Technique & Sauce",
+    desc:"Emulsified white wine and shallot reduction mounted with cold butter; a classic French sauce for fish and vegetables.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"y" },
+    notes:{ vegetarian:"A butter sauce — vegetarian.", jain:"Contains shallots — not Jain.", kosher:"Butter sauce is dairy — cannot accompany a meat dish. Wine must be kosher.", halal:"White wine in the reduction makes it non-halal unless wine is omitted." }},
+
+  { name:"Bordelaise",          cat:"Technique & Sauce",
+    desc:"Classic Bordeaux-style red wine sauce with bone marrow, shallots, and demi-glace; the canonical sauce for steak.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Contains red wine (must be kosher) and bone marrow (meat); requires full kosher certification.", halal:"Red wine makes it non-halal in traditional preparation." }},
+
+  { name:"Périgourdine",        cat:"Technique & Sauce",
+    desc:"Rich sauce from the Périgord: demi-glace with Madeira wine, black truffle, and often foie gras. Served with tournedos Rossini.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Contains Madeira wine (must be kosher) and foie gras (must be kosher-certified).", halal:"Madeira wine makes it non-halal." }},
+
+  { name:"Grand Veneur",        cat:"Technique & Sauce",
+    desc:"'Master of the Hunt' sauce: a poivrade (peppercorn) base with red currant jelly and cream; the classic accompaniment to venison and hare.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Made with game stock; kosher if all components are certified. Red wine in the poivrade base must be kosher.", halal:"Can be halal with zabiha game and no prohibited wine." }},
+
+  { name:"Financière (sauce)",  cat:"Technique & Sauce",
+    desc:"Rich classical sauce with Madeira, mushrooms, olives, and cock's combs (crête de coq); garnish for vol-au-vent and quenelles. Not the dessert.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Madeira wine (must be kosher) and cock's combs require certification; rarely prepared kosher.", halal:"Madeira wine makes it non-halal in traditional form." }},
+
+  // ─── FISH: ENGLISH / JAPANESE — KOSHER STATUS ─────────────────────────────
+  // Kosher rule: must have fins AND cycloid/ctenoid scales removable without tearing skin.
+
+  { name:"Salmon / Sake",              cat:"Fish",
+    desc:"Atlantic or Pacific salmon (鮭 / サーモン). One of the most popular sushi fish worldwide; rich, fatty flesh with prominent cycloid scales.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Salmon has clearly visible cycloid scales easily separated from the skin — a textbook kosher fish." }},
+
+  { name:"Saba / Mackerel",            cat:"Fish",
+    desc:"Japanese mackerel (鯖 / サバ). Oily, strongly flavoured; served cured (shime-saba), as battera pressed sushi, salt-grilled, or simmered.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Well-developed cycloid scales; fully kosher." }},
+
+  { name:"Tai / Red Sea Bream",        cat:"Fish",
+    desc:"Red sea bream (真鯛 / マダイ). The prestige fish of Japanese cuisine, served at celebrations. Known as dorade royale in France and Spain.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Prominent ctenoid scales easily removed; fully kosher." }},
+
+  { name:"Hirame / Flounder",          cat:"Fish",
+    desc:"Olive flounder (平目 / ヒラメ). Prized flatfish in Japan; subtle, clean white flesh. Left-eyed. The fin-edge muscle, engawa, is a separate delicacy.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Small cycloid scales; kosher." }},
+
+  { name:"Engawa / Flounder Fin",      cat:"Fish",
+    desc:"Fin-edge muscle of flounder (縁側 / エンガワ). Thin, ruffled slices with a rich, slightly chewy texture from the constant movement of the fin. A sushi counter favourite.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cut from flounder, a kosher fish." }},
+
+  { name:"Karei / Japanese Flounder",  cat:"Fish",
+    desc:"Japanese right-eyed flounder (鰈 / カレイ). Milder than hirame; often simmered in soy and mirin (karei nitsuke) or served as karaage.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales; kosher." }},
+
+  { name:"Kohada / Gizzard Shad",      cat:"Fish",
+    desc:"Gizzard shad (小鰭 / コハダ). A quintessential Edo-mae sushi fish; small and silver-skinned, cured in salt and vinegar. The adult form is konoshiro (鰶).",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales; kosher." }},
+
+  { name:"Aji / Horse Mackerel",       cat:"Fish",
+    desc:"Japanese horse mackerel (鯵 / アジ). Staple of izakaya and sushi menus; served as tataki (lightly seared with ginger), sashimi, or salt-grilled whole.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales along lateral line; kosher." }},
+
+  { name:"Shima Aji / Striped Jack",   cat:"Fish",
+    desc:"Striped jack or white trevally (縞鯵 / シマアジ). A premium sushi fish; firm, rich, sweet flesh. Among the most sought-after fish at high-end sushi bars.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Trevally has scales; kosher." }},
+
+  { name:"Kanpachi / Greater Amberjack", cat:"Fish",
+    desc:"Greater amberjack (間八 / カンパチ). Related to hamachi; firmer texture, cleaner and less fatty. Prized for sashimi at premium sushi bars.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Amberjack has scales; kosher." }},
+
+  { name:"Hiramasa / Yellowtail Amberjack", cat:"Fish",
+    desc:"Yellowtail amberjack (平政 / ヒラマサ). Similar to hamachi but leaner and firmer; considered superior by many sushi chefs. Predominantly wild-caught.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Has scales; kosher." }},
+
+  { name:"Buri / Adult Yellowtail",    cat:"Fish",
+    desc:"Adult yellowtail (鰤 / ブリ). The mature form of hamachi; richer and fattier. Winter buri (寒ブリ) from the Sea of Japan is a seasonal delicacy.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Yellowtail family; has scales; kosher." }},
+
+  { name:"Katsuo / Skipjack Tuna",     cat:"Fish",
+    desc:"Skipjack tuna or bonito (鰹 / カツオ). Eaten as katsuo tataki — quickly seared and served with ponzu and ginger. Also the primary source of katsuobushi flakes.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Small cycloid scales; kosher." }},
+
+  { name:"Mebachi / Bigeye Tuna",      cat:"Fish",
+    desc:"Bigeye tuna (目鉢 / メバチ). Higher fat content than yellowfin; the most common source of chūtoro at mid-range sushi bars. Named for its notably large eyes.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Tuna has scales; kosher." }},
+
+  { name:"Kinmedai / Splendid Alfonsino", cat:"Fish",
+    desc:"Splendid alfonsino (金目鯛 / キンメダイ). Named for its golden eyes; a deep-water fish with silky, sweet flesh. Served simmered (nitsuke) or as a luxury sushi topping.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Prominent cycloid scales; kosher." }},
+
+  { name:"Sawara / Spanish Mackerel",  cat:"Fish",
+    desc:"Japanese Spanish mackerel (鰆 / サワラ). Its name means 'spring fish', though winter sawara is also prized. Large and elegant; delicate texture popular as sashimi.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Mackerel family; has scales; kosher." }},
+
+  { name:"Sanma / Pacific Saury",      cat:"Fish",
+    desc:"Pacific saury (秋刀魚 / サンマ). Iconic autumn fish in Japan; salt-grilled whole and served with daikon. The kanji literally means 'autumn sword fish'.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Small but removable cycloid scales; kosher." }},
+
+  { name:"Suzuki / Sea Bass",          cat:"Fish",
+    desc:"Japanese sea bass (鱸 / スズキ). A summer fish in Japan with lean, clean white flesh; a key sushi and sashimi fish. Related to the European branzino.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Prominent ctenoid scales; kosher." }},
+
+  { name:"Ayu / Sweetfish",            cat:"Fish",
+    desc:"Sweetfish (鮎 / アユ). A prized freshwater river fish with a faint, melon-like aroma unique to mountain rivers. Typically salt-grilled whole on skewers. A beloved summer delicacy.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales; kosher." }},
+
+  { name:"Sayori / Halfbeak",          cat:"Fish",
+    desc:"Japanese halfbeak (針魚 / サヨリ). A slender, elegant spring fish; pure white flesh with a distinctive dark inner lining. Served as sashimi or pressed sushi.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales; kosher." }},
+
+  { name:"Iwashi / Sardine",           cat:"Fish",
+    desc:"Japanese sardine (鰯 / イワシ). Small oily fish eaten in Japan as sashimi, tataki, or salt-grilled; prized when ultra-fresh. Also dried as niboshi for stock.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Clear cycloid scales; one of the most abundant kosher fish." }},
+
+  { name:"Nishin / Herring",           cat:"Fish",
+    desc:"Pacific herring (鯡・鰊 / ニシン). In Japan the salted roe (kazunoko) is a New Year delicacy. In Europe smoked as kipper or pickled as rollmops or Bismarck herring.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Prominent scales; one of the most classically kosher fish." }},
+
+  { name:"Tara / Cod",                 cat:"Fish",
+    desc:"Pacific or Atlantic cod (鱈 / タラ). In Japan used in hot pot (tara nabe) and the source of shirako (milt). Globally the fish in fish and chips; dried as bacalà.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Large cycloid scales; unambiguously kosher." }},
+
+  { name:"Masu / Trout",               cat:"Fish",
+    desc:"Cherry salmon or trout (鱒 / マス). Includes sakura masu (cherry salmon) and amago; rich pink flesh. Served as sashimi or salt-grilled.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales; kosher." }},
+
+  { name:"Isaki / Grunt",              cat:"Fish",
+    desc:"Chicken grunt (伊佐木 / イサキ). Popular sushi and grilled fish in Japan; mild, delicate flesh. Most prized in early summer.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Ctenoid scales; kosher." }},
+
+  { name:"Amadai / Tilefish",          cat:"Fish",
+    desc:"Tilefish (甘鯛 / アマダイ). Highly prized in Kyoto cuisine; the scales are left on and fried crisp in matsukasa-yaki ('pine cone grilling'). Delicate, sweet flesh.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Large scales (notably fried on in Kyoto cuisine); kosher." }},
+
+  { name:"Kinki / Thornyhead",         cat:"Fish",
+    desc:"Broadbanded thornyhead (喜知次 / キンキ). A luxury deep-sea fish from Hokkaido and Tohoku; rich, fatty, gelatinous flesh. Served simmered or as sashimi.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Has scales; kosher." }},
+
+  { name:"Managatsuo / Silver Pomfret", cat:"Fish",
+    desc:"Silver pomfret (真魚鰹 / マナガツオ). A disc-shaped silvery fish prized in Kansai cuisine; delicate, rich flesh often served grilled with saikyo miso.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Fine cycloid scales; kosher." }},
+
+  { name:"Tobiuo / Flying Fish",       cat:"Fish",
+    desc:"Flying fish (飛魚 / トビウオ). Wing-like pectoral fins allow it to glide above the surface. Eaten as sashimi or salt-grilled; the roe (tobiko) is a common sushi topping.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Cycloid scales; kosher." }},
+
+  // Non-kosher fish
+  { name:"Anago / Conger Eel",         cat:"Fish",
+    desc:"Sea conger eel (穴子 / アナゴ). A saltwater eel distinct from freshwater unagi; a classic Edo-mae sushi topping — simmered until tender, glazed with sweet soy tare.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    notes:{ kosher:"Eels lack scales entirely; not kosher regardless of species or preparation.", halal:"Permitted under Shafi'i, Maliki, and Hanbali schools; Hanafi restricts non-scaled fish." }},
+
+  { name:"Hamo / Pike Conger",         cat:"Fish",
+    desc:"Pike conger (鱧 / ハモ). A prized Kyoto summer fish resembling an eel; hundreds of fine bones are scored by knife (hone-kiri) before cooking. Served in shabu-shabu or tempura.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    notes:{ kosher:"Pike conger is eel-like and lacks removable scales; not kosher despite its culinary prestige.", halal:"Shafi'i and Maliki permit; Hanafi restricts." }},
+
+  { name:"Tachiuo / Cutlassfish",      cat:"Fish",
+    desc:"Cutlassfish or beltfish (太刀魚 / タチウオ). A long, brilliant silver, sword-shaped fish; the name means 'sword fish'. Popular grilled or as sashimi in Japan.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    notes:{ kosher:"Only minute embedded scales that cannot be removed without tearing the skin; not kosher.", halal:"Most Sunni schools permit as seafood; Hanafi restricts non-scaled fish." }},
+
+  { name:"Fugu / Tiger Pufferfish",    cat:"Fish",
+    desc:"Tiger pufferfish (虎河豚 / トラフグ). Japan's most notorious delicacy; toxic organs require a licensed chef. Served as paper-thin sashimi (fugu-sashi), hot pot, or karaage.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Most fugu species used in restaurants lack visible removable scales and are not kosher; a few species have scales and may be permissible but require expert identification." }},
+
+  { name:"Same / Shark",               cat:"Fish",
+    desc:"Shark (鮫 / サメ). Various species appear in Japanese cuisine: dried fin (フカヒレ) in Chinese-influenced dishes; in the West as fish and chips or flake. Increasingly controversial for finning practices.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    notes:{ kosher:"Sharks have placoid (denticle) scales fused to the skin and not removable; not kosher.", halal:"Permitted as seafood under Shafi'i, Maliki, Hanbali; restricted by Hanafi." }},
+  { name:"Button Mushroom / Champignon de Paris", cat:"Mushroom",
+    desc:"The world's most common cultivated mushroom (Agaricus bisporus). Mild, earthy flavour; sold as white buttons. Sautéed, stuffed, used in omelettes, or eaten raw in salads.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Cremini / Baby Bella", cat:"Mushroom",
+    desc:"Brown strain of Agaricus bisporus, harvested young; firmer texture and deeper flavour than white button mushrooms. The everyday mushroom in Italian-American cooking.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Portobello", cat:"Mushroom",
+    desc:"Fully mature brown Agaricus bisporus; large, flat cap with meaty texture. Grilled whole as a burger substitute, roasted, or stuffed with cheese and herbs.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Oyster Mushroom / Pleurote", cat:"Mushroom",
+    desc:"Fan-shaped mushrooms (Pleurotus ostreatus); delicate, slightly sweet and anise-like. Widely cultivated in grey, yellow, and pink varieties. Stir-fried, sautéed, or used in soups.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Shiitake / 椎茸", cat:"Mushroom",
+    desc:"Japan's most important cultivated mushroom (Lentinula edodes); rich umami flavour and meaty texture. Dried shiitake (干し椎茸) add intense flavour to dashi and braises. Used in ramen, hot pots, and stir-fries.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Enoki / 榎茸", cat:"Mushroom",
+    desc:"Long, thread-like white mushrooms (Flammulina velutipes) cultivated in the dark; mild, slightly fruity flavour and satisfying crunch. Classic in Japanese hot pots, ramen, and as a garnish.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Shimeji / しめじ", cat:"Mushroom",
+    desc:"Cluster-forming mushrooms (Hypsizygus tessellatus) sold as white or brown beech mushrooms; firm, nutty, umami. Used in nabemono, risotto, pasta, and stir-fries.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"King Oyster / Eringi / エリンギ", cat:"Mushroom",
+    desc:"Trumpet royale (Pleurotus eryngii); very thick, meaty stem with small cap. Robust umami flavour holds up to high heat; sliced and seared, used in Japanese and Chinese cooking.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Nameko / なめこ", cat:"Mushroom",
+    desc:"Small amber mushrooms (Pholiota nameko) with a natural gelatinous coating; mildly nutty, slightly earthy. The coating thickens broths. Sold jarred or fresh; popular in miso soup and nabemono.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Wood Ear / Kikurage / 木耳", cat:"Mushroom",
+    desc:"Jelly fungus (Auricularia auricula-judae) with a crunchy, gelatinous texture and very mild flavour; used almost entirely for texture. Standard in hot-and-sour soup, ramen, and Chinese stir-fries; sold dried.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Semi-cultivated; should be checked for insects." }},
+
+  { name:"Maitake / 舞茸", cat:"Mushroom",
+    desc:"Hen of the Woods (Grifola frondosa); overlapping ruffled fronds with rich, earthy, peppery flavour. Both wild and cultivated. Prized in Japanese cuisine and studied for medicinal properties.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Often wild-harvested; must be checked for insects." }},
+
+  { name:"Lion's Mane / Yamabushitake / 山伏茸", cat:"Mushroom",
+    desc:"Striking white cascading mushroom (Hericium erinaceus) resembling a pom-pom; sweet, seafood-like flavour often likened to crab. Increasingly cultivated; studied for neurological health benefits.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Reishi / Lingzhi / 霊芝", cat:"Mushroom",
+    desc:"Lacquered bracket fungus (Ganoderma lucidum); very bitter raw, rarely eaten as food. Used dried in teas, tinctures, and soups in Chinese medicine. The legendary 'mushroom of immortality'.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Often wild or semi-cultivated; should be checked for insects." }},
+
+  { name:"Hedgehog / Pied de Mouton", cat:"Mushroom",
+    desc:"Wild mushroom (Hydnum repandum) with cream-coloured cap and distinctive toothed underside; firm, nutty, mildly peppery. Prized for having no toxic lookalikes — a forager's favourite.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Wild mushroom; must be checked for insects." }},
+
+  { name:"Saffron Milk Cap / Lactaire Délicieux", cat:"Mushroom",
+    desc:"Wild mushroom (Lactarius deliciosus) with brilliant carrot-orange cap that bleeds orange latex when cut; robust, slightly resinous flavour. Very popular in Spain (rebozuelo) and southern France.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Wild mushroom; must be checked for insects." }},
+
+  { name:"Caesar's Mushroom / Oronge", cat:"Mushroom",
+    desc:"Noble Amanita (Amanita caesarea); brilliant orange cap, yellow gills and stem. One of Europe's finest edible mushrooms, prized since antiquity. Can be confused with deadly Amanita species — expert identification essential.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Wild mushroom; must be checked for insects." }},
+
+  { name:"Pioppini / Poplar Mushroom", cat:"Mushroom",
+    desc:"Cultivated Agrocybe aegerita; small dark-brown caps with long slender stems, firm bite and pleasant nutty flavour. Popular in Italian pasta and risotto, and increasingly in Japanese cuisine.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Blewit / Pied Bleu", cat:"Mushroom",
+    desc:"Wild-foraged Lepista nuda; unmistakable lilac-violet colouring, aromatic and mildly spiced flavour. Must be cooked (toxic raw). Foraged in Europe and North America in autumn and early winter.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Wild mushroom; must be checked for insects." }},
+
+  { name:"Bay Bolete", cat:"Mushroom",
+    desc:"Wild boletus (Imleria badia); dark chocolate-brown cap, yellow pores that stain blue when cut. Mild, earthy, porcini-like flavour; dries well. Common in European pine and mixed forests.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Wild mushroom; must be checked for insects." }},
+
 ];
+
+const INGREDIENTS = [
+  { id:"gluten",    label:"Gluten",    icon:"🌾", def:"Contains wheat, barley, rye, or other gluten sources — bread, pasta, pastry, soy sauce, most thickened sauces." },
+  { id:"dairy",     label:"Dairy",     icon:"🥛", def:"Contains milk, cream, butter, cheese, crème fraîche, hollandaise, beurre blanc, or other dairy products." },
+  { id:"eggs",      label:"Eggs",      icon:"🥚", def:"Contains chicken eggs or egg-derived products: mayonnaise, hollandaise, aioli, many fresh pastas." },
+  { id:"treenuts",  label:"Tree Nuts", icon:"🌰", def:"Contains almonds, walnuts, cashews, hazelnuts, pine nuts, pistachios, pecans, or other tree nuts." },
+  { id:"peanuts",   label:"Peanuts",   icon:"🥜", def:"Contains peanuts or peanut-derived products. Note: peanuts are legumes, not tree nuts." },
+  { id:"shellfish", label:"Shellfish", icon:"🦞", def:"Contains crustaceans (shrimp, crab, lobster) or molluscs (clams, oysters, scallops, mussels, squid, octopus)." },
+  { id:"fish",      label:"Fish",      icon:"🐟", def:"Contains finfish: salmon, tuna, cod, halibut, sole, anchovy, sardine, sea bass, mackerel, monkfish, etc." },
+  { id:"chicken",   label:"Chicken",   icon:"🍗", def:"Contains chicken or other poultry: turkey, duck, goose, guinea fowl, squab, pigeon." },
+  { id:"beef",      label:"Beef",      icon:"🥩", def:"Contains beef or veal." },
+  { id:"pork",      label:"Pork",      icon:"🐷", def:"Contains pork, ham, bacon, pancetta, lardons, prosciutto, salami, or other pork-derived ingredients." },
+  { id:"lamb",      label:"Lamb",      icon:"🐑", def:"Contains lamb or mutton." },
+  { id:"game",      label:"Game",      icon:"🦌", def:"Contains venison, wild boar, rabbit, pheasant, quail, partridge, grouse, woodcock, ortolan, snipe, or other game." },
+  { id:"alcohol",   label:"Alcohol",   icon:"🍷", def:"Contains wine, beer, spirits, or other alcohol used in cooking: braising liquids, reductions, flambéed dishes, marinades." },
+  { id:"legumes",   label:"Legumes",   icon:"🫘", def:"Contains legumes: beans (white beans, kidney beans, chickpeas, flageolet, lentils), peas, or soy products (tofu, miso, edamame). Peanuts are also legumes but tracked separately." },
+];
+
+// ── CONTAINS DATA ─────────────────────────────────────────────────────────
+const CONTAINS_DATA = {
+  "Wagyu Beef":           { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Beef Tartare":         { gluten:"p", dairy:"n", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"p", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Beef Wellington":      { gluten:"y", dairy:"p", eggs:"p", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"p", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Chateaubriand":        { gluten:"n", dairy:"p", eggs:"p", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Beef Carpaccio":       { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Osso Buco":            { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Côte de Boeuf":        { gluten:"n", dairy:"p", eggs:"p", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Entrecôte":            { gluten:"n", dairy:"p", eggs:"p", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Steak Frites":         { gluten:"n", dairy:"p", eggs:"p", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Beef Bourguignon":     { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"y", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Blanquette de Veau":   { gluten:"p", dairy:"y", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Sweetbreads":          { gluten:"p", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Bone Marrow":          { gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Vitello Tonnato":      { gluten:"n", dairy:"n", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Short Rib":            { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Oxtail":               { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Rack of Lamb":         { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"y", game:"n", alcohol:"n", legumes:"n" },
+  "Venison":              { gluten:"p", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"y", alcohol:"p", legumes:"n" },
+  "Mechoui":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"y", game:"n", alcohol:"n", legumes:"n" },
+  "Cassoulet":            { gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"n", pork:"y", lamb:"p", game:"n", alcohol:"p", legumes:"y" },
+  "Squab":                { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"n", pork:"n", lamb:"n", game:"y", alcohol:"n", legumes:"n" },
+  "Quail":                { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"n", pork:"n", lamb:"n", game:"y", alcohol:"p", legumes:"n" },
+  "Tajine / Tagine":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"p", peanuts:"n", shellfish:"n", fish:"n", chicken:"p", beef:"n", pork:"n", lamb:"p", game:"n", alcohol:"n", legumes:"n" },
+  "Bastilla":             { gluten:"y", dairy:"n", eggs:"y", treenuts:"y", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"n", pork:"n", lamb:"n", game:"p", alcohol:"n", legumes:"n" },
+  "Prosciutto di Parma":  { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Ibérico Ham":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Mortadella":           { gluten:"n", dairy:"n", eggs:"n", treenuts:"y", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Nduja":                { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Foie Gras":            { gluten:"p", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Rillettes":            { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"p", chicken:"p", beef:"n", pork:"p", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Pork Belly":           { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Suckling Pig":         { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Pâté en Croûte":      { gluten:"y", dairy:"p", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"p", beef:"n", pork:"p", lamb:"n", game:"p", alcohol:"p", legumes:"n" },
+  "Bresaola":             { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Terrine":              { gluten:"p", dairy:"n", eggs:"p", treenuts:"n", peanuts:"n", shellfish:"p", fish:"p", chicken:"p", beef:"p", pork:"p", lamb:"n", game:"p", alcohol:"p", legumes:"n" },
+  "Duck Confit":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Coq au Vin":           { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Galantine":            { gluten:"n", dairy:"n", eggs:"p", treenuts:"p", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"n", pork:"p", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Chicken Liver Mousse": { gluten:"p", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Oysters":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Lobster Bisque":       { gluten:"y", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Langoustine":          { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "King Crab":            { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Crab Cakes":           { gluten:"y", dairy:"n", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Shrimp Cocktail":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Scallops":             { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Mussels Marinière":    { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Grilled Octopus":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Calamari":             { gluten:"y", dairy:"n", eggs:"p", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Clam Chowder":         { gluten:"y", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"p", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Geoduck":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Abalone":              { gluten:"p", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Escargot":             { gluten:"p", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Sea Urchin (Uni)":     { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Frog Legs":            { gluten:"p", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Caviar / Osetra":      { gluten:"y", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Salmon Gravlax":       { gluten:"p", dairy:"n", eggs:"p", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Tuna Tartare":         { gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Hamachi / Yellowtail": { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Toro (Fatty Tuna)":    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Dover Sole":           { gluten:"y", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Turbot":               { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Branzino":             { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Black Cod / Sablefish":{ gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Ceviche":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"p", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Bouillabaisse":        { gluten:"y", dairy:"n", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"y", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Eel / Unagi":          { gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Ikura / Salmon Roe":   { gluten:"p", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Boquerones":           { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Bacalhau":             { gluten:"p", dairy:"p", eggs:"p", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Brandade":             { gluten:"p", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Monkfish":             { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Halibut":              { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Arctic Char":          { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Swordfish":            { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Mahi-Mahi":            { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Dashi":                { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Ahi Poke":             { gluten:"y", dairy:"n", eggs:"n", treenuts:"y", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Burrata":              { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Stracciatella":        { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Caprese Salad":        { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Mushroom Risotto":     { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Truffle Pasta":        { gluten:"y", dairy:"y", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cauliflower Steak":    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Gazpacho":             { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Vichyssoise":          { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Ratatouille":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Beet Carpaccio":       { gluten:"n", dairy:"y", eggs:"n", treenuts:"y", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Tabbouleh":            { gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Hummus":               { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Baba Ganoush":         { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Falafel":              { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Socca":                { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Shakshuka":            { gluten:"n", dairy:"n", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Raclette":             { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Fondue (Cheese)":      { gluten:"y", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Consommé":             { gluten:"n", dairy:"n", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"p", beef:"p", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Miso Soup":            { gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"p", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "French Onion Soup":    { gluten:"y", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"p", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Crème Brûlée":         { gluten:"n", dairy:"y", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Panna Cotta":          { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Soufflé":              { gluten:"p", dairy:"y", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Madeleine":            { gluten:"y", dairy:"y", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Financier":            { gluten:"y", dairy:"y", eggs:"y", treenuts:"y", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Île Flottante":        { gluten:"n", dairy:"y", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Tarte Tatin":          { gluten:"y", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Macaron":              { gluten:"n", dairy:"y", eggs:"y", treenuts:"y", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Amuse-Bouche":         { gluten:"u", dairy:"u", eggs:"u", treenuts:"u", peanuts:"u", shellfish:"u", fish:"u", chicken:"u", beef:"u", pork:"u", lamb:"u", game:"u", alcohol:"u" },
+  "Tasting Menu":         { gluten:"u", dairy:"u", eggs:"u", treenuts:"u", peanuts:"u", shellfish:"u", fish:"u", chicken:"u", beef:"u", pork:"u", lamb:"u", game:"u", alcohol:"u" },
+  "Chermoula":            { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Gremolata":            { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Rouille":              { gluten:"p", dairy:"n", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cervelle de Veau":     { gluten:"p", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Tête de Veau":         { gluten:"n", dairy:"n", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Joue de Bœuf":         { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Langue de Bœuf":       { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Andouillette":         { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Pied de Cochon":       { gluten:"p", dairy:"n", eggs:"p", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Guanciale":            { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Lardo di Colonnata":   { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Culatello di Zibello": { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Grouse":               { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"p", lamb:"n", game:"y", alcohol:"n", legumes:"n" },
+  "Woodcock":             { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"y", alcohol:"n", legumes:"n" },
+  "Faisan / Pheasant":    { gluten:"p", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"p", lamb:"n", game:"y", alcohol:"n", legumes:"n" },
+  "Lièvre à la Royale":   { gluten:"p", dairy:"n", eggs:"p", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"p", lamb:"n", game:"y", alcohol:"y", legumes:"n" },
+  "Saint-Pierre / John Dory":{ gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Sandre / Zander":      { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Barbue / Brill":       { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Nodoguro":             { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Ankimo":               { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Shirako":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Bottarga":             { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Colatura di Alici":    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Karasumi":             { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Poularde Demi-Deuil":  { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Chawanmushi":          { gluten:"p", dairy:"n", eggs:"y", treenuts:"p", peanuts:"n", shellfish:"p", fish:"y", chicken:"p", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cèpes / Porcini":      { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Girolles / Chanterelles":{ gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Trompettes de la Mort":{ gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Morels":               { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Salsify":              { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cardoon":              { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"p", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Agretti":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Fiddlehead Ferns":     { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Ris de Veau":          { gluten:"y", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Fraise de Veau":       { gluten:"p", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Snipe":                { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"y", alcohol:"n", legumes:"n" },
+  "Ortolan":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"y", alcohol:"n", legumes:"n" },
+  "Sanglier / Wild Boar": { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"y", alcohol:"p", legumes:"n" },
+  "Perdrix / Partridge":  { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"p", lamb:"n", game:"y", alcohol:"n", legumes:"n" },
+  "Coppa / Capicola":     { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Finocchiona":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Lomo Ibérico":         { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cecina":               { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Speck":                { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Lonza":                { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Loup de Mer":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Omble Chevalier":      { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Grondin / Gurnard":    { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Pageot / Dorade":      { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "O-Toro":               { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Chu-Toro":             { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Katsuobushi":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Kombu Dashi":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Beluga Caviar":        { gluten:"p", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Sevruga Caviar":       { gluten:"p", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Almas Caviar":         { gluten:"p", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Crosnes":              { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Scorzonera":           { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Ramson / Wild Garlic": { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Ramps":                { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Matsutake":            { gluten:"n", dairy:"p", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Black Truffle":        { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "White Truffle":        { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Brillat-Savarin":      { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Époisses":             { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Vacherin Mont-d'Or":   { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Reblochon":            { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Comté":                { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Beaufort":             { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Brie de Meaux":        { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Camembert de Normandie":{ gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Ossau-Iraty":          { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Mimolette":            { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Kaiseki":              { gluten:"u", dairy:"u", eggs:"u", treenuts:"u", peanuts:"u", shellfish:"u", fish:"u", chicken:"u", beef:"u", pork:"u", lamb:"u", game:"u", alcohol:"u" },
+  "Omakase":              { gluten:"u", dairy:"u", eggs:"u", treenuts:"u", peanuts:"u", shellfish:"u", fish:"u", chicken:"u", beef:"u", pork:"u", lamb:"u", game:"u", alcohol:"u" },
+  "Yakitori":             { gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Sunomono":             { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"p", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Sous Vide":            { gluten:"u", dairy:"u", eggs:"u", treenuts:"u", peanuts:"u", shellfish:"u", fish:"u", chicken:"u", beef:"u", pork:"u", lamb:"u", game:"u", alcohol:"u" },
+  "En Papillote":         { gluten:"u", dairy:"u", eggs:"u", treenuts:"u", peanuts:"u", shellfish:"u", fish:"u", chicken:"u", beef:"u", pork:"u", lamb:"u", game:"u", alcohol:"u" },
+  "Confit":               { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"p", beef:"n", pork:"p", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Meunière":             { gluten:"y", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Grenobloise":          { gluten:"y", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Beurre Blanc":         { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Bordelaise":           { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Périgourdine":         { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"y", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Grand Veneur":         { gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"y", alcohol:"y", legumes:"n" },
+  "Financière (sauce)":   { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"y", beef:"p", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  // ── new fish ──
+  "Salmon / Sake":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Saba / Mackerel":            { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Tai / Red Sea Bream":        { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Hirame / Flounder":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Engawa / Flounder Fin":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Karei / Japanese Flounder":  { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Kohada / Gizzard Shad":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Aji / Horse Mackerel":       { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Shima Aji / Striped Jack":   { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Kanpachi / Greater Amberjack":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Hiramasa / Yellowtail Amberjack":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Buri / Adult Yellowtail":    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Katsuo / Skipjack Tuna":     { gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Mebachi / Bigeye Tuna":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Kinmedai / Splendid Alfonsino":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Sawara / Spanish Mackerel":  { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Sanma / Pacific Saury":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Suzuki / Sea Bass":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Ayu / Sweetfish":            { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Sayori / Halfbeak":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Iwashi / Sardine":           { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Nishin / Herring":           { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Tara / Cod":                 { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Masu / Trout":               { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Isaki / Grunt":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Amadai / Tilefish":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Kinki / Thornyhead":         { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Managatsuo / Silver Pomfret":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Tobiuo / Flying Fish":       { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Anago / Conger Eel":         { gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"p", legumes:"n" },
+  "Hamo / Pike Conger":         { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Tachiuo / Cutlassfish":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Fugu / Tiger Pufferfish":    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Same / Shark":               { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Button Mushroom / Champignon de Paris":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cremini / Baby Bella":          { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Portobello":                    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Oyster Mushroom / Pleurote":    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Shiitake / 椎茸":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Enoki / 榎茸":                 { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Shimeji / しめじ":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "King Oyster / Eringi / エリンギ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Nameko / なめこ":               { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Wood Ear / Kikurage / 木耳":    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Maitake / 舞茸":               { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Lion's Mane / Yamabushitake / 山伏茸":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Reishi / Lingzhi / 霊芝":      { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Hedgehog / Pied de Mouton":     { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Saffron Milk Cap / Lactaire Délicieux":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Caesar's Mushroom / Oronge":   { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Pioppini / Poplar Mushroom":    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Blewit / Pied Bleu":            { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Bay Bolete":                    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+};
+FOODS.forEach(f => { f.c = CONTAINS_DATA[f.name] || {}; });
 
 // ── RENDER ────────────────────────────────────────────────────────────────
 const ICONS = { y:"✓", n:"✗", p:"~", u:"?" };
-const LABELS = { y:"Compatible", n:"Not compatible", p:"Depends on preparation", u:"Varies by tradition" };
+
+let mode = "diet";
+
+function switchMode(newMode) {
+  mode = newMode;
+  document.getElementById("modeDiet").classList.toggle("on", mode === "diet");
+  document.getElementById("modeContains").classList.toggle("on", mode === "contains");
+  document.getElementById("colCount").textContent = mode === "diet"
+    ? `${RESTRICTIONS.length} dietary restrictions`
+    : `${INGREDIENTS.length} ingredients`;
+  if (mode === "diet") {
+    document.getElementById("lgY").textContent = "Generally compatible";
+    document.getElementById("lgN").textContent = "Not compatible";
+    document.getElementById("lgP").textContent = "Depends on preparation or certification";
+    document.getElementById("lgU").textContent = "Varies by tradition or scholarly opinion";
+  } else {
+    document.getElementById("lgY").textContent = "Contains this ingredient";
+    document.getElementById("lgN").textContent = "Does not contain";
+    document.getElementById("lgP").textContent = "May contain (depends on preparation)";
+    document.getElementById("lgU").textContent = "Unknown";
+  }
+  document.getElementById("tbl").classList.toggle("mode-contains", mode === "contains");
+  document.getElementById("thead").innerHTML = "";
+  buildHead();
+  buildGloss();
+  render(document.getElementById("searchInput").value);
+}
 
 function buildHead() {
   const tr = document.createElement("tr");
@@ -819,29 +1852,39 @@ function buildHead() {
   th0.className = "name-th";
   th0.innerHTML = `<div class="th-inner"><span class="th-label">Dish</span></div>`;
   tr.appendChild(th0);
-  RESTRICTIONS.forEach(r => {
+  const cols = mode === "diet" ? RESTRICTIONS : INGREDIENTS;
+  cols.forEach(r => {
     const th = document.createElement("th");
     th.title = r.label + ": " + r.def;
-    th.innerHTML = `<div class="th-inner"><span class="th-icon">${r.icon}</span><span class="th-label">${r.abbr}</span></div>`;
+    th.innerHTML = `<div class="th-inner"><span class="th-icon">${r.icon}</span><span class="th-label">${r.label}</span></div>`;
     tr.appendChild(th);
   });
   document.getElementById("thead").appendChild(tr);
 }
 
-function buildRow(food, even) {
+function hl(text, q) {
+  if (!q) return text;
+  return text.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), m => `<mark>${m}</mark>`);
+}
+
+function buildRow(food, even, q) {
   const tr = document.createElement("tr");
   const td0 = document.createElement("td");
   td0.className = "name-td";
-  td0.innerHTML = `<span class="food-name">${food.name}</span><span class="food-cat">${food.cat}</span>`;
+  td0.innerHTML = `<span class="food-name">${hl(food.name, q)}</span><span class="food-cat">${food.cat}</span><span class="food-desc">${hl(food.desc, q)}</span>`;
   if (even) td0.style.background = "var(--bg2)";
   tr.appendChild(td0);
 
-  RESTRICTIONS.forEach(r => {
-    const s = food.r[r.id] || "u";
+  const cols = mode === "diet" ? RESTRICTIONS : INGREDIENTS;
+  const data = mode === "diet" ? food.r : (food.c || {});
+  const dataNotes = mode === "diet" ? food.notes : (food.cn || {});
+
+  cols.forEach(r => {
+    const s = data[r.id] || "u";
     const td = document.createElement("td");
     td.className = `sc ${s}`;
     td.innerHTML = `<div class="ci">${ICONS[s]}</div>`;
-    td.addEventListener("mouseenter", e => showTip(e, food, r, s));
+    td.addEventListener("mouseenter", e => showTip(e, food, r, s, dataNotes));
     td.addEventListener("mousemove", moveTip);
     td.addEventListener("mouseleave", hideTip);
     tr.appendChild(td);
@@ -862,7 +1905,7 @@ function render(query) {
     const matchQ = !q || food.name.toLowerCase().includes(q) || food.cat.toLowerCase().includes(q) || food.desc.toLowerCase().includes(q);
     const matchF = activeFilter === "All" || food.cat === activeFilter;
     if (matchQ && matchF) {
-      tbody.appendChild(buildRow(food, evenIdx % 2 === 1));
+      tbody.appendChild(buildRow(food, evenIdx % 2 === 1, q));
       evenIdx++;
       count++;
     }
@@ -903,7 +1946,11 @@ function setFilter(name, el) {
 // Glossary
 function buildGloss() {
   const g = document.getElementById("glossGrid");
-  RESTRICTIONS.forEach(r => {
+  g.innerHTML = "";
+  const cols = mode === "diet" ? RESTRICTIONS : INGREDIENTS;
+  document.querySelector(".gloss .section-title").textContent =
+    mode === "diet" ? "Dietary Restriction Definitions" : "Ingredient Definitions";
+  cols.forEach(r => {
     g.innerHTML += `<div class="gi"><div class="gi-icon">${r.icon}</div><div class="gi-text"><strong>${r.label}</strong><span>${r.def}</span></div></div>`;
   });
 }
@@ -912,15 +1959,20 @@ function buildGloss() {
 const tip = document.getElementById("tip");
 let tipX = 0, tipY = 0;
 
-function showTip(e, food, restr, s) {
-  const note = (food.notes && food.notes[restr.id]) || "";
+function showTip(e, food, col, s, notes) {
+  const note = (notes && notes[col.id]) || "";
+  const modeLabels = mode === "diet"
+    ? { y:"Compatible", n:"Not compatible", p:"Depends on preparation", u:"Varies by tradition" }
+    : { y:"Contains", n:"Does not contain", p:"May contain", u:"Unknown" };
+  const fallback = mode === "diet"
+    ? { y:"Generally compatible with this dietary restriction.", n:"Not compatible with this dietary restriction." }
+    : { y:`This dish contains ${col.label.toLowerCase()}.`, n:`This dish does not contain ${col.label.toLowerCase()}.` };
   tip.innerHTML = `
     <div class="tip-food">${food.name}</div>
-    <div class="tip-restr">${restr.icon} ${restr.label}</div>
-    <span class="tip-badge ${s}">${LABELS[s]}</span>
+    <div class="tip-restr">${col.icon} ${col.label}</div>
+    <span class="tip-badge ${s}">${modeLabels[s]}</span>
     ${note ? `<div class="tip-note">${note}</div>` : ""}
-    ${!note && s === "y" ? `<div class="tip-note" style="color:#555">Generally compatible with this dietary restriction.</div>` : ""}
-    ${!note && s === "n" ? `<div class="tip-note" style="color:#555">Not compatible with this dietary restriction.</div>` : ""}
+    ${!note && (s === "y" || s === "n") ? `<div class="tip-note" style="color:#555">${fallback[s]}</div>` : ""}
   `;
   tipX = e.clientX; tipY = e.clientY;
   tip.className = "show";
@@ -949,6 +2001,9 @@ document.getElementById("searchInput").addEventListener("input", e => {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(() => render(e.target.value), 80);
 });
+
+document.getElementById("modeDiet").addEventListener("click", () => switchMode("diet"));
+document.getElementById("modeContains").addEventListener("click", () => switchMode("contains"));
 
 // Init
 buildHead();
