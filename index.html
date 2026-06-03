@@ -2147,6 +2147,21 @@ const FOODS = [
     desc:"Coagulated soy milk pressed into blocks; silken (smooth, custard-like), soft, firm, or extra-firm. Silken tofu is used in miso soup, desserts, and dressings; firm tofu is pan-fried, grilled, or braised in agedashi or mapo doufu.",
     r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
 
+  { name:"Lox",                         cat:"Fish",
+    desc:"Cold-cured salmon — brined in salt and sometimes sugar, but not smoked (unlike hot-smoked salmon). A staple of Jewish-American deli cuisine, served on bagels with cream cheese, capers, and red onion.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Salmon is a kosher fish; lox itself requires kosher certification and proper handling. Traditional bagel-and-lox presentations mix fish with dairy (cream cheese) — permitted under most kosher authorities as fish and dairy together is not the same prohibition as meat and dairy." }},
+
+  { name:"Nutritional Yeast",           cat:"Technique & Sauce",
+    desc:"Deactivated Saccharomyces cerevisiae yeast grown on molasses; sold as flakes or powder. Nutty, cheesy, umami flavour makes it a go-to vegan cheese substitute. Often fortified with B12. Sprinkled on pasta, popcorn, or blended into sauces.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Yeast products require kosher certification; nutritional yeast is generally considered pareve." }},
+
+  { name:"Tamari",                      cat:"Technique & Sauce",
+    desc:"Japanese soy sauce made with little or no wheat; thicker, richer, and less sharp than standard shoyu. The traditional by-product of miso production. Certified gluten-free versions are widely available. Used as a 1:1 wheat-free substitute for soy sauce.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"y" },
+    notes:{ kosher:"Requires kosher certification as a fermented soy product.", halal:"Traditionally brewed tamari is generally considered permissible; trace fermentation alcohol." }},
+
 ];
 
 const INGREDIENTS = [
@@ -2557,6 +2572,9 @@ const CONTAINS_DATA = {
   "Natto / 納豆":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
   "Tempeh":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
   "Tofu / 豆腐":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Lox":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Nutritional Yeast":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Tamari":{ gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
 };
 FOODS.forEach(f => { f.c = CONTAINS_DATA[f.name] || {}; });
 
