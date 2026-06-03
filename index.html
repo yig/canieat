@@ -66,15 +66,21 @@ body {
   font-family: inherit;
   letter-spacing: -1px;
   color: #fff;
-  background: transparent;
+  background: rgba(74, 160, 74, 0.07);
   border: none;
   border-bottom: 3px solid var(--accent);
+  border-radius: 4px 4px 0 0;
   outline: none;
   width: 180px;
   padding: 0 4px 2px;
+  transition: background .2s, box-shadow .2s;
 }
 #searchInput::placeholder { color: #3a3a3a; }
-#searchInput:focus { border-bottom-color: #7dd87d; }
+#searchInput:focus {
+  background: rgba(74, 160, 74, 0.13);
+  border-bottom-color: #7dd87d;
+  box-shadow: 0 4px 16px rgba(74, 160, 74, 0.18);
+}
 
 /* ── STATS / FILTERS ── */
 .bar {
