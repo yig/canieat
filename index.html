@@ -261,6 +261,13 @@ td.sc {
 .mode-contains .n { background: #242424; }
 .mode-contains .n .ci { color: #484848; }
 
+/* ── SEARCH HIGHLIGHT ── */
+mark {
+  background: #5c4300; color: #ffd166;
+  border-radius: 2px; padding: 0 2px;
+  font-style: normal;
+}
+
 /* ── DISCLAIMER ── */
 .disc {
   text-align: center; font-size: 12px; color: #666;
@@ -1537,11 +1544,16 @@ function buildHead() {
   document.getElementById("thead").appendChild(tr);
 }
 
-function buildRow(food, even) {
+function hl(text, q) {
+  if (!q) return text;
+  return text.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), m => `<mark>${m}</mark>`);
+}
+
+function buildRow(food, even, q) {
   const tr = document.createElement("tr");
   const td0 = document.createElement("td");
   td0.className = "name-td";
-  td0.innerHTML = `<span class="food-name">${food.name}</span><span class="food-cat">${food.cat}</span><span class="food-desc">${food.desc}</span>`;
+  td0.innerHTML = `<span class="food-name">${hl(food.name, q)}</span><span class="food-cat">${food.cat}</span><span class="food-desc">${hl(food.desc, q)}</span>`;
   if (even) td0.style.background = "var(--bg2)";
   tr.appendChild(td0);
 
@@ -1575,7 +1587,7 @@ function render(query) {
     const matchQ = !q || food.name.toLowerCase().includes(q) || food.cat.toLowerCase().includes(q) || food.desc.toLowerCase().includes(q);
     const matchF = activeFilter === "All" || food.cat === activeFilter;
     if (matchQ && matchF) {
-      tbody.appendChild(buildRow(food, evenIdx % 2 === 1));
+      tbody.appendChild(buildRow(food, evenIdx % 2 === 1, q));
       evenIdx++;
       count++;
     }
