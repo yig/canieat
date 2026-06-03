@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Can I Eat It? — Food &amp; Dietary Restriction Compatibility</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #1b1b1b;
+  --bg2:       #212121;
+  --bg3:       #2a2a2a;
+  --hdr:       #192e19;
+  --accent:    #5cb85c;
+  --accentDim: #2e6b2e;
+  --text:      #e4e4e4;
+  --dim:       #888;
+  --border:    #333;
+  --yes:       #2d6a2d;
+  --yestxt:    #a8d5a8;
+  --no:        #6e1a1a;
+  --notxt:     #f4a0a0;
+  --partial:   #7a3c00;
+  --ptxt:      #ffc87a;
+  --unk:       #2e3f4a;
+  --unktxt:    #8fb8cb;
+  --nameW:     210px;
+  --cellW:     50px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* ── HEADER ── */
+.hdr {
+  background: var(--hdr);
+  border-bottom: 2px solid var(--accentDim);
+  padding: 18px 24px 20px;
+}
+.hdr-inner { max-width: 1200px; margin: 0 auto; }
+
+.logo {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  color: var(--accent);
+  margin-bottom: 2px;
+  user-select: none;
+}
+.logo em { color: #fff; font-style: normal; }
+
+.tagline { color: var(--dim); font-size: 13px; margin-bottom: 14px; }
+
+.search-wrap { position: relative; max-width: 580px; }
+.search-wrap svg {
+  position: absolute; left: 12px; top: 50%;
+  transform: translateY(-50%);
+  width: 18px; height: 18px; fill: #666; pointer-events: none;
+}
+#searchInput {
+  width: 100%;
+  padding: 11px 14px 11px 40px;
+  font-size: 15px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 7px;
+  color: #fff;
+  outline: none;
+  transition: border-color .18s, background .18s;
+}
+#searchInput:focus { border-color: var(--accent); background: rgba(255,255,255,0.1); }
+#searchInput::placeholder { color: #555; }
+
+/* ── STATS / FILTERS ── */
+.bar {
+  max-width: 1200px; margin: 0 auto;
+  padding: 9px 24px;
+  display: flex; align-items: center; gap: 10px;
+  color: var(--dim); font-size: 12px;
+  border-bottom: 1px solid var(--border);
+}
+#resultCount { color: var(--accent); font-weight: 700; }
+
+.filters {
+  max-width: 1200px; margin: 0 auto;
+  padding: 10px 24px;
+  display: flex; flex-wrap: wrap; gap: 7px;
+  border-bottom: 1px solid var(--border);
+}
+.fbtn {
+  padding: 4px 11px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--dim);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.fbtn:hover { border-color: var(--accent); color: var(--accent); }
+.fbtn.on { background: var(--accentDim); border-color: var(--accent); color: #fff; }
+
+/* ── TABLE ── */
+.table-wrap {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 24px 32px;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  min-width: 100%;
+}
+
+/* HEAD */
+thead th {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--bg3);
+  border-bottom: 2px solid var(--border);
+  padding: 0;
+}
+thead th.name-th {
+  width: var(--nameW); min-width: var(--nameW);
+  text-align: left; z-index: 30; left: 0;
+}
+thead th:not(.name-th) {
+  width: var(--cellW); min-width: var(--cellW);
+  cursor: help;
+}
+.th-inner {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-end;
+  padding: 8px 4px 6px;
+  height: 100px;
+}
+.name-th .th-inner { align-items: flex-start; padding: 8px 12px; justify-content: flex-end; height: 100px; }
+.th-icon { font-size: 16px; margin-bottom: 4px; line-height: 1; }
+.th-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .5px;
+  color: var(--dim);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  white-space: nowrap;
+  line-height: 1;
+}
+.name-th .th-label { writing-mode: initial; transform: none; color: var(--dim); }
+
+/* BODY */
+tbody tr { border-bottom: 1px solid #2c2c2c; }
+tbody tr:hover td { background: rgba(255,255,255,0.03) !important; }
+
+td.name-td {
+  position: sticky; left: 0; z-index: 10;
+  background: var(--bg);
+  padding: 9px 12px;
+  width: var(--nameW); min-width: var(--nameW);
+}
+tbody tr:nth-child(even) td.name-td { background: var(--bg2); }
+
+.food-name  { font-weight: 600; font-size: 13px; display: block; }
+.food-cat   { font-size: 11px; color: var(--dim); margin-top: 1px; }
+
+td.sc {
+  width: var(--cellW); min-width: var(--cellW);
+  height: 46px; padding: 0;
+  text-align: center; vertical-align: middle;
+  cursor: help;
+}
+.ci {
+  display: flex; align-items: center; justify-content: center;
+  height: 100%; font-size: 13px; font-weight: 700;
+  user-select: none;
+}
+
+.y  { background: var(--yes); }    .y  .ci { color: var(--yestxt); }
+.n  { background: var(--no); }     .n  .ci { color: var(--notxt); }
+.p  { background: var(--partial); } .p  .ci { color: var(--ptxt); }
+.u  { background: var(--unk); }    .u  .ci { color: var(--unktxt); }
+
+/* TOOLTIP */
+#tip {
+  position: fixed; z-index: 9999; pointer-events: none;
+  background: #111; border: 1px solid #3a3a3a;
+  border-radius: 8px; padding: 11px 14px;
+  max-width: 280px; font-size: 12px; line-height: 1.55;
+  box-shadow: 0 6px 24px rgba(0,0,0,.7);
+  display: none;
+}
+#tip.show { display: block; }
+.tip-food { font-weight: 700; font-size: 13px; color: #fff; margin-bottom: 2px; }
+.tip-restr { font-size: 10px; text-transform: uppercase; letter-spacing: .6px; color: var(--accent); margin-bottom: 6px; }
+.tip-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 10px;
+  font-size: 11px; font-weight: 700; margin-bottom: 6px;
+}
+.tip-badge.y { background: var(--yes); color: var(--yestxt); }
+.tip-badge.n { background: var(--no);  color: var(--notxt); }
+.tip-badge.p { background: var(--partial); color: var(--ptxt); }
+.tip-badge.u { background: var(--unk); color: var(--unktxt); }
+.tip-note { color: #aaa; }
+
+/* NO RESULTS */
+.none {
+  text-align: center; padding: 60px 20px;
+  color: var(--dim);
+}
+.none-icon { font-size: 48px; margin-bottom: 12px; }
+
+/* ── LEGEND ── */
+.legend, .gloss, .disc {
+  max-width: 1200px; margin: 0 auto;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+}
+.section-title {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+  font-weight: 700; color: var(--dim); margin-bottom: 12px;
+}
+.legend-row { display: flex; flex-wrap: wrap; gap: 20px; }
+.lg-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.sw {
+  width: 22px; height: 22px; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; flex-shrink: 0;
+}
+
+/* ── GLOSSARY ── */
+.gloss-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+.gi { display: flex; gap: 10px; align-items: flex-start; }
+.gi-icon { font-size: 20px; flex-shrink: 0; line-height: 1.3; }
+.gi-text strong { font-size: 13px; color: #ddd; display: block; margin-bottom: 2px; }
+.gi-text span { font-size: 12px; color: var(--dim); }
+
+/* ── DISCLAIMER ── */
+.disc {
+  text-align: center; font-size: 12px; color: #666;
+  line-height: 1.7; padding-bottom: 40px;
+}
+.disc strong { color: #999; }
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-inner">
+    <div class="logo">can i <em>eat</em> it?</div>
+    <p class="tagline">Dietary restriction compatibility for dishes you might encounter at a restaurant</p>
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" stroke="#666" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      <input id="searchInput" type="text" placeholder="Search a dish… foie gras, escargot, uni, wagyu…" autocomplete="off" spellcheck="false">
+    </div>
+  </div>
+</header>
+
+<div class="bar">
+  <span>Showing <strong id="resultCount">0</strong> dishes</span>
+  <span style="color:#444">•</span>
+  <span>9 dietary restrictions</span>
+</div>
+
+<div class="filters" id="filters"></div>
+
+<div class="table-wrap">
+  <table id="tbl">
+    <thead id="thead"></thead>
+    <tbody id="tbody"></tbody>
+  </table>
+  <div class="none" id="none" style="display:none">
+    <div class="none-icon">🍽️</div>
+    <div>No dishes found for "<span id="noneTerm"></span>"</div>
+  </div>
+</div>
+
+<div class="legend">
+  <div class="section-title">Legend</div>
+  <div class="legend-row">
+    <div class="lg-item"><div class="sw" style="background:var(--yes);color:var(--yestxt)">✓</div><span>Generally compatible</span></div>
+    <div class="lg-item"><div class="sw" style="background:var(--no);color:var(--notxt)">✗</div><span>Not compatible</span></div>
+    <div class="lg-item"><div class="sw" style="background:var(--partial);color:var(--ptxt)">~</div><span>Depends on preparation or certification</span></div>
+    <div class="lg-item"><div class="sw" style="background:var(--unk);color:var(--unktxt)">?</div><span>Varies by tradition or scholarly opinion</span></div>
+  </div>
+</div>
+
+<div class="gloss">
+  <div class="section-title">Dietary Restriction Definitions</div>
+  <div class="gloss-grid" id="glossGrid"></div>
+</div>
+
+<div class="disc">
+  <strong>⚠ This website was generated automatically. Do not send feedback about incorrect information.</strong><br>
+  Dietary laws are complex and vary by tradition, school of thought, and individual practice. Information on this site
+  may be incomplete, oversimplified, or wrong. Always verify with a qualified religious authority, certified
+  organization, or restaurant staff before making dietary decisions. This site accepts no responsibility for errors.
+</div>
+
+<div id="tip"></div>
+
+<script>
+const RESTRICTIONS = [
+  { id:"vegetarian",  label:"Vegetarian",      icon:"🥗",  abbr:"VEG",
+    def:"No meat, poultry, or seafood. Dairy and eggs are generally permitted (lacto-ovo vegetarian)." },
+  { id:"vegan",       label:"Vegan",            icon:"🌱",  abbr:"VEGAN",
+    def:"No animal products of any kind — no meat, fish, dairy, eggs, honey, or gelatin." },
+  { id:"pescatarian", label:"Pescatarian",      icon:"🐟",  abbr:"PESC",
+    def:"No meat or poultry. Fish and all seafood are permitted. Dairy and eggs also OK." },
+  { id:"vegequarian", label:"Vegequarian",      icon:"🦐",  abbr:"VEQN",
+    def:"Vegetables plus any seafood — fish, shellfish, and crustaceans all OK. Effectively pescatarian with explicit shellfish inclusion." },
+  { id:"noRedMeat",   label:"No Red Meat",      icon:"🍗",  abbr:"NRM",
+    def:"Avoids beef, pork, lamb, veal, venison, and other 'red' meats. Poultry, fish, and seafood are generally acceptable." },
+  { id:"jain",        label:"Jain",             icon:"🌿",  abbr:"JAIN",
+    def:"Strict lacto-vegetarian. Prohibits root and underground vegetables (onion, garlic, potato, carrot, beet, radish) to avoid harming organisms in the soil. No meat, fish, or eggs." },
+  { id:"kosher",      label:"Kosher",           icon:"✡",   abbr:"KOSHER",
+    def:"Jewish dietary law (kashrut). No pork, no shellfish or non-scaled fish. No mixing of meat and dairy. Permitted animals must be slaughtered by trained shochet using shechita method." },
+  { id:"halal",       label:"Halal",            icon:"☪",   abbr:"HALAL",
+    def:"Islamic dietary law. No pork or pork derivatives, no alcohol. Permitted animals must be slaughtered via zabiha. Shellfish rules vary by school (Shafi'i permits; Hanafi restricts)." },
+  { id:"lent",        label:"Lent (Catholic)",  icon:"✝",   abbr:"LENT",
+    def:"Catholic abstinence on Ash Wednesday and Fridays during Lent: no flesh of warm-blooded animals (mammals and birds). Fish, shellfish, and cold-blooded animals are permitted." },
+];
+
+const CATS = [
+  "Beef & Veal","Lamb & Game","Pork & Charcuterie","Poultry",
+  "Shellfish","Fish","Vegetarian / Vegan","Soup & Broth","Dessert","Other"
+];
+
+// Status: y=yes, n=no, p=partial/depends, u=unknown/varies
+// r: { restriction_id: "y"|"n"|"p"|"u" }
+// notes: { restriction_id: "explanation for p/u or extra context" }
+const FOODS = [
+  // ─── BEEF & VEAL ───────────────────────────────────────────────────────────
+  { name:"Wagyu Beef",       cat:"Beef & Veal",
+    desc:"Highly marbled Japanese beef, prized for intense fat distribution.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Can be kosher if sourced from a certified kosher butcher using shechita slaughter.", halal:"Can be halal if properly slaughtered using zabiha method and certified." }},
+  { name:"Beef Tartare",     cat:"Beef & Veal",
+    desc:"Raw minced beef seasoned with capers, egg yolk, and Worcestershire sauce.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Raw preparation and common ingredients (Worcestershire, dairy) make kosher certification extremely rare.", halal:"Worcestershire sauce typically contains tamarind and non-halal anchovies; raw meat handling also an issue." }},
+  { name:"Beef Wellington",  cat:"Beef & Veal",
+    desc:"Beef tenderloin wrapped in mushroom duxelles and puff pastry.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Pastry may contain dairy/butter combined with beef — mixing meat and dairy is forbidden. All-kosher versions exist but are rare in restaurants.", halal:"Compatible if the beef is halal-certified and no prohibited ingredients are used." }},
+  { name:"Chateaubriand",    cat:"Beef & Veal",
+    desc:"Thick-cut roast from the centre of the beef tenderloin, typically served for two.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Kosher if from a certified source; Béarnaise sauce (butter) cannot be served with the meat under kosher rules.", halal:"Halal if the beef is from a certified zabiha source." }},
+  { name:"Beef Carpaccio",   cat:"Beef & Veal",
+    desc:"Thinly sliced raw beef with olive oil, lemon, capers, and Parmesan.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Parmesan (dairy) served alongside raw beef violates the meat-dairy prohibition.", halal:"Typically prepared without certified halal slaughter; capers and seasonings may also be an issue." }},
+  { name:"Osso Buco",        cat:"Beef & Veal",
+    desc:"Braised veal shanks with gremolata, typically served with risotto Milanese.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Veal is kosher if certified; the classic gremolata contains garlic, which is fine for kosher but forbidden for Jain.", halal:"Halal if the veal is from a zabiha-certified source and no alcohol is used in braising." }},
+  { name:"Côte de Boeuf",    cat:"Beef & Veal",
+    desc:"Bone-in ribeye steak, served carved at the table for two.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Requires kosher-certified beef from a shochet; the hindquarter cut requires expert nikur (removal of forbidden fat).", halal:"Halal if properly slaughtered and certified." }},
+  { name:"Entrecôte",        cat:"Beef & Veal",
+    desc:"French rib-eye steak, often served with fries and béarnaise.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Béarnaise (butter with meat) violates meat-dairy separation.", halal:"Halal with certified beef; béarnaise butter is generally fine for halal." }},
+  { name:"Steak Frites",     cat:"Beef & Veal",
+    desc:"Pan-seared steak with crispy French fries.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Kosher with certified beef; fries must be cooked in non-meat fat if serving with dairy accompaniments.", halal:"Halal with certified beef; fries must not be cooked in lard." }},
+  { name:"Beef Bourguignon",  cat:"Beef & Veal",
+    desc:"Slow-braised beef in Burgundy wine with mushrooms, pearl onions, and lardons.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Contains pork lardons (not kosher) and non-kosher wine.", halal:"Contains pork lardons and alcohol (wine) — both prohibited." }},
+  { name:"Blanquette de Veau", cat:"Beef & Veal",
+    desc:"Creamy white veal stew with mushrooms, pearl onions, and cream.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Cream sauce served with veal violates the meat-dairy prohibition.", halal:"Halal if veal is certified and only halal-compliant dairy is used." }},
+  { name:"Sweetbreads",      cat:"Beef & Veal",
+    desc:"Thymus or pancreas glands, typically veal, pan-fried or sautéed.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Technically possible if from a kosher animal and expertly prepared (certain internal organs require complex nikur), but extremely rare in restaurants.", halal:"Halal if from a halal-slaughtered animal; organ meats are generally permitted." }},
+  { name:"Bone Marrow",      cat:"Beef & Veal",
+    desc:"Roasted marrow from split cattle bones, served with toast and parsley salad.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Marrow is kosher from a certified animal; it's considered a meat product and cannot be mixed with dairy.", halal:"Halal from a zabiha-certified animal." }},
+  { name:"Vitello Tonnato",  cat:"Beef & Veal",
+    desc:"Cold sliced veal topped with a creamy tuna and caper sauce.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Mixing meat (veal) with fish (tuna sauce) in the same dish is forbidden under Ashkenazi practice.", halal:"Can be halal with properly slaughtered veal and halal-compliant sauce." }},
+  { name:"Short Rib",        cat:"Beef & Veal",
+    desc:"Braised beef short ribs, often glazed or slow-cooked for several hours.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Kosher with certified beef; wine-braised versions need kosher wine.", halal:"Halal with certified beef and no alcohol in braising liquid." }},
+  { name:"Oxtail",           cat:"Beef & Veal",
+    desc:"Slow-braised tail of cattle, often served as a rich stew.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Oxtail is a permitted cut if from a kosher animal, but requires expert butchering of the hindquarter.", halal:"Halal with certified beef." }},
+
+  // ─── LAMB & GAME ──────────────────────────────────────────────────────────
+  { name:"Rack of Lamb",     cat:"Lamb & Game",
+    desc:"French-trimmed lamb rib chops, typically herb-crusted and roasted.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Lamb is a kosher animal; requires proper shechita slaughter and certification.", halal:"One of the most commonly halal-certified meats; widely available as halal." }},
+  { name:"Venison",          cat:"Lamb & Game",
+    desc:"Deer meat, often served as medallions with berry sauce and root vegetable purée.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Deer is a kosher animal and must be slaughtered by a shochet; wild-hunted venison (e.g., shot) is not kosher.", halal:"Must be slaughtered via zabiha; wild-hunted venison (killed by bullet) is a matter of scholarly debate." }},
+  { name:"Mechoui",          cat:"Lamb & Game",
+    desc:"Whole or half Moroccan lamb slow-roasted over an open fire.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"y", lent:"n" },
+    notes:{ kosher:"Lamb is kosher if slaughtered properly; traditional mechoui is rarely certified kosher.", halal:"Lamb is among the most widely halal-certified meats; mechoui is a traditional celebration dish in Muslim cultures." }},
+  { name:"Cassoulet",        cat:"Lamb & Game",
+    desc:"Slow-cooked French white bean stew with duck confit, pork sausage, and pork rind.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Contains pork (sausage, rind) — not kosher.", halal:"Contains pork and non-halal charcuterie — not halal." }},
+  { name:"Squab",            cat:"Lamb & Game",
+    desc:"Young farmed pigeon, typically pan-roasted or served with foie gras.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Pigeon is not on the traditional list of kosher birds in many Ashkenazi communities, though some Sephardic authorities permit it with certification.", halal:"Generally permitted but requires zabiha slaughter." }},
+  { name:"Quail",            cat:"Lamb & Game",
+    desc:"Small game bird, often stuffed with foie gras or served with grape sauce.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Quail is a permitted bird under many kosher authorities but requires shechita slaughter and certification.", halal:"Halal with zabiha slaughter; quail is widely considered a permitted bird." }},
+  { name:"Tajine / Tagine",  cat:"Lamb & Game",
+    desc:"Moroccan slow-cooked stew, most often lamb or chicken with vegetables, olives, and preserved lemon.",
+    r:{ vegetarian:"p", vegan:"p", pescatarian:"p", vegequarian:"p", noRedMeat:"p", jain:"p", kosher:"p", halal:"y", lent:"p" },
+    notes:{ vegetarian:"Vegetable tagines exist and are common; meat versions are not vegetarian.", vegan:"Vegetable tagine with no dairy or honey can be vegan.", noRedMeat:"Chicken tagines are 'no red meat'; lamb versions are not.", jain:"Vegetable tagine may contain onion, garlic, or root vegetables.", halal:"Traditional Moroccan tagine is widely prepared halal.", lent:"Fish tagine or vegetable tagine is fine for Lent; meat versions are not." }},
+  { name:"Bastilla",         cat:"Lamb & Game",
+    desc:"Moroccan sweet-savory pastry pie traditionally filled with pigeon (or chicken), almonds, and eggs.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"n" },
+    notes:{ kosher:"Pigeon certification is debated; even chicken versions mixing eggs with meat-based filling can be problematic.", halal:"A traditional festive dish in Moroccan cuisine; widely prepared halal." }},
+
+  // ─── PORK & CHARCUTERIE ──────────────────────────────────────────────────
+  { name:"Prosciutto di Parma", cat:"Pork & Charcuterie",
+    desc:"Italian dry-aged ham, thinly sliced and often served with melon or burrata.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+  { name:"Ibérico Ham",      cat:"Pork & Charcuterie",
+    desc:"Acorn-fed Spanish cured ham from Iberian black pigs; intensely nutty and fatty.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+  { name:"Mortadella",       cat:"Pork & Charcuterie",
+    desc:"Italian cooked pork sausage studded with pistachios and peppercorns.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+  { name:"Nduja",            cat:"Pork & Charcuterie",
+    desc:"Fiery spreadable Calabrian pork salami; used as a condiment, pasta sauce, or pizza topping.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+  { name:"Foie Gras",        cat:"Pork & Charcuterie",
+    desc:"Fattened duck or goose liver, served seared, as terrine, or in mousse.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Duck and goose are kosher birds; foie gras can be kosher when properly certified, and kosher foie gras is produced in some countries.", halal:"Duck and goose are halal animals; requires zabiha slaughter and certification." }},
+  { name:"Rillettes",        cat:"Pork & Charcuterie",
+    desc:"Potted meat spread slow-cooked in fat, classically pork but also duck or salmon.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"p", vegequarian:"p", noRedMeat:"p", jain:"n", kosher:"p", halal:"p", lent:"p" },
+    notes:{ pescatarian:"Salmon rillettes are pescatarian-friendly.", noRedMeat:"Duck rillettes are no-red-meat; pork versions are not.", kosher:"Pork rillettes are not kosher; duck rillettes require kosher certification.", halal:"Pork versions are not halal; duck or salmon versions can be halal with certification.", lent:"Salmon rillettes are fine for Lent; pork and duck versions are not." }},
+  { name:"Pork Belly",       cat:"Pork & Charcuterie",
+    desc:"Slow-roasted pork belly with crackling skin.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+  { name:"Suckling Pig",     cat:"Pork & Charcuterie",
+    desc:"Whole roasted young pig, often the centrepiece of a tasting menu.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+  { name:"Pâté en Croûte",   cat:"Pork & Charcuterie",
+    desc:"Elegant French meat pâté baked inside a pastry crust.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"p", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ noRedMeat:"Usually contains pork; chicken or game pâté en croûte versions exist.", kosher:"Traditional versions contain pork and may mix meat with butter pastry.", halal:"Possible with all-halal poultry filling and halal-certified pastry." }},
+  { name:"Bresaola",         cat:"Pork & Charcuterie",
+    desc:"Air-dried salted beef from Valtellina, Italy; thinly sliced and served with arugula.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Beef is kosher if certified; curing and processing must also meet kashrut standards.", halal:"Beef is halal if certified; the curing process must avoid prohibited additives." }},
+  { name:"Terrine",          cat:"Pork & Charcuterie",
+    desc:"Cold pressed loaf of ground meat, game, or vegetables; composition varies widely.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"p", vegequarian:"p", noRedMeat:"p", jain:"n", kosher:"p", halal:"p", lent:"p" },
+    notes:{ vegetarian:"Vegetable or cheese terrines exist; most traditional terrines contain meat.", pescatarian:"Salmon or seafood terrines are pescatarian.", noRedMeat:"Poultry or fish terrines are 'no red meat'.", kosher:"Meat terrines containing pork or mixing meat and dairy are not kosher.", halal:"Depends entirely on ingredients; pork-based versions are not halal.", lent:"Fish terrine is fine for Lent; meat terrines are not." }},
+  { name:"Duck Confit",      cat:"Pork & Charcuterie",
+    desc:"Duck leg slow-cooked and preserved in its own rendered fat.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Duck is a kosher bird; requires shechita slaughter and certified rendering of fat.", halal:"Duck is a permitted bird; requires zabiha slaughter." }},
+
+  // ─── POULTRY ────────────────────────────────────────────────────────────
+  { name:"Coq au Vin",       cat:"Poultry",
+    desc:"Chicken braised in red wine with mushrooms, pearl onions, and lardons.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"p", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ noRedMeat:"Chicken itself is no-red-meat, but the dish contains pork lardons.", kosher:"Contains non-kosher wine and pork lardons.", halal:"Contains pork lardons and alcohol (wine)." }},
+  { name:"Galantine",        cat:"Poultry",
+    desc:"Deboned whole chicken or duck stuffed with forcemeat, poached and served cold.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Poultry can be kosher; forcemeat must contain no pork or dairy.", halal:"Can be halal with certified poultry and no prohibited fillings." }},
+  { name:"Chicken Liver Mousse", cat:"Poultry",
+    desc:"Whipped chicken liver pâté with butter and cognac.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Chicken liver mousse typically combines meat with butter — a meat-dairy violation. Also often contains cognac.", halal:"Chicken is halal with zabiha slaughter; cognac (alcohol) in the recipe makes it non-halal unless omitted." }},
+
+  // ─── SHELLFISH ──────────────────────────────────────────────────────────
+  { name:"Oysters",          cat:"Shellfish",
+    desc:"Raw or cooked bivalve mollusks, typically served on ice with mignonette.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    notes:{ vegetarian:"Some vegetarians eat oysters (they lack a central nervous system); others do not — a personal decision.", kosher:"Shellfish without fins and scales are not kosher.", halal:"Shafi'i and Maliki schools permit all sea creatures; Hanafi school restricts shellfish. Oysters are debated." }},
+  { name:"Lobster Bisque",   cat:"Shellfish",
+    desc:"Rich, creamy soup with lobster meat and shells, often finished with cognac.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    notes:{ kosher:"Lobster is not kosher (shellfish without scales).", halal:"Shellfish permissibility depends on school of thought; cognac in bisque makes it non-halal unless omitted.", lent:"Shellfish is permitted during Lent." }},
+  { name:"Langoustine",      cat:"Shellfish",
+    desc:"Small Norwegian lobster (Dublin Bay prawn), grilled or poached with butter.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    notes:{ kosher:"Crustaceans are not kosher.", halal:"Crustaceans are debated: permitted in Shafi'i jurisprudence, restricted in Hanafi." }},
+  { name:"King Crab",        cat:"Shellfish",
+    desc:"Steamed Alaskan king crab legs, often served with drawn butter.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    notes:{ kosher:"Crab is not kosher.", halal:"Crustaceans: permitted (Shafi'i/Maliki), restricted (Hanafi). Personal practice varies." }},
+  { name:"Crab Cakes",       cat:"Shellfish",
+    desc:"Pan-fried or broiled patties of crab meat with breadcrumbs and Old Bay seasoning.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    notes:{ kosher:"Crab is not kosher.", halal:"See crab — crustacean permissibility is school-dependent." }},
+  { name:"Shrimp Cocktail",  cat:"Shellfish",
+    desc:"Chilled poached shrimp served with cocktail sauce.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    notes:{ kosher:"Shrimp is not kosher.", halal:"Shrimp are crustaceans — permitted under Shafi'i, restricted under Hanafi." }},
+  { name:"Scallops",         cat:"Shellfish",
+    desc:"Seared sea scallops, typically with beurre blanc or pea purée.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    notes:{ kosher:"Scallops (bivalves) are not kosher.", halal:"Bivalves are permitted by most schools; some stricter interpretations restrict mollusks." }},
+  { name:"Mussels Marinière", cat:"Shellfish",
+    desc:"Steamed mussels in white wine, shallots, and parsley.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    notes:{ kosher:"Mussels are not kosher.", halal:"Mussels are generally considered halal; white wine in the broth makes it non-halal unless substituted." }},
+  { name:"Grilled Octopus",  cat:"Shellfish",
+    desc:"Chargrilled octopus with lemon, olive oil, and herbs.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    notes:{ kosher:"Octopus lacks fins and scales — not kosher.", halal:"Shafi'i permits all sea creatures; Hanafi permits only scaled fish, making octopus non-halal in that tradition." }},
+  { name:"Calamari",         cat:"Shellfish",
+    desc:"Fried or grilled squid rings with aioli or marinara.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    notes:{ kosher:"Squid lacks fins and scales — not kosher.", halal:"Same as octopus: permitted under Shafi'i, not under Hanafi." }},
+  { name:"Clam Chowder",     cat:"Shellfish",
+    desc:"Creamy New England or Manhattan-style chowder with clams and potatoes.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"p", vegequarian:"p", noRedMeat:"p", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    notes:{ pescatarian:"New England chowder often contains bacon — check with the kitchen.", noRedMeat:"Often contains bacon.", kosher:"Clams are not kosher.", halal:"Clams are generally permitted; bacon (if present) makes it non-halal." }},
+  { name:"Geoduck",          cat:"Shellfish",
+    desc:"Enormous Pacific clam with sweet, crunchy flesh; served as sashimi or crudo.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    notes:{ kosher:"Clams are not kosher.", halal:"Bivalve mollusks — halal under most schools of thought." }},
+  { name:"Abalone",          cat:"Shellfish",
+    desc:"Sea snail regarded as a delicacy; served raw, canned, or pan-seared.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    notes:{ kosher:"Abalone (a sea snail) is not kosher.", halal:"Sea snails are generally considered halal under Shafi'i; Hanafi restricts them." }},
+  { name:"Escargot",         cat:"Shellfish",
+    desc:"Baked land snails in garlic-herb butter, served in the shell.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"p", noRedMeat:"y", jain:"n", kosher:"n", halal:"n", lent:"y" },
+    notes:{ vegequarian:"Land snails are not seafood; most vegequarians would not eat them.", kosher:"Snails are not kosher — they fall under prohibited crawling creatures.", halal:"Land snails are not halal according to the majority of scholars.", lent:"Snails are cold-blooded invertebrates; Catholic Lent abstinence is from warm-blooded animals, so escargot is technically permitted." }},
+  { name:"Sea Urchin (Uni)", cat:"Shellfish",
+    desc:"Sea urchin roe, served on sushi, toast, or pasta; intensely briny and creamy.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    notes:{ kosher:"Sea urchin is not kosher.", halal:"Sea urchin (a spiny echinoderm) — Shafi'i permits all sea creatures; Hanafi restricts to scaled fish, making uni non-halal in that tradition." }},
+  { name:"Frog Legs",        cat:"Shellfish",
+    desc:"Sautéed frog legs in garlic and butter, a classic French bistro dish.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"u", lent:"y" },
+    notes:{ kosher:"Frogs are not kosher animals.", halal:"Frogs are prohibited under Hanafi and Maliki; Shafi'i permits frog legs. Majority opinion leans toward prohibition.", lent:"Frogs are cold-blooded amphibians — Catholic abstinence applies only to warm-blooded animals, so frog legs are permitted during Lent." }},
+
+  // ─── FISH ──────────────────────────────────────────────────────────────
+  { name:"Caviar / Osetra",  cat:"Fish",
+    desc:"Salt-cured sturgeon roe, served on blinis with crème fraîche.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Sturgeon roe is not accepted as kosher by most Ashkenazi authorities (sturgeon lacks the right scale type). Salmon, whitefish, and other certified kosher fish roes are available as alternatives.", halal:"Fish roe from halal fish is generally considered halal." }},
+  { name:"Salmon Gravlax",   cat:"Fish",
+    desc:"Dry-cured salmon with dill, sugar, and lemon; often served with mustard sauce.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Salmon is a kosher fish; gravlax preparation must be certified kosher and no dairy accompaniments can be served with meat." }},
+  { name:"Tuna Tartare",     cat:"Fish",
+    desc:"Diced raw tuna with soy, sesame oil, avocado, and sriracha.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Tuna has fins and scales — kosher; preparation and soy sauce (may contain wheat) must be certified." }},
+  { name:"Hamachi / Yellowtail", cat:"Fish",
+    desc:"Japanese yellowtail served as sashimi or crudo with jalapeño and ponzu.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Yellowtail (Seriola) has fins and scales — kosher." }},
+  { name:"Toro (Fatty Tuna)", cat:"Fish",
+    desc:"Otoro or chutoro — the prized fatty belly of bluefin tuna, served as sashimi.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Bluefin tuna has fins and scales — kosher." }},
+  { name:"Dover Sole",       cat:"Fish",
+    desc:"Delicate English flatfish, classically prepared meunière or bonne femme.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Sole has fins and scales — kosher; beurre meunière cannot be served with a meat meal." }},
+  { name:"Turbot",           cat:"Fish",
+    desc:"European flatfish prized for its firm, sweet white flesh.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Turbot has scales — kosher." }},
+  { name:"Branzino",         cat:"Fish",
+    desc:"Mediterranean sea bass, typically roasted whole with lemon and herbs.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Sea bass has fins and scales — kosher." }},
+  { name:"Black Cod / Sablefish", cat:"Fish",
+    desc:"Miso-glazed sablefish, popularized by Nobu; buttery texture and mild flavour.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Sablefish has scales — kosher; miso glaze must be certified kosher and not mixed with dairy." }},
+  { name:"Ceviche",          cat:"Fish",
+    desc:"Raw fish 'cooked' in citrus juice with chili, cilantro, and red onion.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Depends on the fish — if scaled (e.g., sea bass, snapper), kosher; if it includes shellfish, not kosher." }},
+  { name:"Bouillabaisse",    cat:"Fish",
+    desc:"Provençal fish stew with saffron, fennel, and rouille on toast; typically includes shellfish.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"y" },
+    notes:{ kosher:"Traditionally includes shellfish (mussels, crab) and non-kosher fish — not kosher.", halal:"Can be halal if shellfish are included (under Shafi'i) and alcohol-free; traditional recipe often calls for pastis (anise liqueur)." }},
+  { name:"Eel / Unagi",      cat:"Fish",
+    desc:"Grilled freshwater eel glazed with sweet tare sauce, a sushi staple.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"y", lent:"y" },
+    notes:{ kosher:"Eel lacks scales — not kosher." }},
+  { name:"Ikura / Salmon Roe", cat:"Fish",
+    desc:"Salt-cured salmon eggs, vivid orange, served on rice or with blinis.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Salmon roe is kosher; must be certified as no non-kosher fish roe is mixed in." }},
+  { name:"Boquerones",       cat:"Fish",
+    desc:"White anchovies marinated in vinegar and olive oil; an umami-rich tapa.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Anchovies have fins and scales — kosher." }},
+  { name:"Bacalhau",         cat:"Fish",
+    desc:"Portuguese salt cod, prepared in dozens of ways — a national treasure.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Cod is a kosher fish; traditional Portuguese preparations sometimes include cream or butter, which cannot be served with meat." }},
+  { name:"Brandade",         cat:"Fish",
+    desc:"Warm Provençal emulsion of salt cod, olive oil, and potato.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Cod is kosher; dairy-free versions are fine with meat meals; cream versions are not." }},
+  { name:"Monkfish",         cat:"Fish",
+    desc:"Dense, meaty white fish sometimes called 'poor man's lobster'; often roasted or served with jus.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Monkfish has fins and scales — kosher." }},
+  { name:"Halibut",          cat:"Fish",
+    desc:"Large Pacific or Atlantic flatfish; delicate flavour and firm flaky texture.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Halibut has fins and scales — kosher." }},
+  { name:"Arctic Char",      cat:"Fish",
+    desc:"Cold-water fish closely related to salmon and trout; pink-fleshed and rich.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Arctic char has fins and scales — kosher." }},
+  { name:"Swordfish",        cat:"Fish",
+    desc:"Meaty grilled swordfish steak with chimichurri or salsa verde.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Swordfish: its scales are present in juvenile fish but shed in adults; some rabbinical authorities permit it, others prohibit it. Check with your rabbi." }},
+  { name:"Mahi-Mahi",        cat:"Fish",
+    desc:"Versatile tropical fish with firm texture and mild, sweet flavour.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Mahi-mahi has fins and scales — kosher." }},
+  { name:"Dashi",            cat:"Fish",
+    desc:"Japanese umami broth made from kombu seaweed and katsuobushi (bonito flakes).",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Traditional dashi contains bonito (fish) flakes. Kombu-only dashi is vegetarian/vegan.", kosher:"Bonito flakes must be from a kosher-certified fish; kombu dashi is inherently pareve.", jain:"Kombu dashi (no fish) is acceptable for Jain vegetarians." }},
+  { name:"Ahi Poke",         cat:"Fish",
+    desc:"Hawaiian bowl of diced raw ahi tuna with soy sauce, sesame, onion, and macadamia nuts.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Tuna is kosher; soy sauce and seasonings should be certified. Green onion is forbidden for Jain.", jain:"Contains green onion (an underground-adjacent allium) — typically forbidden." }},
+
+  // ─── VEGETARIAN / VEGAN ─────────────────────────────────────────────────
+  { name:"Burrata",          cat:"Vegetarian / Vegan",
+    desc:"Fresh Italian cheese: a mozzarella shell enclosing a creamy stracciatella centre.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Dairy — kosher if certified; cannot be served in the same meal as meat.", jain:"Dairy is permitted in Jain diet; rennet source may matter to strict adherents." }},
+  { name:"Stracciatella",    cat:"Vegetarian / Vegan",
+    desc:"Shredded mozzarella in fresh cream; the filling of burrata.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Dairy — must be certified kosher and not served with meat." }},
+  { name:"Caprese Salad",    cat:"Vegetarian / Vegan",
+    desc:"Sliced tomatoes, fresh mozzarella, basil, and extra-virgin olive oil.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Dairy — must be certified kosher; fine on its own or as part of a dairy meal." }},
+  { name:"Mushroom Risotto", cat:"Vegetarian / Vegan",
+    desc:"Arborio rice with porcini or wild mushrooms, white wine, and Parmesan.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"y" },
+    notes:{ jain:"Traditional risotto is made with onion, shallot, and garlic — all forbidden in Jain diet.", kosher:"Dairy (Parmesan, butter) — must be certified kosher; wine must be kosher.", halal:"White wine is typically used — non-halal unless explicitly prepared without alcohol." }},
+  { name:"Truffle Pasta",    cat:"Vegetarian / Vegan",
+    desc:"Fresh pasta with shaved black or white truffle, butter, and Parmesan.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ jain:"May contain garlic in the sauce; truffle butter sauces often include garlic.", kosher:"Dairy-based — must be certified kosher; cannot be served in a meat meal." }},
+  { name:"Cauliflower Steak", cat:"Vegetarian / Vegan",
+    desc:"Thick cross-section of cauliflower, roasted until caramelised with spices.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Cauliflower is a flower vegetable — permitted in Jain diet." }},
+  { name:"Gazpacho",         cat:"Vegetarian / Vegan",
+    desc:"Cold Andalusian tomato soup with cucumber, pepper, onion, and garlic.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Contains onion and garlic — both forbidden in Jain diet." }},
+  { name:"Vichyssoise",      cat:"Vegetarian / Vegan",
+    desc:"Cold creamy potato and leek soup, finished with chives.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ jain:"Leeks and potatoes are underground/root vegetables — forbidden in Jain diet.", kosher:"Dairy-based — kosher if certified; cannot be paired with meat." }},
+  { name:"Ratatouille",      cat:"Vegetarian / Vegan",
+    desc:"Provençal slow-cooked vegetable stew of zucchini, eggplant, tomato, and pepper.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Often contains garlic and onion; these can be omitted in a Jain preparation." }},
+  { name:"Beet Carpaccio",   cat:"Vegetarian / Vegan",
+    desc:"Thinly sliced roasted beets with goat cheese, candied walnuts, and balsamic.",
+    r:{ vegetarian:"y", vegan:"p", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegan:"Goat cheese makes it non-vegan; some versions are served with a nut-based cheese alternative.", jain:"Beet is a root vegetable — not permitted in Jain diet.", kosher:"Dairy (goat cheese) — must be kosher certified." }},
+  { name:"Tabbouleh",        cat:"Vegetarian / Vegan",
+    desc:"Lebanese salad of finely chopped parsley, bulgur wheat, tomato, mint, lemon, and olive oil.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Traditional tabbouleh does not contain garlic or onion — fully compatible with Jain diet." }},
+  { name:"Hummus",           cat:"Vegetarian / Vegan",
+    desc:"Blended chickpeas with tahini, lemon juice, and garlic; served with olive oil.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Classic hummus contains garlic — Jain diet forbids garlic. Garlic-free hummus would be compatible." }},
+  { name:"Baba Ganoush",     cat:"Vegetarian / Vegan",
+    desc:"Smoky roasted eggplant with tahini, lemon, and sometimes garlic.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Often contains garlic; garlic-free versions are Jain-compatible." }},
+  { name:"Falafel",          cat:"Vegetarian / Vegan",
+    desc:"Deep-fried balls of ground chickpeas or fava beans with herbs and spices.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Falafel typically contains garlic and onion — not Jain-compatible." }},
+  { name:"Socca",            cat:"Vegetarian / Vegan",
+    desc:"Niçoise chickpea flour flatbread, baked in a wood oven and eaten plain or with olive oil.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Plain socca contains only chickpea flour, water, olive oil, and salt — entirely Jain-compatible." }},
+  { name:"Shakshuka",        cat:"Vegetarian / Vegan",
+    desc:"Eggs poached in spiced tomato, pepper, and onion sauce.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Contains onion, and often garlic and chili — not Jain-compatible.", kosher:"Pareve or dairy — kosher and very popular in Israeli cuisine." }},
+  { name:"Raclette",         cat:"Vegetarian / Vegan",
+    desc:"Swiss melted raclette cheese served over boiled potatoes with cornichons and pickled onions.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ jain:"Potatoes (root) and pickled onions are forbidden in Jain diet.", kosher:"Dairy — must be certified kosher; potatoes and pickles raise no additional kosher concerns." }},
+  { name:"Fondue (Cheese)",  cat:"Vegetarian / Vegan",
+    desc:"Melted Gruyère and Emmental in white wine, served with bread for dipping.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"p", halal:"p", lent:"y" },
+    notes:{ jain:"May contain garlic rubbed inside the pot.", kosher:"Dairy — kosher if certified; wine must be kosher.", halal:"Traditional recipe uses white wine — not halal. Can be prepared without alcohol." }},
+
+  // ─── SOUP & BROTH ────────────────────────────────────────────────────────
+  { name:"Consommé",         cat:"Soup & Broth",
+    desc:"Crystal-clear clarified broth, typically beef or chicken, often garnished with tiny cuts.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"p", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ noRedMeat:"Chicken consommé is no-red-meat; beef consommé is not.", kosher:"Kosher if made from certified kosher meat; cannot be served with dairy.", halal:"Halal if made from zabiha meat.", lent:"Meat-based broth (beef or chicken) is not permitted on Lenten Fridays." }},
+  { name:"Miso Soup",        cat:"Soup & Broth",
+    desc:"Japanese fermented soybean paste soup with tofu, wakame seaweed, and green onion.",
+    r:{ vegetarian:"p", vegan:"p", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Traditional miso soup uses dashi (fish/bonito stock) — not vegetarian. Kombu-only dashi versions are vegetarian.", vegan:"Same issue — fish stock version is not vegan. Request kombu dashi.", jain:"Green onion (scallion) is generally considered a surface vegetable and may be permitted, but this varies by Jain tradition; dashi version contains fish.", kosher:"Depends on dashi; miso paste may need certification." }},
+  { name:"French Onion Soup", cat:"Soup & Broth",
+    desc:"Caramelised onion soup topped with Gruyère-gratinéed crouton.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"p", vegequarian:"p", noRedMeat:"p", jain:"n", kosher:"n", halal:"p", lent:"p" },
+    notes:{ vegetarian:"Traditionally made with beef broth; vegetarian versions exist.", noRedMeat:"Beef broth version is not no-red-meat; vegetarian version is.", jain:"Primarily onion — completely forbidden in Jain diet.", kosher:"Beef stock with Gruyère topping violates the meat-dairy prohibition.", halal:"Can be halal with certified beef stock and halal-certified wine substitute.", lent:"Beef broth version: not permitted on Lenten Fridays. Vegetarian version: fine." }},
+
+  // ─── DESSERT ─────────────────────────────────────────────────────────────
+  { name:"Crème Brûlée",     cat:"Dessert",
+    desc:"Silky vanilla custard with a caramelised sugar crust.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Dairy dessert — must be certified kosher and not served after a meat meal." }},
+  { name:"Panna Cotta",      cat:"Dessert",
+    desc:"Italian cream dessert set with gelatin, often served with berry coulis.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"p", halal:"p", lent:"y" },
+    notes:{ vegetarian:"Gelatin is typically from animal bones; vegetarian versions use agar-agar.", jain:"Gelatin from animal bones is not Jain; agar-agar version is acceptable.", kosher:"Gelatin must be kosher-certified (fish gelatin or veg alternative). Dairy — not after a meat meal.", halal:"Pork-derived gelatin is not halal; must use halal gelatin or agar-agar." }},
+  { name:"Soufflé",          cat:"Dessert",
+    desc:"Light baked dessert of egg whites and pastry cream, flavoured with chocolate or Grand Marnier.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"y" },
+    notes:{ kosher:"Dairy soufflé — certified kosher and not served after a meat meal. Grand Marnier contains alcohol.", halal:"Grand Marnier (orange liqueur) makes a Grand Marnier soufflé non-halal." }},
+  { name:"Madeleine",        cat:"Dessert",
+    desc:"French shell-shaped sponge cake with lemon zest, made famous by Proust.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Dairy (butter) — must be certified kosher; not after a meat meal." }},
+  { name:"Financier",        cat:"Dessert",
+    desc:"Small rectangular French almond cake made with brown butter and egg whites.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Dairy (beurre noisette) — kosher certified; not after a meat meal." }},
+  { name:"Île Flottante",    cat:"Dessert",
+    desc:"Soft meringue islands floating on vanilla custard (crème anglaise).",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Dairy custard — must be kosher certified." }},
+  { name:"Tarte Tatin",      cat:"Dessert",
+    desc:"Upside-down caramelised apple tart, a French classic.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Pastry contains butter — kosher if certified; not after a meat meal." }},
+  { name:"Macaron",          cat:"Dessert",
+    desc:"French sandwich cookie of almond meringue shells with ganache or buttercream.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Dairy fillings — must be certified kosher." }},
+
+  // ─── OTHER ─────────────────────────────────────────────────────────────
+  { name:"Amuse-Bouche",     cat:"Other",
+    desc:"A single-bite appetizer sent by the kitchen; composition varies by chef and season.",
+    r:{ vegetarian:"p", vegan:"p", pescatarian:"p", vegequarian:"p", noRedMeat:"p", jain:"p", kosher:"p", halal:"p", lent:"p" },
+    notes:{ vegetarian:"Composition unknown in advance — always ask your server.", vegan:"Ask specifically if it is vegan.", kosher:"Rarely kosher-certified in non-kosher restaurants.", halal:"Ingredients unknown — confirm with the kitchen." }},
+  { name:"Tasting Menu",     cat:"Other",
+    desc:"Multi-course chef's selection; typically 5–20 courses of seasonal dishes.",
+    r:{ vegetarian:"p", vegan:"p", pescatarian:"p", vegequarian:"p", noRedMeat:"p", jain:"p", kosher:"p", halal:"p", lent:"p" },
+    notes:{ vegetarian:"Most restaurants offer a vegetarian tasting menu variant — ask in advance.", vegan:"Vegan tasting menus exist but must be requested when booking.", jain:"Jain dietary needs are complex — contact the restaurant well in advance.", kosher:"Very few non-kosher restaurants can produce a fully kosher tasting menu.", halal:"Contact the restaurant in advance; many fine-dining establishments can accommodate halal requests." }},
+  { name:"Chermoula",        cat:"Other",
+    desc:"North African herb and spice marinade/sauce with cilantro, cumin, and lemon; accompanies fish or vegetables.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Contains garlic — not Jain-compatible; garlic-free version would be acceptable." }},
+  { name:"Gremolata",        cat:"Other",
+    desc:"Traditional Italian garnish of lemon zest, garlic, and parsley; served with osso buco.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Garlic is a core ingredient — not Jain-compatible." }},
+  { name:"Rouille",          cat:"Other",
+    desc:"Provençal saffron and garlic mayonnaise; the traditional accompaniment to bouillabaisse.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ jain:"Contains garlic — not Jain-compatible.", kosher:"Eggs — may be certified kosher as a pareve condiment; cannot be served alongside unkosher food." }},
+];
+
+// ── RENDER ────────────────────────────────────────────────────────────────
+const ICONS = { y:"✓", n:"✗", p:"~", u:"?" };
+const LABELS = { y:"Compatible", n:"Not compatible", p:"Depends on preparation", u:"Varies by tradition" };
+
+function buildHead() {
+  const tr = document.createElement("tr");
+  const th0 = document.createElement("th");
+  th0.className = "name-th";
+  th0.innerHTML = `<div class="th-inner"><span class="th-label">Dish</span></div>`;
+  tr.appendChild(th0);
+  RESTRICTIONS.forEach(r => {
+    const th = document.createElement("th");
+    th.title = r.label + ": " + r.def;
+    th.innerHTML = `<div class="th-inner"><span class="th-icon">${r.icon}</span><span class="th-label">${r.abbr}</span></div>`;
+    tr.appendChild(th);
+  });
+  document.getElementById("thead").appendChild(tr);
+}
+
+function buildRow(food, even) {
+  const tr = document.createElement("tr");
+  const td0 = document.createElement("td");
+  td0.className = "name-td";
+  td0.innerHTML = `<span class="food-name">${food.name}</span><span class="food-cat">${food.cat}</span>`;
+  if (even) td0.style.background = "var(--bg2)";
+  tr.appendChild(td0);
+
+  RESTRICTIONS.forEach(r => {
+    const s = food.r[r.id] || "u";
+    const td = document.createElement("td");
+    td.className = `sc ${s}`;
+    td.innerHTML = `<div class="ci">${ICONS[s]}</div>`;
+    td.addEventListener("mouseenter", e => showTip(e, food, r, s));
+    td.addEventListener("mousemove", moveTip);
+    td.addEventListener("mouseleave", hideTip);
+    tr.appendChild(td);
+  });
+  return tr;
+}
+
+let activeFilter = "All";
+
+function render(query) {
+  const q = query.trim().toLowerCase();
+  const tbody = document.getElementById("tbody");
+  tbody.innerHTML = "";
+  let count = 0;
+  let evenIdx = 0;
+
+  FOODS.forEach(food => {
+    const matchQ = !q || food.name.toLowerCase().includes(q) || food.cat.toLowerCase().includes(q) || food.desc.toLowerCase().includes(q);
+    const matchF = activeFilter === "All" || food.cat === activeFilter;
+    if (matchQ && matchF) {
+      tbody.appendChild(buildRow(food, evenIdx % 2 === 1));
+      evenIdx++;
+      count++;
+    }
+  });
+
+  document.getElementById("resultCount").textContent = count;
+  const noneEl = document.getElementById("none");
+  noneEl.style.display = count === 0 ? "block" : "none";
+  if (count === 0) document.getElementById("noneTerm").textContent = query;
+}
+
+// Filters
+function buildFilters() {
+  const wrap = document.getElementById("filters");
+  const all = document.createElement("button");
+  all.className = "fbtn on";
+  all.textContent = "All dishes";
+  all.addEventListener("click", () => setFilter("All", all));
+  wrap.appendChild(all);
+
+  CATS.forEach(cat => {
+    if (!FOODS.some(f => f.cat === cat)) return;
+    const btn = document.createElement("button");
+    btn.className = "fbtn";
+    btn.textContent = cat;
+    btn.addEventListener("click", () => setFilter(cat, btn));
+    wrap.appendChild(btn);
+  });
+}
+
+function setFilter(name, el) {
+  activeFilter = name;
+  document.querySelectorAll(".fbtn").forEach(b => b.classList.remove("on"));
+  el.classList.add("on");
+  render(document.getElementById("searchInput").value);
+}
+
+// Glossary
+function buildGloss() {
+  const g = document.getElementById("glossGrid");
+  RESTRICTIONS.forEach(r => {
+    g.innerHTML += `<div class="gi"><div class="gi-icon">${r.icon}</div><div class="gi-text"><strong>${r.label}</strong><span>${r.def}</span></div></div>`;
+  });
+}
+
+// Tooltip
+const tip = document.getElementById("tip");
+let tipX = 0, tipY = 0;
+
+function showTip(e, food, restr, s) {
+  const note = (food.notes && food.notes[restr.id]) || "";
+  tip.innerHTML = `
+    <div class="tip-food">${food.name}</div>
+    <div class="tip-restr">${restr.icon} ${restr.label}</div>
+    <span class="tip-badge ${s}">${LABELS[s]}</span>
+    ${note ? `<div class="tip-note">${note}</div>` : ""}
+    ${!note && s === "y" ? `<div class="tip-note" style="color:#555">Generally compatible with this dietary restriction.</div>` : ""}
+    ${!note && s === "n" ? `<div class="tip-note" style="color:#555">Not compatible with this dietary restriction.</div>` : ""}
+  `;
+  tipX = e.clientX; tipY = e.clientY;
+  tip.className = "show";
+  positionTip();
+}
+
+function moveTip(e) {
+  tipX = e.clientX; tipY = e.clientY;
+  positionTip();
+}
+
+function positionTip() {
+  const tw = tip.offsetWidth, th = tip.offsetHeight;
+  let x = tipX + 16, y = tipY + 16;
+  if (x + tw > window.innerWidth - 8) x = tipX - tw - 8;
+  if (y + th > window.innerHeight - 8) y = tipY - th - 8;
+  tip.style.left = x + "px";
+  tip.style.top  = y + "px";
+}
+
+function hideTip() { tip.className = ""; }
+
+// Search debounce
+let searchTimer;
+document.getElementById("searchInput").addEventListener("input", e => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => render(e.target.value), 80);
+});
+
+// Init
+buildHead();
+buildFilters();
+buildGloss();
+render("");
+</script>
+</body>
+</html>
