@@ -370,7 +370,7 @@ const RESTRICTIONS = [
 
 const CATS = [
   "Beef & Veal","Lamb & Game","Pork & Charcuterie","Poultry",
-  "Shellfish","Fish","Vegetarian / Vegan","Vegetables","Mushroom","Soup & Broth","Dessert","Cheese","Technique & Sauce","Other"
+  "Shellfish","Fish","Vegetarian / Vegan","Vegetables","Fruits","Grains & Bread","Herbs & Spices","Nuts & Seeds","Mushroom","Dairy & Eggs","Soup & Broth","Dessert","Cheese","Technique & Sauce","Other"
 ];
 
 // Status: y=yes, n=no, p=partial/depends, u=unknown/varies
@@ -1602,6 +1602,551 @@ const FOODS = [
     r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
     notes:{ kosher:"Standard wheat flour is kosher; chametz (leavened wheat products) are forbidden on Passover — special certified matzo meal or flour required." }},
 
+  { name:"Asparagus / アスパラガス",   cat:"Vegetables",
+    desc:"Tender spring shoots; eaten blanched, roasted, or grilled. Green, white (etiolated), and purple varieties. A classic pairing with hollandaise, butter, or vinaigrette.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Avocado",                    cat:"Vegetables",
+    desc:"Creamy fruit (Persea americana) used as a vegetable; mild, buttery flavour. Eaten raw in guacamole, salads, sushi rolls, and on toast. High in monounsaturated fat.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Bamboo Shoots / 筍",         cat:"Vegetables",
+    desc:"Young sprouts of bamboo (Phyllostachys spp.); crunchy with a mild, slightly sweet flavour. Used in Japanese nimono, Chinese stir-fries, and Southeast Asian curries. Must be boiled to remove toxins.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Bamboo shoots emerge from underground; some Jain traditions avoid them." }},
+
+  { name:"Bean Sprouts / もやし",       cat:"Vegetables",
+    desc:"Germinated mung beans (or soy beans) with crisp texture and neutral flavour. Used in ramen, pad thai, stir-fries, and Korean bibimbap. Eaten raw or briefly cooked.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Bell Pepper / ピーマン",      cat:"Vegetables",
+    desc:"Capsicum annuum; sweet, crunchy peppers in green, red, yellow, and orange varieties. Eaten raw in salads, roasted, stuffed, or stir-fried. Red peppers are ripened green ones — sweeter and richer in vitamins.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Bok Choy / チンゲン菜",       cat:"Vegetables",
+    desc:"Chinese cabbage (Brassica rapa var. chinensis); tender white stalks and dark green leaves. Mild, slightly sweet. Used in stir-fries, soups, and steamed with garlic and oyster sauce.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Broccoli / ブロッコリー",     cat:"Vegetables",
+    desc:"Brassica oleracea; dense green florets with a mildly bitter flavour. Steamed, roasted, stir-fried, or eaten raw with dip. One of the most nutritionally dense vegetables.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Brussels Sprouts / 芽キャベツ", cat:"Vegetables",
+    desc:"Tiny cabbages (Brassica oleracea var. gemmifera); nutty, slightly bitter flavour intensified by roasting. Delicious halved and caramelised in a hot pan with bacon or lardons.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Cabbage / キャベツ",           cat:"Vegetables",
+    desc:"Brassica oleracea var. capitata; dense head of tightly packed leaves. Raw in coleslaw, fermented as sauerkraut or kimchi, braised, or stir-fried. Red, green, and savoy varieties.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Carrot / 人参",               cat:"Vegetables",
+    desc:"Daucus carota; sweet, crisp root vegetable. Eaten raw, roasted, braised, puréed, or juiced. A foundational element of mirepoix and soffritto.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A root vegetable — uprooting harms the plant and soil organisms; forbidden in Jain diet." }},
+
+  { name:"Celery / セロリ",              cat:"Vegetables",
+    desc:"Apium graveolens; crunchy stalk with a distinctive aromatic flavour. Eaten raw with dips, braised, or used as a flavour base in stocks, mirepoix, and Bloody Marys.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Corn / Sweet Corn / トウモロコシ", cat:"Vegetables",
+    desc:"Zea mays; sweet, juicy kernels eaten off the cob, creamed, or as polenta when dried and ground. Also a source of cornstarch, corn syrup, and popcorn.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Cucumber / きゅうり",           cat:"Vegetables",
+    desc:"Cucumis sativus; cool, crisp, and refreshing. Eaten raw in salads and sandwiches, pickled (cornichons, dill pickles), or in Japanese sunomono and tzatziki.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Daikon / 大根",               cat:"Vegetables",
+    desc:"Japanese white radish (Raphanus sativus var. longipinnatus); mildly peppery raw, sweet and tender when simmered. Grated as oroshi alongside sashimi, pickled as takuan, or simmered in oden.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A root vegetable — forbidden in Jain diet." }},
+
+  { name:"Eggplant / Aubergine / ナス", cat:"Vegetables",
+    desc:"Solanum melongena; spongy, mild flesh that absorbs flavours readily. Grilled, fried, roasted (baba ganoush), or braised (ratatouille, caponata). Japanese varieties are slender and sweeter.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Fennel / フィノッキオ",        cat:"Vegetables",
+    desc:"Foeniculum vulgare; crisp bulb with a delicate anise flavour; mellows and sweetens with cooking. Raw in salads, braised, or roasted. Fronds used as a herb.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Green Beans / いんげん",       cat:"Vegetables",
+    desc:"Phaseolus vulgaris, harvested young before the seeds develop. Blanched and dressed in vinaigrette (haricots verts), stir-fried with garlic, or slow-cooked Southern-style.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Kale / ケール",               cat:"Vegetables",
+    desc:"Brassica oleracea var. sabellica; robust, deeply flavoured leaves — curly, lacinato (dinosaur), or red Russian varieties. Used raw in salads, wilted, sautéed, or baked into crisps.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Leek / ポロネギ",              cat:"Vegetables",
+    desc:"Allium ampeloprasum; milder than onion, with a subtle sweetness. Braised, sautéed, used in vichyssoise, and as a flavour base in stocks and soups.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Alliums are forbidden in Jain diet." }},
+
+  { name:"Lettuce / レタス",             cat:"Vegetables",
+    desc:"Lactuca sativa; mild, refreshing leaves used in salads, sandwiches, and wraps. Romaine, butterhead, iceberg, and oakleaf are common varieties. Also briefly wilted in stir-fries.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Lotus Root / 蓮根",           cat:"Vegetables",
+    desc:"Aquatic rhizome of the lotus plant (Nelumbo nucifera); crunchy with a mildly sweet, earthy flavour and a distinctive lacy cross-section. Simmered in dashi, stir-fried, pickled, or deep-fried as chips.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"An aquatic rhizome — harvesting from mud; generally avoided in Jain diet." }},
+
+  { name:"Peas / グリーンピース",         cat:"Vegetables",
+    desc:"Pisum sativum; sweet, tender legume pods. Fresh, frozen, or dried. Used in risottos, pasta, soups, and puréed as a vibrant green sauce. Snow peas and sugar snaps are eaten pod and all.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Pumpkin / Kabocha / かぼちゃ", cat:"Vegetables",
+    desc:"Winter squash; dense, sweet flesh that roasts, soups, and purées beautifully. Japanese kabocha (Cucurbita maxima) has a chestnut-like richness. Also used in pies, curries, and tempura.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Spinach / ほうれん草",          cat:"Vegetables",
+    desc:"Spinacia oleracea; tender, slightly earthy leaves. Wilted with garlic, used in pasta, egg dishes, dips, soups, and Japanese ohitashi (blanched and dressed with dashi and soy). Baby spinach eaten raw.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Sweet Potato / サツマイモ",    cat:"Vegetables",
+    desc:"Ipomoea batatas; naturally sweet, starchy tuber. Baked, roasted, mashed, or fried. Japanese satsumaimo has a purple skin and yellow flesh; used in tempura, wagashi sweets, and shochu.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A tuber — forbidden in Jain diet." }},
+
+  { name:"Taro / 里芋",                 cat:"Vegetables",
+    desc:"Colocasia esculenta; starchy corm with a subtle, nutty flavour and a gluey texture when cooked. Used in Japanese nimono (simmered dishes), Hawaiian poi, and throughout the Pacific and Asia.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A corm (underground storage organ) — forbidden in Jain diet." }},
+
+  { name:"Tomato / トマト",              cat:"Vegetables",
+    desc:"Solanum lycopersicum; botanically a fruit, used as a vegetable. The backbone of Italian and Spanish cuisines — in sauces, soups, salads, and preserved as paste or passata. Sweet when ripe, acidic when underripe.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Turnip / カブ",               cat:"Vegetables",
+    desc:"Brassica rapa var. rapa; mild root vegetable, somewhere between a radish and a cabbage. Roasted, braised, or pickled. Young turnip tops are eaten as greens. Japanese kokabu (baby turnip) is a staple vegetable.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A root vegetable — forbidden in Jain diet." }},
+
+  { name:"Zucchini / Courgette / ズッキーニ", cat:"Vegetables",
+    desc:"Cucurbita pepo; mild, versatile summer squash. Sliced and sautéed, grilled, stuffed, or spiralised as a pasta substitute. Blossoms are battered and fried in Italian and French cuisines.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Apple / りんご",               cat:"Fruits",
+    desc:"Malus domestica; crisp, sweet-tart fruit eaten fresh, juiced, baked in tarts and crumbles, or pressed for cider. Thousands of cultivars; Fuji and Mutsu popular in Japan, Granny Smith and Cox in Europe.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Banana / バナナ",              cat:"Fruits",
+    desc:"Musa spp.; creamy, sweet tropical fruit. Eaten fresh, baked into bread and cakes, fried as tostones (green) or maduros (ripe), or blended into smoothies. Plantains are a starchier cooking variety.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Blueberry / ブルーベリー",     cat:"Fruits",
+    desc:"Vaccinium corymbosum; small, sweet-tart berries. Eaten fresh, used in muffins, pancakes, jams, and compotes. Rich in antioxidants. North American in origin; now grown worldwide.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Cherry / さくらんぼ",          cat:"Fruits",
+    desc:"Prunus avium (sweet) or P. cerasus (sour); small stone fruit. Eaten fresh, used in clafoutis, kirsch-based desserts, and Black Forest cake. Japanese sakuranbo — pale pink Yamagata cherries — are prized gifts.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Coconut / ヤシの実",           cat:"Fruits",
+    desc:"Cocos nucifera; versatile tropical fruit — flesh eaten fresh or desiccated, pressed as milk and cream for curries and desserts, water drunk as a refreshing drink.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Fig / イチジク",               cat:"Fruits",
+    desc:"Ficus carica; soft, jammy fruit with a honeyed sweetness and crunchy seeds. Eaten fresh with prosciutto and blue cheese, baked into tarts, preserved as jam, or dried.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Grape / ぶどう",               cat:"Fruits",
+    desc:"Vitis vinifera; table and wine grapes. Eaten fresh, dried as raisins, pressed into wine and grape juice, or used in verjuice. Muscat, Kyoho, and Delaware are popular Japanese varieties.",
+    r:{ vegetarian:"y", vegan:"p", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegan:"Some vineyards use animal-derived fining agents (isinglass, gelatin, casein) in winemaking; fresh grapes themselves are vegan.", kosher:"Fresh grapes are kosher; grape products (juice, wine, vinegar) require kosher certification (yayin mevushal rules apply)." }},
+
+  { name:"Lemon / レモン",               cat:"Fruits",
+    desc:"Citrus limon; tart, aromatic citrus. Juice used to brighten sauces, marinades, dressings, and desserts; zest adds intense fragrance. The Amalfi coast sfusato and Meyer lemon are prized varieties.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Lime / ライム",                cat:"Fruits",
+    desc:"Citrus aurantiifolia; sharper and more aromatic than lemon. Essential in Mexican, Southeast Asian, and Caribbean cuisines — in ceviche, pad thai, margaritas, and Key lime pie.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Mango / マンゴー",             cat:"Fruits",
+    desc:"Mangifera indica; tropical stone fruit with intensely sweet, fragrant flesh. Eaten fresh, used in lassi, chutney, salsa, and sticky rice desserts. Miyazaki mangoes command a premium price in Japan.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Orange / オレンジ",            cat:"Fruits",
+    desc:"Citrus sinensis; sweet citrus fruit eaten fresh, juiced, or used in sauces (duck à l'orange) and desserts. Zest is a key flavour in cakes, liqueurs, and marmalades. Blood oranges have a striking crimson flesh.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Peach / 桃",                  cat:"Fruits",
+    desc:"Prunus persica; fragrant stone fruit with white or yellow flesh. Eaten fresh, poached, grilled, or preserved in syrup. Japanese momo are among the world's most prized: enormous, impossibly sweet, and gift-wrapped.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Pear / 洋梨",                 cat:"Fruits",
+    desc:"Pyrus communis (European) or P. pyrifolia (Japanese nashi); sweet, soft or crisp depending on variety. Eaten fresh, poached in red wine, baked in tarts, or paired with blue cheese. Nashi (梨) is a Japanese variety — round and crisp.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Persimmon / 柿",              cat:"Fruits",
+    desc:"Diospyros kaki; sweet, honey-toned autumn fruit. Hachiya must be fully ripe (jelly-soft) or it is astringent; Fuyu is eaten crisp. Dried as hoshigaki — wrinkled, intensely sweet. A quintessential Japanese autumn fruit.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Pineapple / パイナップル",     cat:"Fruits",
+    desc:"Ananas comosus; tropical fruit with a balance of sweetness and acidity. Eaten fresh, grilled, used in Hawaiian pizza (contentiously), sweet-and-sour dishes, and as a meat tenderiser due to bromelain.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Plum / Ume / 梅",             cat:"Fruits",
+    desc:"Prunus salicina (Japanese plum) or P. mume (ume/Japanese apricot). Ume is rarely eaten raw — pickled as umeboshi, distilled as umeshu (plum wine), or made into bainiku paste. A defining flavour of Japanese cuisine.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"y" },
+    notes:{ kosher:"Umeshu (plum wine) requires kosher certification.", halal:"Umeshu contains alcohol and is not halal; the fruit itself and non-alcoholic preparations are halal." }},
+
+  { name:"Raspberry / ラズベリー",       cat:"Fruits",
+    desc:"Rubus idaeus; jewel-like berries with a bright, tart flavour. Eaten fresh, used in coulis, tarts, jams, and sauces for game and chocolate. Quick to ferment — best used immediately.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Strawberry / イチゴ",          cat:"Fruits",
+    desc:"Fragaria × ananassa; the world's most popular berry. Eaten fresh with cream, in tarts, jams, and shortcake. Japanese ichigo — Amaou, Tochiotome, Benihoppe — are extraordinarily sweet and large.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Watermelon / スイカ",          cat:"Fruits",
+    desc:"Citrullus lanatus; refreshing summer fruit, over 90% water. Eaten chilled as slices, cubed in salads with feta and mint, or pickled (rind). Japanese premium shiro (white) and densuke (black-skinned) varieties are prized.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Yuzu / ゆず",                 cat:"Fruits",
+    desc:"Citrus junos; intensely aromatic Japanese citrus with a floral, tart flavour somewhere between lemon and grapefruit. Rarely eaten raw — zest and juice used in ponzu, kosho, vinaigrettes, and desserts.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Barley / 大麦",               cat:"Grains & Bread",
+    desc:"Hordeum vulgare; ancient grain used in soups, stews, risotto-style pilafs, and malt for beer and whisky. Pearled barley has the bran removed; hulled retains more nutrition. Contains gluten.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Plain barley is kosher; chometz concerns apply on Passover." }},
+
+  { name:"Bread / パン",                cat:"Grains & Bread",
+    desc:"Leavened baked dough; the most common form is wheat-flour bread leavened with yeast or sourdough starter. Bagettes, sourdoughs, milk breads (shokupan), and flatbreads vary enormously. Contains gluten.",
+    r:{ vegetarian:"y", vegan:"p", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"y" },
+    notes:{ vegan:"Enriched breads (brioche, milk bread) contain eggs and butter.", kosher:"Wheat bread is chometz — forbidden on Passover; bread generally requires kosher certification for the leavening agent.", halal:"Most bread is halal; some enriched breads use vanilla or flavours with alcohol content." }},
+
+  { name:"Breadcrumbs / Panko / パン粉", cat:"Grains & Bread",
+    desc:"Dried, crumbled bread used as a coating or topping. Panko (Japanese breadcrumbs) are extra-coarse and shatter-crisp when fried — essential for tonkatsu, katsu curry, and fried oysters. Contains gluten.",
+    r:{ vegetarian:"y", vegan:"p", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"y" },
+    notes:{ vegan:"Standard panko is vegan; enriched versions may contain egg or milk.", kosher:"Requires kosher certification." }},
+
+  { name:"Brown Rice / 玄米",           cat:"Grains & Bread",
+    desc:"Whole grain rice with bran and germ intact; nuttier flavour and chewier texture than white rice. Higher in fibre and nutrients. Gluten-free. Used in Japanese genmai diets and macrobiotic cooking.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Buckwheat / 蕎麦粉",          cat:"Grains & Bread",
+    desc:"Fagopyrum esculentum; a seed, not a true cereal grain, and naturally gluten-free. Ground into flour for soba noodles, blinis, galettes bretonnes, and kasha. Despite its name, unrelated to wheat.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Pure buckwheat is gluten-free and kosher; Japanese soba often contains wheat flour — check ingredients." }},
+
+  { name:"Couscous / クスクス",          cat:"Grains & Bread",
+    desc:"Tiny granules of semolina wheat; a staple of North African cuisine. Steamed and served under tagines and braises, or dressed cold in salads. Whole wheat and Israeli (pearl) couscous are common variants. Contains gluten.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Oats / 燕麦",                 cat:"Grains & Bread",
+    desc:"Avena sativa; rolled, steel-cut, or ground into oatmeal. Used in porridge, granola, muesli, flapjacks, and oat milk. Naturally gluten-free, but frequently contaminated with wheat during processing.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Oats are one of the five grains subject to chometz laws on Passover; certified gluten-free oats may still be considered chometz by some authorities." }},
+
+  { name:"Quinoa / キヌア",              cat:"Grains & Bread",
+    desc:"Chenopodium quinoa; a seed from the Andes used as a grain. Nutty flavour, naturally gluten-free, and a complete protein (contains all essential amino acids). Rinsing removes bitter saponins.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Not one of the five chometz grains — permitted on Passover by most authorities; confirm with your rabbi." }},
+
+  { name:"Rye / ライ麦",                 cat:"Grains & Bread",
+    desc:"Secale cereale; hearty grain used in rye bread, crispbread, and Scandinavian knäckebröd. Dense, slightly sour flavour. Also fermented into rye whisky and kvass. Contains gluten.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Rye is one of the five grains subject to chometz laws — forbidden on Passover." }},
+
+  { name:"White Rice / 白米",            cat:"Grains & Bread",
+    desc:"Milled rice with bran and germ removed; fluffy, mild, and versatile. The staple grain of Japan, China, Southeast Asia, and much of the world. Glutinous (mochi) rice is sticky when cooked; Japanese short-grain (koshihikari) is prized for its texture.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Basil / バジル",               cat:"Herbs & Spices",
+    desc:"Ocimum basilicum; sweet, clove-scented herb essential in Italian cooking — pesto, caprese, pasta. Thai basil is spicier with anise notes. Used fresh (never cooked for long) and as a garnish.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Bay Leaf / ローリエ",          cat:"Herbs & Spices",
+    desc:"Laurus nobilis; dried leaves with a subtle floral, clove-like aroma. Used whole in stocks, braises, and bouquet garni; always removed before serving. Both fresh and dried versions are used.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Black Pepper / 黒胡椒",        cat:"Herbs & Spices",
+    desc:"Piper nigrum; the world's most traded spice. Dried unripe berries; pungent heat that builds on the palate. Used whole in pickling, coarsely cracked on steaks, or finely ground universally.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Cardamom / カルダモン",        cat:"Herbs & Spices",
+    desc:"Elettaria cardamomum (green) or Amomum subulatum (black); intensely aromatic pods used in Indian chai, Nordic pastries, Middle Eastern coffee, and rice dishes. Among the most expensive spices after saffron and vanilla.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Chili Pepper / 唐辛子",        cat:"Herbs & Spices",
+    desc:"Capsicum frutescens or C. annuum; heat from capsaicin, ranging from mild (Anaheim) to fierce (habanero, ghost pepper). Used fresh, dried, flaked, or as paste. Japanese togarashi, Korean gochugaru, and Mexican chipotle each have distinct flavour profiles.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Cilantro / Coriander Leaf / コリアンダー", cat:"Herbs & Spices",
+    desc:"Coriandrum sativum leaves; bright, citrusy herb — loved and loathed in roughly equal measure. Essential in Mexican salsas, Indian curries, Southeast Asian noodle soups, and Middle Eastern falafel.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Cinnamon / シナモン",          cat:"Herbs & Spices",
+    desc:"Cinnamomum verum (Ceylon) or C. cassia; warm, sweet-spicy bark used in pastries, spiced wines, rice puddings, tagines, and mulled cider. Ceylon cinnamon is subtler; cassia is sharper and more common.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Cumin / クミン",               cat:"Herbs & Spices",
+    desc:"Cuminum cyminum; earthy, warm seeds with a slightly bitter edge. Ground or whole, essential in Mexican chili, Indian curry, Middle Eastern spice blends (ras el hanout, dukkah), and hummus.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Dill / ディル",                cat:"Herbs & Spices",
+    desc:"Anethum graveolens; feathery herb with a fresh, anise-like flavour. Classic with salmon (gravlax), cucumber, cream cheese, and pickles. Seeds are used in pickling and breads.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Ginger / 生姜",               cat:"Herbs & Spices",
+    desc:"Zingiber officinale; pungent, spicy rhizome used fresh, pickled (gari with sushi), dried, or candied. A foundational flavour in Japanese, Chinese, Indian, and Southeast Asian cuisines.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A rhizome harvested from underground — forbidden in Jain diet." }},
+
+  { name:"Lemongrass / レモングラス",    cat:"Herbs & Spices",
+    desc:"Cymbopogon citratus; fibrous stalks with a bright lemon-citrus aroma. Bruised and simmered in Thai and Vietnamese soups and curries, or infused in teas and desserts.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Mint / ミント",                cat:"Herbs & Spices",
+    desc:"Mentha spp.; cool, refreshing herb used in tabbouleh, raita, mojitos, lamb dishes, desserts, and teas. Spearmint (nana) is the classic culinary mint; peppermint is more intensely mentholated.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Nutmeg / ナツメグ",            cat:"Herbs & Spices",
+    desc:"Myristica fragrans; warm, slightly sweet spice used in béchamel, potatoes gratin, eggnog, and mulled wine. Mace is the dried lacy red coating of the same seed; slightly lighter in flavour.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Paprika / パプリカ",           cat:"Herbs & Spices",
+    desc:"Ground dried Capsicum annuum; ranges from sweet to hot and from vibrant red to deep brown. Hungarian and Spanish (smoked — pimentón) varieties each have distinct character. Essential in goulash, chorizo, and patatas bravas.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Parsley / パセリ",             cat:"Herbs & Spices",
+    desc:"Petroselinum crispum; flat-leaf (Italian) or curly. Bright, fresh, slightly bitter flavour used as a garnish and in gremolata, chimichurri, tabbouleh, and persillade. One of the most widely used herbs in European cooking.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Rosemary / ローズマリー",      cat:"Herbs & Spices",
+    desc:"Salvia rosmarinus; resinous, pine-like herb used with roasted lamb, chicken, potatoes, and focaccia. Also infused into olive oil and vinegar. Pairs well with lemon and garlic.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Saffron / サフラン",           cat:"Herbs & Spices",
+    desc:"Stigmas of Crocus sativus; the world's most expensive spice by weight. Imparts a golden colour and a complex honeyed, hay-like flavour to bouillabaisse, paella, risotto milanese, and Persian rice.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Shiso / Perilla / しそ",       cat:"Herbs & Spices",
+    desc:"Perilla frutescens; aromatic herb in the mint family with a complex flavour — anise, cinnamon, citrus. Green shiso (ooba) is served with sashimi and used in tempura; red shiso (akashiso) is used to pickle umeboshi.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Star Anise / 八角",            cat:"Herbs & Spices",
+    desc:"Illicium verum; star-shaped spice pod with an intense anise-liquorice flavour. A key ingredient in Chinese five-spice powder and the base of pho broth. Also used to flavour pastis, absinthe, and braised meats.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Tarragon / タラゴン",          cat:"Herbs & Spices",
+    desc:"Artemisia dracunculus; anise-scented herb quintessential in French cuisine — béarnaise sauce, fines herbes, chicken tarragon. French tarragon is the culinary variety; Russian tarragon is harsher.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Thyme / タイム",               cat:"Herbs & Spices",
+    desc:"Thymus vulgaris; earthy, slightly floral herb used in stocks, braises, roasts, and bouquet garni. Lemon thyme has a bright citrus note. Dried thyme is more potent than fresh.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Turmeric / ターメリック",      cat:"Herbs & Spices",
+    desc:"Curcuma longa; vivid yellow rhizome used dried and ground in curries, rice dishes (pilaf, biryani), golden milk, and pickles. Earthy, slightly bitter flavour. The source of curcumin, studied for anti-inflammatory properties.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A rhizome harvested from underground — forbidden in Jain diet." }},
+
+  { name:"Vanilla / バニラ",             cat:"Herbs & Spices",
+    desc:"Vanilla planifolia; seed pods of a tropical orchid; the world's second most expensive spice. Used as whole beans, paste, or extract in desserts, ice cream, custards, and pastry. Madagascar and Tahitian varieties differ in flavour.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"y" },
+    notes:{ kosher:"Pure vanilla extract requires kosher certification; some contain alcohol.", halal:"Vanilla extract contains alcohol; many schools consider it permissible in small amounts used in cooking." }},
+
+  { name:"Wasabi / わさび",              cat:"Herbs & Spices",
+    desc:"Wasabia japonica; pungent rhizome grated into a pale green paste served with sushi and sashimi. True fresh wasabi is rare and expensive — most 'wasabi' outside Japan is coloured horseradish paste.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A rhizome — harvested from underground; forbidden in Jain diet." }},
+
+  { name:"Almonds / アーモンド",         cat:"Nuts & Seeds",
+    desc:"Prunus amygdalus; the world's most widely consumed tree nut. Eaten raw, roasted, as almond milk, flour, butter, or marzipan. Used in tarts, pralines, and financiers. Both sweet and bitter almonds exist; bitter almonds contain trace cyanide.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Cashews / カシューナッツ",     cat:"Nuts & Seeds",
+    desc:"Anacardium occidentale; kidney-shaped tree nut with a mild, buttery flavour. Eaten raw or roasted, used in stir-fries, curries, and as a vegan cream substitute when soaked and blended.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Flaxseeds / 亜麻仁",           cat:"Nuts & Seeds",
+    desc:"Linum usitatissimum; small, nutty seeds used as a nutrition supplement, in crackers, and as an egg substitute when ground (flax egg). High in omega-3 fatty acids. Also pressed into linseed oil.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Hazelnuts / ヘーゼルナッツ",   cat:"Nuts & Seeds",
+    desc:"Corylus avellana; rich, toasty nut used in pralinés, gianduja (hazelnut chocolate), Nutella, and the classic financier. Also found in dukkah and frangipane. Pairs beautifully with chocolate and coffee.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Macadamia Nuts / マカダミアナッツ", cat:"Nuts & Seeds",
+    desc:"Macadamia integrifolia; rich, buttery nuts from Australia and Hawaii. The fattiest of all tree nuts — luxuriously smooth when eaten raw. Used in cookies, white chocolate bark, and Hawaiian poke bowls.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Pecans / ペカン",              cat:"Nuts & Seeds",
+    desc:"Carya illinoinensis; buttery, mildly sweet nuts native to North America. Essential in pecan pie, pralines, and candied nut mixes. Related to hickory nuts; milder and less bitter than walnuts.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Pine Nuts / 松の実",           cat:"Nuts & Seeds",
+    desc:"Seeds of stone pines (Pinus pinea and related species); small, delicate, with a soft, creamy sweetness. The essential nut in classic basil pesto, also used in stuffings, salads, and Middle Eastern kibbeh.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Pistachios / ピスタチオ",      cat:"Nuts & Seeds",
+    desc:"Pistacia vera; vibrantly green tree nut with a subtly sweet, earthy flavour. Used in baklava, mortadella, Middle Eastern desserts, and ice cream. Iranian and Sicilian varieties are especially prized.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Pumpkin Seeds / かぼちゃの種", cat:"Nuts & Seeds",
+    desc:"Pepitas — shelled seeds of Cucurbita spp.; earthy, nutty flavour. Toasted as a snack, sprinkled on salads and soups, or ground into pipián sauce in Mexican cuisine. Rich in magnesium and zinc.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Sesame Seeds / ごま",          cat:"Nuts & Seeds",
+    desc:"Sesamum indicum; tiny seeds with a nutty, slightly sweet flavour intensified by toasting. White and black varieties used to garnish sushi, onigiri, and stir-fries. Ground into tahini and sesame paste. A recognised major allergen in many countries.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Sunflower Seeds / ひまわりの種", cat:"Nuts & Seeds",
+    desc:"Helianthus annuus seeds; mildly nutty, commonly eaten roasted and salted as a snack, or used in salads, granola, and breads. Also pressed into sunflower oil.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Tahini",                      cat:"Nuts & Seeds",
+    desc:"Ground sesame paste; smooth, rich, and bitter-nutty. Essential in hummus, baba ganoush, and halva. Drizzled over falafel, mixed into dressings, and used as a base for various Middle Eastern sauces.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Walnuts / くるみ",             cat:"Nuts & Seeds",
+    desc:"Juglans regia; robust, slightly bitter tree nut used in baking, salads, and sauces (Ligurian walnut sauce). Pairs well with blue cheese, honey, and dark chocolate. Also pressed into walnut oil.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Butter / バター",              cat:"Dairy & Eggs",
+    desc:"Churned cow's cream; 80% fat. Sweet (unsalted) or cultured (European-style, with lactic tang). The foundation of French cuisine — in sauces, pastry, and finishing dishes. Salted butter is a condiment in itself.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"p" },
+    notes:{ kosher:"Butter is dairy — may not be served with meat in a kosher meal.", lent:"Dairy is generally permitted during Lent in the Catholic tradition, though stricter fasting days exclude it." }},
+
+  { name:"Crème Fraîche",               cat:"Dairy & Eggs",
+    desc:"Cultured cream with 30–40% fat; thick, slightly tangy, and stable enough to boil without curdling. Used to finish sauces, top soups, and as a base for dressings. French-style is richer than American sour cream.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"p" },
+    notes:{ kosher:"A dairy product — not to be served with meat." }},
+
+  { name:"Eggs / 卵",                   cat:"Dairy & Eggs",
+    desc:"Chicken eggs (Gallus gallus domesticus); among the most versatile ingredients in cooking. Scrambled, fried, poached, soft-boiled (onsen tamago / ramen egg), used in custards, cakes, omelettes, and mayonnaise.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ jain:"Eggs are generally not consumed in Jain diet — they are considered to have the potential for life.", kosher:"Eggs must be checked for blood spots; commercially produced eggs are generally checked by the producer." }},
+
+  { name:"Heavy Cream / 生クリーム",     cat:"Dairy & Eggs",
+    desc:"Cow's cream with 35–40% fat; whips to soft or firm peaks, enriches sauces and soups, and sets panna cotta and ganache. Japanese namagurīmu is slightly sweeter and preferred for whipped cream on desserts.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"p" },
+    notes:{ kosher:"A dairy product — not to be served with meat." }},
+
+  { name:"Milk / 牛乳",                  cat:"Dairy & Eggs",
+    desc:"Cow's milk; whole, semi-skimmed, or skimmed. The base for butter, cream, yogurt, and cheese. Used in béchamel, custards, ice cream, and baking. Plant-based milks (oat, soy, almond) are common alternatives.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"p" },
+    notes:{ kosher:"A dairy product — not to be served with meat." }},
+
+  { name:"Sour Cream / サワークリーム",  cat:"Dairy & Eggs",
+    desc:"Cream fermented with lactic acid bacteria; thick, tangy, about 20% fat. Used as a topping for baked potatoes, nachos, borscht, and blinis, and in dips and baking.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"p" },
+    notes:{ kosher:"A dairy product — not to be served with meat." }},
+
+  { name:"Yogurt / ヨーグルト",          cat:"Dairy & Eggs",
+    desc:"Milk fermented with bacterial cultures; thick, tangy, and versatile. Eaten plain, with fruit or granola, stirred into raita and tzatziki, used to marinate meat (tandoori chicken), and as a base for labneh (strained yogurt cheese).",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"p" },
+    notes:{ kosher:"A dairy product — not to be served with meat.", halal:"Must be certified halal; some yogurts use gelatin as a thickener." }},
+
+  { name:"Coconut Milk / ココナッツミルク", cat:"Technique & Sauce",
+    desc:"Pressed liquid from grated coconut flesh; rich, creamy, and subtly sweet. The base of Thai and Sri Lankan curries, Vietnamese desserts, and tropical cocktails. Reduced to cream or diluted as coconut water substitute.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Fish Sauce / ナンプラー",      cat:"Technique & Sauce",
+    desc:"Fermented small fish (anchovies, mackerel) aged in salt; intensely savoury and pungent. Essential in Thai, Vietnamese, and Burmese cooking — in pad thai, pho, larb, and dipping sauces. The Southeast Asian equivalent of soy sauce.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Must be from kosher fish species with certification; most commercial brands are not certified." }},
+
+  { name:"Honey / はちみつ",             cat:"Technique & Sauce",
+    desc:"Nectar collected and processed by honey bees; sweet with a complex floral flavour varying by the bees' forage. Used in baking, glazes, dressings, and desserts. Manuka (New Zealand) and acacia (Europe) are prized varieties.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ vegan:"Produced by bees — most vegans avoid it.", jain:"Collection of honey is considered harmful to bees — generally avoided in Jain diet." }},
+
+  { name:"Maple Syrup / メープルシロップ", cat:"Technique & Sauce",
+    desc:"Reduced sap of sugar maple trees (Acer saccharum); sweet with caramel and toffee notes. Used on pancakes and waffles, in glazes, dressings, and as a natural sweetener. Dark syrup has more intense flavour.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Mayonnaise / マヨネーズ",      cat:"Technique & Sauce",
+    desc:"Emulsion of egg yolk and oil; rich, creamy condiment. Japanese kewpie mayo uses rice vinegar and only egg yolks — silkier and slightly sweeter than Western versions. Used in sandwiches, sauces, and as a cooking glaze.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ jain:"Contains eggs — generally not consumed in Jain diet.", kosher:"Requires kosher certification; may not be used with meat if it contains dairy." }},
+
+  { name:"Mirin / みりん",               cat:"Technique & Sauce",
+    desc:"Japanese sweet rice wine; hon-mirin has about 14% alcohol, imparting sweetness and gloss to teriyaki, yakitori glazes, simmered dishes (nimono), and sauces. Aji-mirin is a low-alcohol substitute.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"p", halal:"p", lent:"y" },
+    notes:{ jain:"Hon-mirin contains alcohol; many Jain practitioners avoid it.", kosher:"Requires kosher certification as a fermented product.", halal:"Hon-mirin contains alcohol; low-alcohol aji-mirin is generally considered permissible." }},
+
+  { name:"Miso Paste / 味噌",            cat:"Technique & Sauce",
+    desc:"Fermented soybean paste (with or without rice or barley koji); the foundational seasoning of Japanese cuisine. White (shiro), red (aka), and blended (awase) misos vary in saltiness and depth. Used in soups, marinades, glazes, and dressings.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"y" },
+    notes:{ kosher:"Requires kosher certification as a fermented soy product.", halal:"Some authorities note trace alcohol from fermentation; most consider it permissible." }},
+
+  { name:"Olive Oil / オリーブオイル",   cat:"Technique & Sauce",
+    desc:"Cold-pressed oil from Olea europaea; the dominant cooking fat of Mediterranean cuisine. Extra virgin (EVOO) is pressed without heat and is fruity, peppery, and complex. Used raw for dressing, at moderate heat for sautéing.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Oyster Sauce / オイスターソース", cat:"Technique & Sauce",
+    desc:"Thick, glossy sauce made from reduced oyster extracts, sugar, and salt. Savory-sweet with deep umami. A cornerstone of Cantonese cooking — stir-fries, Chinese broccoli (gai lan), and fried rice.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"p", vegequarian:"p", noRedMeat:"y", jain:"n", kosher:"n", halal:"y", lent:"y" },
+    notes:{ pescatarian:"Contains oyster extract — acceptable to most pescatarians.", kosher:"Oysters are not kosher." }},
+
+  { name:"Ponzu / ポン酢",               cat:"Technique & Sauce",
+    desc:"Citrus-seasoned soy-based sauce; bright, tart, and umami-rich. Made from soy sauce with yuzu, sudachi, or lemon juice. Used as a dipping sauce for hot pot (shabu-shabu), sashimi, grilled fish, and salad dressing.",
+    r:{ vegetarian:"p", vegan:"p", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"p", halal:"p", lent:"y" },
+    notes:{ vegetarian:"Traditional ponzu contains katsuobushi (bonito) in the base; citrus-only versions exist.", vegan:"Same as vegetarian note.", jain:"May contain bonito dashi; citrus-only versions are jain-compatible.", kosher:"Requires kosher certification." }},
+
+  { name:"Rice Vinegar / 米酢",          cat:"Technique & Sauce",
+    desc:"Mild, slightly sweet vinegar fermented from rice; softer and less acidic than Western white wine vinegar. Essential in sushi rice seasoning, Japanese salad dressings, and pickles (tsukemono). Also used in Chinese cooking.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"p", halal:"y", lent:"y" },
+    notes:{ jain:"Fermented product; trace alcohol content.", kosher:"Requires kosher certification as a fermented product." }},
+
+  { name:"Sake / 酒",                    cat:"Technique & Sauce",
+    desc:"Japanese rice wine; about 15% ABV. Drunk warm or chilled, and used extensively in cooking to deglaze pans, tenderise meat, and add depth to sauces, stocks, and marinades. Dry (karakuchi) and sweet (amakuchi) styles exist.",
+    r:{ vegetarian:"y", vegan:"p", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"n", lent:"p" },
+    notes:{ vegan:"Some sake uses isinglass or other animal fining agents; look for certified vegan sake.", kosher:"Requires kosher certification.", halal:"Contains significant alcohol — not halal.", lent:"Alcohol; some Lenten traditions abstain." }},
+
+  { name:"Sesame Oil / ごま油",           cat:"Technique & Sauce",
+    desc:"Oil pressed from toasted (dark) or raw (light) sesame seeds; intensely nutty and aromatic. Dark sesame oil is a finishing oil — added at the end of cooking to ramen, stir-fries, and cold noodles. Used in high-heat frying in East Asia.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Soy Sauce / 醤油",             cat:"Technique & Sauce",
+    desc:"Fermented soybean and wheat sauce; Japan's primary seasoning. Koikuchi (dark) is most common; usukuchi (light) is saltier and used when colour must be preserved; tamari is wheat-free. Used in marinades, dipping sauces, stir-fries, and braises.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"y" },
+    notes:{ kosher:"Requires kosher certification as a fermented product.", halal:"Some authorities note trace alcohol from fermentation; most consider traditionally brewed soy sauce permissible." }},
+
+  { name:"Sugar / 砂糖",                 cat:"Technique & Sauce",
+    desc:"Sucrose refined from sugar cane or sugar beet. The universal sweetener — granulated, caster, icing/powdered, raw (demerara, muscovado), and brown (with molasses). Heated to caramel for toffees, crème brûlée, and glazes.",
+    r:{ vegetarian:"y", vegan:"p", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{ vegan:"Some refined white sugar is filtered through bone char; unrefined, beet, or certified vegan sugars avoid this." }},
+
+  { name:"Vegetable Oil / サラダ油",     cat:"Technique & Sauce",
+    desc:"Neutral, refined oil from soybeans, rapeseed (canola), sunflower, or corn; high smoke point makes it suitable for frying and baking. Japanese sarada-yu (salad oil) is the standard all-purpose cooking oil.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Requires kosher certification as processing may involve shared equipment." }},
+
+  { name:"Vinegar / 酢",                 cat:"Technique & Sauce",
+    desc:"Acetic acid produced by fermenting alcohol; used to add brightness and acidity to dressings, pickles, sauces, and reductions. White wine, red wine, sherry, balsamic, and apple cider are common varieties.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"p", halal:"y", lent:"y" },
+    notes:{ jain:"Fermented product; trace alcohol.", kosher:"Wine vinegars require kosher certification (grape product); other vinegars generally require certification." }},
+
+  { name:"White Wine / 白ワイン",        cat:"Technique & Sauce",
+    desc:"Fermented grape juice; used in cooking to deglaze pans, braise fish and shellfish, make beurre blanc and velouté, and poach fruit. Dry white wine (Muscadet, Chablis, Sauvignon Blanc) is the culinary standard.",
+    r:{ vegetarian:"p", vegan:"p", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"n", lent:"p" },
+    notes:{ vegetarian:"Most wine is fined with animal products (isinglass, gelatin, casein); vegan-certified wine exists.", kosher:"Must be certified kosher (mevushal for non-Jewish handling).", halal:"Contains alcohol — not halal." }},
+
+  { name:"Worcestershire Sauce",        cat:"Technique & Sauce",
+    desc:"Fermented condiment with tamarind, molasses, anchovies, garlic, onion, and vinegar; developed in England. Used in Bloody Marys, Caesar salads, marinades, and to deepen stews and gravies.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"y" },
+    notes:{ kosher:"Contains anchovies (check for kosher certification); also contains malt vinegar.", halal:"Most brands use halal-certified anchovies; check for alcohol content." }},
+
+  { name:"Natto / 納豆",                 cat:"Vegetarian / Vegan",
+    desc:"Fermented soybeans (Bacillus subtilis); a Japanese breakfast staple with a sticky, stringy texture and pungent, ammonia-like smell. Served over rice with soy sauce, mustard, and green onion. Rich in vitamin K2 and protein.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"y" },
+    notes:{ kosher:"Fermented soy — requires kosher certification.", halal:"Fermented product; generally considered permissible." }},
+
+  { name:"Tempeh",                      cat:"Vegetarian / Vegan",
+    desc:"Fermented soybean cake (Rhizopus mould); firm, nutty, and slightly earthy. Indonesian in origin; a high-protein meat substitute. Sliced and pan-fried, crumbled into stir-fries, or marinated and grilled.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"y" },
+    notes:{ kosher:"Fermented soy; requires kosher certification.", halal:"Fermented product; generally considered permissible." }},
+
+  { name:"Tofu / 豆腐",                  cat:"Vegetarian / Vegan",
+    desc:"Coagulated soy milk pressed into blocks; silken (smooth, custard-like), soft, firm, or extra-firm. Silken tofu is used in miso soup, desserts, and dressings; firm tofu is pan-fried, grilled, or braised in agedashi or mapo doufu.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
 ];
 
 const INGREDIENTS = [
@@ -1887,6 +2432,131 @@ const CONTAINS_DATA = {
   "Peanuts / 落花生":               { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"y", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
   "Peanut Oil":                     { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"p", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"p" },
   "Wheat Flour / 小麦粉":            { gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Asparagus / アスパラガス":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Avocado":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Bamboo Shoots / 筍":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Bean Sprouts / もやし":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Bell Pepper / ピーマン":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Bok Choy / チンゲン菜":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Broccoli / ブロッコリー":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Brussels Sprouts / 芽キャベツ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cabbage / キャベツ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Carrot / 人参":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Celery / セロリ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Corn / Sweet Corn / トウモロコシ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cucumber / きゅうり":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Daikon / 大根":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Eggplant / Aubergine / ナス":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Fennel / フィノッキオ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Green Beans / いんげん":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Kale / ケール":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Leek / ポロネギ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Lettuce / レタス":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Lotus Root / 蓮根":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Peas / グリーンピース":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Pumpkin / Kabocha / かぼちゃ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Spinach / ほうれん草":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Sweet Potato / サツマイモ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Taro / 里芋":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Tomato / トマト":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Turnip / カブ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Zucchini / Courgette / ズッキーニ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Apple / りんご":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Banana / バナナ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Blueberry / ブルーベリー":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cherry / さくらんぼ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Coconut / ヤシの実":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Fig / イチジク":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Grape / ぶどう":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Lemon / レモン":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Lime / ライム":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Mango / マンゴー":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Orange / オレンジ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Peach / 桃":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Pear / 洋梨":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Persimmon / 柿":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Pineapple / パイナップル":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Plum / Ume / 梅":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Raspberry / ラズベリー":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Strawberry / イチゴ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Watermelon / スイカ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Yuzu / ゆず":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Barley / 大麦":{ gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Bread / パン":{ gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Breadcrumbs / Panko / パン粉":{ gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Brown Rice / 玄米":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Buckwheat / 蕎麦粉":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Couscous / クスクス":{ gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Oats / 燕麦":{ gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Quinoa / キヌア":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Rye / ライ麦":{ gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "White Rice / 白米":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Basil / バジル":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Bay Leaf / ローリエ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Black Pepper / 黒胡椒":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cardamom / カルダモン":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Chili Pepper / 唐辛子":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cilantro / Coriander Leaf / コリアンダー":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cinnamon / シナモン":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cumin / クミン":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Dill / ディル":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Ginger / 生姜":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Lemongrass / レモングラス":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Mint / ミント":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Nutmeg / ナツメグ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Paprika / パプリカ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Parsley / パセリ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Rosemary / ローズマリー":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Saffron / サフラン":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Shiso / Perilla / しそ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Star Anise / 八角":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Tarragon / タラゴン":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Thyme / タイム":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Turmeric / ターメリック":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Vanilla / バニラ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Wasabi / わさび":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Almonds / アーモンド":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"y", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cashews / カシューナッツ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"y", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Flaxseeds / 亜麻仁":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Hazelnuts / ヘーゼルナッツ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"y", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Macadamia Nuts / マカダミアナッツ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"y", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Pecans / ペカン":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"y", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Pine Nuts / 松の実":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"y", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Pistachios / ピスタチオ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"y", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Pumpkin Seeds / かぼちゃの種":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Sesame Seeds / ごま":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Sunflower Seeds / ひまわりの種":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Tahini":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Walnuts / くるみ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"y", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Butter / バター":{ gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Crème Fraîche":{ gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Eggs / 卵":{ gluten:"n", dairy:"n", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Heavy Cream / 生クリーム":{ gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Milk / 牛乳":{ gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Sour Cream / サワークリーム":{ gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Yogurt / ヨーグルト":{ gluten:"n", dairy:"y", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Coconut Milk / ココナッツミルク":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Fish Sauce / ナンプラー":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Honey / はちみつ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Maple Syrup / メープルシロップ":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Mayonnaise / マヨネーズ":{ gluten:"n", dairy:"n", eggs:"y", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Mirin / みりん":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Miso Paste / 味噌":{ gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Olive Oil / オリーブオイル":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Oyster Sauce / オイスターソース":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"y", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Ponzu / ポン酢":{ gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"p", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Rice Vinegar / 米酢":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Sake / 酒":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Sesame Oil / ごま油":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Soy Sauce / 醤油":{ gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Sugar / 砂糖":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Vegetable Oil / サラダ油":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Vinegar / 酢":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "White Wine / 白ワイン":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"y", legumes:"n" },
+  "Worcestershire Sauce":{ gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Natto / 納豆":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Tempeh":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Tofu / 豆腐":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
 };
 FOODS.forEach(f => { f.c = CONTAINS_DATA[f.name] || {}; });
 
