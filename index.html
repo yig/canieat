@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Can I Eat It? — Food &amp; Dietary Restriction Compatibility</title>
+<title>Can I Eat ___? — Food &amp; Dietary Restriction Compatibility</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -50,32 +50,31 @@ body {
   font-weight: 900;
   letter-spacing: -1px;
   color: var(--accent);
-  margin-bottom: 2px;
-  user-select: none;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 .logo em { color: #fff; font-style: normal; }
 
-.tagline { color: var(--dim); font-size: 13px; margin-bottom: 14px; }
+.tagline { color: var(--dim); font-size: 13px; margin-top: -10px; margin-bottom: 0; }
 
-.search-wrap { position: relative; max-width: 580px; }
-.search-wrap svg {
-  position: absolute; left: 12px; top: 50%;
-  transform: translateY(-50%);
-  width: 18px; height: 18px; fill: #666; pointer-events: none;
-}
 #searchInput {
-  width: 100%;
-  padding: 11px 14px 11px 40px;
-  font-size: 15px;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.13);
-  border-radius: 7px;
+  font-size: 30px;
+  font-weight: 900;
+  font-family: inherit;
+  letter-spacing: -1px;
   color: #fff;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid var(--accent);
   outline: none;
-  transition: border-color .18s, background .18s;
+  width: 240px;
+  padding: 0 4px 2px;
 }
-#searchInput:focus { border-color: var(--accent); background: rgba(255,255,255,0.1); }
-#searchInput::placeholder { color: #555; }
+#searchInput::placeholder { color: #3a3a3a; }
+#searchInput:focus { border-bottom-color: #7dd87d; }
 
 /* ── STATS / FILTERS ── */
 .bar {
@@ -139,9 +138,9 @@ thead th:not(.name-th) {
   display: flex; flex-direction: column;
   align-items: center; justify-content: flex-end;
   padding: 8px 4px 6px;
-  height: 100px;
+  height: 160px;
 }
-.name-th .th-inner { align-items: flex-start; padding: 8px 12px; justify-content: flex-end; height: 100px; }
+.name-th .th-inner { align-items: flex-start; padding: 8px 12px; justify-content: flex-end; height: 160px; }
 .th-icon { font-size: 16px; margin-bottom: 4px; line-height: 1; }
 .th-label {
   font-size: 10px; font-weight: 700; letter-spacing: .5px;
@@ -256,12 +255,8 @@ td.sc {
 
 <header class="hdr">
   <div class="hdr-inner">
-    <div class="logo">can i <em>eat</em> it?</div>
+    <div class="logo">can i <em>eat</em> <input id="searchInput" type="text" placeholder="______" autocomplete="off" spellcheck="false">?</div>
     <p class="tagline">Dietary restriction compatibility for dishes you might encounter at a restaurant</p>
-    <div class="search-wrap">
-      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" stroke="#666" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-      <input id="searchInput" type="text" placeholder="Search a dish… foie gras, escargot, uni, wagyu…" autocomplete="off" spellcheck="false">
-    </div>
   </div>
 </header>
 
@@ -822,7 +817,7 @@ function buildHead() {
   RESTRICTIONS.forEach(r => {
     const th = document.createElement("th");
     th.title = r.label + ": " + r.def;
-    th.innerHTML = `<div class="th-inner"><span class="th-icon">${r.icon}</span><span class="th-label">${r.abbr}</span></div>`;
+    th.innerHTML = `<div class="th-inner"><span class="th-icon">${r.icon}</span><span class="th-label">${r.label}</span></div>`;
     tr.appendChild(th);
   });
   document.getElementById("thead").appendChild(tr);
