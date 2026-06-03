@@ -2645,9 +2645,16 @@ function render(query) {
   let count = 0;
   let evenIdx = 0;
 
-  const sorted = [...FOODS].sort((a, b) => a.name.localeCompare(b.name));
+  const nameMatch = f => f.name.toLowerCase().includes(q) || f.cat.toLowerCase().includes(q);
+  const sorted = [...FOODS].sort((a, b) => {
+    if (q) {
+      const aNm = nameMatch(a), bNm = nameMatch(b);
+      if (aNm !== bNm) return aNm ? -1 : 1;
+    }
+    return a.name.localeCompare(b.name);
+  });
   sorted.forEach(food => {
-    const matchQ = !q || food.name.toLowerCase().includes(q) || food.cat.toLowerCase().includes(q) || food.desc.toLowerCase().includes(q);
+    const matchQ = !q || nameMatch(food) || food.desc.toLowerCase().includes(q);
     const matchF = activeFilter === "All" || food.cat === activeFilter;
     if (matchQ && matchF) {
       tbody.appendChild(buildRow(food, evenIdx % 2 === 1, q));
