@@ -244,6 +244,21 @@ td.sc {
 .gi-text strong { font-size: 13px; color: #ddd; display: block; margin-bottom: 2px; }
 .gi-text span { font-size: 12px; color: var(--dim); }
 
+/* ── MODE TOGGLE ── */
+.mode-toggle { display: flex; gap: 4px; margin-left: auto; }
+.mbtn {
+  padding: 3px 12px; border-radius: 20px;
+  border: 1px solid var(--border); background: transparent;
+  color: var(--dim); font-size: 12px; cursor: pointer;
+  font-family: inherit; transition: all .15s; white-space: nowrap;
+}
+.mbtn:hover { border-color: var(--accent); color: var(--accent); }
+.mbtn.on { background: var(--accentDim); border-color: var(--accent); color: #fff; }
+
+/* In contains mode, "n" (absent) cells are neutral dark, not alarming red */
+.mode-contains .n { background: #242424; }
+.mode-contains .n .ci { color: #484848; }
+
 /* ── DISCLAIMER ── */
 .disc {
   text-align: center; font-size: 12px; color: #666;
@@ -264,7 +279,11 @@ td.sc {
 <div class="bar">
   <span>Showing <strong id="resultCount">0</strong> dishes</span>
   <span style="color:#444">•</span>
-  <span>9 dietary restrictions</span>
+  <span id="colCount">9 dietary restrictions</span>
+  <div class="mode-toggle">
+    <button class="mbtn on" id="modeDiet">I eat…</button>
+    <button class="mbtn" id="modeContains">Contains</button>
+  </div>
 </div>
 
 <div class="filters" id="filters"></div>
@@ -283,10 +302,10 @@ td.sc {
 <div class="legend">
   <div class="section-title">Legend</div>
   <div class="legend-row">
-    <div class="lg-item"><div class="sw" style="background:var(--yes);color:var(--yestxt)">✓</div><span>Generally compatible</span></div>
-    <div class="lg-item"><div class="sw" style="background:var(--no);color:var(--notxt)">✗</div><span>Not compatible</span></div>
-    <div class="lg-item"><div class="sw" style="background:var(--partial);color:var(--ptxt)">~</div><span>Depends on preparation or certification</span></div>
-    <div class="lg-item"><div class="sw" style="background:var(--unk);color:var(--unktxt)">?</div><span>Varies by tradition or scholarly opinion</span></div>
+    <div class="lg-item"><div class="sw" style="background:var(--yes);color:var(--yestxt)">✓</div><span id="lgY">Generally compatible</span></div>
+    <div class="lg-item"><div class="sw" style="background:var(--no);color:var(--notxt)">✗</div><span id="lgN">Not compatible</span></div>
+    <div class="lg-item"><div class="sw" style="background:var(--partial);color:var(--ptxt)">~</div><span id="lgP">Depends on preparation or certification</span></div>
+    <div class="lg-item"><div class="sw" style="background:var(--unk);color:var(--unktxt)">?</div><span id="lgU">Varies by tradition or scholarly opinion</span></div>
   </div>
 </div>
 
@@ -1249,9 +1268,51 @@ const FOODS = [
     notes:{ kosher:"Madeira wine (must be kosher) and cock's combs require certification; rarely prepared kosher.", halal:"Madeira wine makes it non-halal in traditional form." }},
 ];
 
+const INGREDIENTS = [
+  { id:"gluten",    label:"Gluten",    icon:"🌾", def:"Contains wheat, barley, rye, or other gluten sources — bread, pasta, pastry, soy sauce, most thickened sauces." },
+  { id:"dairy",     label:"Dairy",     icon:"🥛", def:"Contains milk, cream, butter, cheese, crème fraîche, hollandaise, beurre blanc, or other dairy products." },
+  { id:"eggs",      label:"Eggs",      icon:"🥚", def:"Contains chicken eggs or egg-derived products: mayonnaise, hollandaise, aioli, many fresh pastas." },
+  { id:"treenuts",  label:"Tree Nuts", icon:"🌰", def:"Contains almonds, walnuts, cashews, hazelnuts, pine nuts, pistachios, pecans, or other tree nuts." },
+  { id:"peanuts",   label:"Peanuts",   icon:"🥜", def:"Contains peanuts or peanut-derived products. Note: peanuts are legumes, not tree nuts." },
+  { id:"shellfish", label:"Shellfish", icon:"🦞", def:"Contains crustaceans (shrimp, crab, lobster) or molluscs (clams, oysters, scallops, mussels, squid, octopus)." },
+  { id:"fish",      label:"Fish",      icon:"🐟", def:"Contains finfish: salmon, tuna, cod, halibut, sole, anchovy, sardine, sea bass, mackerel, monkfish, etc." },
+  { id:"chicken",   label:"Chicken",   icon:"🍗", def:"Contains chicken or other poultry: turkey, duck, goose, guinea fowl, squab, pigeon." },
+  { id:"beef",      label:"Beef",      icon:"🥩", def:"Contains beef or veal." },
+  { id:"pork",      label:"Pork",      icon:"🐷", def:"Contains pork, ham, bacon, pancetta, lardons, prosciutto, salami, or other pork-derived ingredients." },
+  { id:"lamb",      label:"Lamb",      icon:"🐑", def:"Contains lamb or mutton." },
+  { id:"game",      label:"Game",      icon:"🦌", def:"Contains venison, wild boar, rabbit, pheasant, quail, partridge, grouse, woodcock, ortolan, snipe, or other game." },
+  { id:"alcohol",   label:"Alcohol",   icon:"🍷", def:"Contains wine, beer, spirits, or other alcohol used in cooking: braising liquids, reductions, flambéed dishes, marinades." },
+];
+
 // ── RENDER ────────────────────────────────────────────────────────────────
 const ICONS = { y:"✓", n:"✗", p:"~", u:"?" };
-const LABELS = { y:"Compatible", n:"Not compatible", p:"Depends on preparation", u:"Varies by tradition" };
+
+let mode = "diet";
+
+function switchMode(newMode) {
+  mode = newMode;
+  document.getElementById("modeDiet").classList.toggle("on", mode === "diet");
+  document.getElementById("modeContains").classList.toggle("on", mode === "contains");
+  document.getElementById("colCount").textContent = mode === "diet"
+    ? `${RESTRICTIONS.length} dietary restrictions`
+    : `${INGREDIENTS.length} ingredients`;
+  if (mode === "diet") {
+    document.getElementById("lgY").textContent = "Generally compatible";
+    document.getElementById("lgN").textContent = "Not compatible";
+    document.getElementById("lgP").textContent = "Depends on preparation or certification";
+    document.getElementById("lgU").textContent = "Varies by tradition or scholarly opinion";
+  } else {
+    document.getElementById("lgY").textContent = "Contains this ingredient";
+    document.getElementById("lgN").textContent = "Does not contain";
+    document.getElementById("lgP").textContent = "May contain (depends on preparation)";
+    document.getElementById("lgU").textContent = "Unknown";
+  }
+  document.getElementById("tbl").classList.toggle("mode-contains", mode === "contains");
+  document.getElementById("thead").innerHTML = "";
+  buildHead();
+  buildGloss();
+  render(document.getElementById("searchInput").value);
+}
 
 function buildHead() {
   const tr = document.createElement("tr");
@@ -1259,7 +1320,8 @@ function buildHead() {
   th0.className = "name-th";
   th0.innerHTML = `<div class="th-inner"><span class="th-label">Dish</span></div>`;
   tr.appendChild(th0);
-  RESTRICTIONS.forEach(r => {
+  const cols = mode === "diet" ? RESTRICTIONS : INGREDIENTS;
+  cols.forEach(r => {
     const th = document.createElement("th");
     th.title = r.label + ": " + r.def;
     th.innerHTML = `<div class="th-inner"><span class="th-icon">${r.icon}</span><span class="th-label">${r.label}</span></div>`;
@@ -1276,12 +1338,16 @@ function buildRow(food, even) {
   if (even) td0.style.background = "var(--bg2)";
   tr.appendChild(td0);
 
-  RESTRICTIONS.forEach(r => {
-    const s = food.r[r.id] || "u";
+  const cols = mode === "diet" ? RESTRICTIONS : INGREDIENTS;
+  const data = mode === "diet" ? food.r : (food.c || {});
+  const dataNotes = mode === "diet" ? food.notes : (food.cn || {});
+
+  cols.forEach(r => {
+    const s = data[r.id] || "u";
     const td = document.createElement("td");
     td.className = `sc ${s}`;
     td.innerHTML = `<div class="ci">${ICONS[s]}</div>`;
-    td.addEventListener("mouseenter", e => showTip(e, food, r, s));
+    td.addEventListener("mouseenter", e => showTip(e, food, r, s, dataNotes));
     td.addEventListener("mousemove", moveTip);
     td.addEventListener("mouseleave", hideTip);
     tr.appendChild(td);
@@ -1343,7 +1409,11 @@ function setFilter(name, el) {
 // Glossary
 function buildGloss() {
   const g = document.getElementById("glossGrid");
-  RESTRICTIONS.forEach(r => {
+  g.innerHTML = "";
+  const cols = mode === "diet" ? RESTRICTIONS : INGREDIENTS;
+  document.querySelector(".gloss .section-title").textContent =
+    mode === "diet" ? "Dietary Restriction Definitions" : "Ingredient Definitions";
+  cols.forEach(r => {
     g.innerHTML += `<div class="gi"><div class="gi-icon">${r.icon}</div><div class="gi-text"><strong>${r.label}</strong><span>${r.def}</span></div></div>`;
   });
 }
@@ -1352,15 +1422,20 @@ function buildGloss() {
 const tip = document.getElementById("tip");
 let tipX = 0, tipY = 0;
 
-function showTip(e, food, restr, s) {
-  const note = (food.notes && food.notes[restr.id]) || "";
+function showTip(e, food, col, s, notes) {
+  const note = (notes && notes[col.id]) || "";
+  const modeLabels = mode === "diet"
+    ? { y:"Compatible", n:"Not compatible", p:"Depends on preparation", u:"Varies by tradition" }
+    : { y:"Contains", n:"Does not contain", p:"May contain", u:"Unknown" };
+  const fallback = mode === "diet"
+    ? { y:"Generally compatible with this dietary restriction.", n:"Not compatible with this dietary restriction." }
+    : { y:`This dish contains ${col.label.toLowerCase()}.`, n:`This dish does not contain ${col.label.toLowerCase()}.` };
   tip.innerHTML = `
     <div class="tip-food">${food.name}</div>
-    <div class="tip-restr">${restr.icon} ${restr.label}</div>
-    <span class="tip-badge ${s}">${LABELS[s]}</span>
+    <div class="tip-restr">${col.icon} ${col.label}</div>
+    <span class="tip-badge ${s}">${modeLabels[s]}</span>
     ${note ? `<div class="tip-note">${note}</div>` : ""}
-    ${!note && s === "y" ? `<div class="tip-note" style="color:#555">Generally compatible with this dietary restriction.</div>` : ""}
-    ${!note && s === "n" ? `<div class="tip-note" style="color:#555">Not compatible with this dietary restriction.</div>` : ""}
+    ${!note && (s === "y" || s === "n") ? `<div class="tip-note" style="color:#555">${fallback[s]}</div>` : ""}
   `;
   tipX = e.clientX; tipY = e.clientY;
   tip.className = "show";
@@ -1389,6 +1464,9 @@ document.getElementById("searchInput").addEventListener("input", e => {
   clearTimeout(searchTimer);
   searchTimer = setTimeout(() => render(e.target.value), 80);
 });
+
+document.getElementById("modeDiet").addEventListener("click", () => switchMode("diet"));
+document.getElementById("modeContains").addEventListener("click", () => switchMode("contains"));
 
 // Init
 buildHead();
