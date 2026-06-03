@@ -370,7 +370,7 @@ const RESTRICTIONS = [
 
 const CATS = [
   "Beef & Veal","Lamb & Game","Pork & Charcuterie","Poultry",
-  "Shellfish","Fish","Vegetarian / Vegan","Soup & Broth","Dessert","Cheese","Technique & Sauce","Other"
+  "Shellfish","Fish","Vegetarian / Vegan","Vegetables","Mushroom","Soup & Broth","Dessert","Cheese","Technique & Sauce","Other"
 ];
 
 // Status: y=yes, n=no, p=partial/depends, u=unknown/varies
@@ -1546,6 +1546,62 @@ const FOODS = [
     r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
     notes:{ kosher:"Wild mushroom; must be checked for insects." }},
 
+  { name:"Garlic / にんにく",         cat:"Vegetables",
+    desc:"Allium sativum; the foundational aromatic of countless cuisines — French, Italian, Spanish, Chinese, Japanese. Used raw, sautéed, roasted whole, or fermented as black garlic.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Alliums — garlic, onion, shallot, leek, and relatives — are forbidden in Jain diet as harvesting uproots the entire plant." }},
+
+  { name:"Green Onion / Scallion / ネギ", cat:"Vegetables",
+    desc:"Allium fistulosum (Japanese negi) or young Allium cepa. Used raw as a garnish on ramen, miso soup, sushi, and yakitori; also grilled whole or used as a braising aromatic.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Alliums are forbidden in Jain diet." }},
+
+  { name:"Onion / 玉ねぎ",             cat:"Vegetables",
+    desc:"Allium cepa; one of the most widely used aromatics in the world. Pungent raw, sweet when caramelized. Used as a base for stocks, sauces, and braises in virtually every cuisine.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Alliums are forbidden in Jain diet." }},
+
+  { name:"Potato / じゃがいも",         cat:"Vegetables",
+    desc:"Solanum tuberosum; the world's fourth-largest food crop. Boiled, roasted, fried, mashed, or used in gratins and soups. Starchy and versatile; a staple of European, Japanese, and Andean cuisines.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A tuber — uprooting harms the plant and soil organisms; forbidden in Jain diet." }},
+
+  { name:"Shallot / Echalote",          cat:"Vegetables",
+    desc:"Allium ascalonicum; milder and sweeter than onion with a hint of garlic. Essential in French cooking — vinaigrettes, beurre blanc, pan sauces, and mignonette.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Alliums are forbidden in Jain diet." }},
+
+  { name:"Black Beans",                cat:"Vegetarian / Vegan",
+    desc:"Phaseolus vulgaris; staple of Latin American and Caribbean cuisines. Rich, earthy flavour; used in rice dishes, soups, tacos, and burritos. High in protein and fibre.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Chickpeas / Garbanzo Beans", cat:"Vegetarian / Vegan",
+    desc:"Cicer arietinum; one of the world's most important legumes. Used whole in stews and salads, or ground into hummus, falafel, and chickpea flour (socca, panisse). Also roasted as a snack.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Edamame / 枝豆",             cat:"Vegetarian / Vegan",
+    desc:"Young soybeans (Glycine max) harvested while still green; boiled or steamed in the pod and salted. A classic Japanese snack and izakaya staple, and popular worldwide as a protein-rich appetiser.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Lentils",                    cat:"Vegetarian / Vegan",
+    desc:"Lens culinaris; one of humanity's oldest cultivated crops. Red, green, brown, and black (beluga) varieties. Used in dal, soups, salads, and as a meat extender. A protein-rich staple across South Asia, the Middle East, and Europe.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" }},
+
+  { name:"Peanuts / 落花生",            cat:"Vegetarian / Vegan",
+    desc:"Groundnuts (Arachis hypogaea); despite the name, a legume not a tree nut. Eaten roasted, raw, or as peanut butter; used in West African, Southeast Asian, and American cuisines. One of the most common food allergens.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Peanuts ripen underground; many Jain traditions avoid them as harvesting requires uprooting the plant." }},
+
+  { name:"Peanut Oil",                 cat:"Technique & Sauce",
+    desc:"Oil pressed from peanuts; high smoke point makes it ideal for deep-frying (tempura, french frites). Highly refined peanut oil has most protein removed and is usually tolerated by peanut-allergic individuals; cold-pressed retains both flavour and allergens.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"p", kosher:"p", halal:"y", lent:"y" },
+    notes:{ jain:"Peanuts grow underground; some Jain traditions avoid peanut-derived products.", kosher:"Generally considered kosher; Ashkenazi tradition restricts it on Passover as kitniyot." }},
+
+  { name:"Wheat Flour / 小麦粉",        cat:"Technique & Sauce",
+    desc:"Milled wheat grain; the foundation of bread, pasta, pastry, cakes, tempura batter, and roux-based sauces. Contains gluten. Protein content varies by type: cake (low), all-purpose (medium), bread and 00 (high).",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Standard wheat flour is kosher; chametz (leavened wheat products) are forbidden on Passover — special certified matzo meal or flour required." }},
+
 ];
 
 const INGREDIENTS = [
@@ -1819,6 +1875,18 @@ const CONTAINS_DATA = {
   "Pioppini / Poplar Mushroom":    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
   "Blewit / Pied Bleu":            { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
   "Bay Bolete":                    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Garlic / にんにく":              { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Green Onion / Scallion / ネギ":  { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Onion / 玉ねぎ":                 { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Potato / じゃがいも":             { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Shallot / Echalote":             { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Black Beans":                    { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Chickpeas / Garbanzo Beans":     { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Edamame / 枝豆":                 { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Lentils":                        { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Peanuts / 落花生":               { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"y", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Peanut Oil":                     { gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"p", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"p" },
+  "Wheat Flour / 小麦粉":            { gluten:"y", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
 };
 FOODS.forEach(f => { f.c = CONTAINS_DATA[f.name] || {}; });
 
