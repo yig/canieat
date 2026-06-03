@@ -329,7 +329,7 @@ const RESTRICTIONS = [
 
 const CATS = [
   "Beef & Veal","Lamb & Game","Pork & Charcuterie","Poultry",
-  "Shellfish","Fish","Vegetarian / Vegan","Soup & Broth","Dessert","Other"
+  "Shellfish","Fish","Vegetarian / Vegan","Soup & Broth","Dessert","Cheese","Technique & Sauce","Other"
 ];
 
 // Status: y=yes, n=no, p=partial/depends, u=unknown/varies
@@ -969,6 +969,284 @@ const FOODS = [
     desc:"Tightly coiled tips of young ostrich fern fronds; fleeting spring season, nutty and slightly grassy.",
     r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
     notes:{} },
+
+  // ─── OFFAL (additional) ──────────────────────────────────────────────────
+  { name:"Ris de Veau",         cat:"Beef & Veal",
+    desc:"Veal sweetbreads — specifically the thymus gland; crispy outside, creamy within. The most prized form of sweetbreads.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Thymus requires complex expert preparation (nikur) to be kosher; extremely rare in restaurants.", halal:"Halal if from a properly slaughtered animal." }},
+
+  { name:"Fraise de Veau",      cat:"Beef & Veal",
+    desc:"Veal mesentery (the frilled membrane of the intestine), blanched and pan-fried; a traditional French bistro off-cut.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Intestinal membrane — insurmountable kashrus difficulties in practice.", halal:"Permissible if from a properly slaughtered animal and thoroughly cleaned." }},
+
+  // ─── GAME (additional) ───────────────────────────────────────────────────
+  { name:"Snipe",               cat:"Lamb & Game",
+    desc:"Small wading game bird; extraordinarily difficult to shoot, hence 'sniper'. Traditionally roasted undrawn like woodcock.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Wild-shot bird — cannot be slaughtered by shechita.", halal:"Killed by shooting, not zabiha slaughter." }},
+
+  { name:"Ortolan",             cat:"Lamb & Game",
+    desc:"Tiny songbird once eaten whole in France, covered with a napkin; now a protected species. Serving it is illegal in France and most of Europe.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Not a traditionally recognised kosher bird; wild-caught.", halal:"Wild-caught, not zabiha.", lent:"A bird — warm-blooded, not permitted on Lenten Fridays." }},
+
+  { name:"Sanglier / Wild Boar",cat:"Lamb & Game",
+    desc:"Wild boar, roasted or braised; darker and more flavourful than farmed pork. Common in autumn on French and Italian menus.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Wild boar is the same species as the domestic pig (Sus scrofa) — not kosher.", halal:"Pork family — not halal." }},
+
+  { name:"Perdrix / Partridge", cat:"Lamb & Game",
+    desc:"Small European game bird, red-legged or grey; milder than grouse, often roasted with cabbage and lardons.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Wild-shot partridge is not kosher; farm-raised partridge with shechita slaughter is possible but rare.", halal:"Farm-raised partridge with zabiha slaughter can be halal; wild-shot is not." }},
+
+  // ─── PORK & CHARCUTERIE (additional) ─────────────────────────────────────
+  { name:"Coppa / Capicola",    cat:"Pork & Charcuterie",
+    desc:"Italian cured pork collar or neck; lightly spiced, marble-patterned slices. Named capicola in North America.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Finocchiona",         cat:"Pork & Charcuterie",
+    desc:"Tuscan pork salami with fennel seeds and sometimes red wine; soft and aromatic.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Lomo Ibérico",        cat:"Pork & Charcuterie",
+    desc:"Cured loin of Iberian black-footed pig; leaner than ham but equally intense, with a sweet, paprika-laced flavour.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Cecina",              cat:"Pork & Charcuterie",
+    desc:"Air-dried salted beef from León, Spain; deeply flavoured, served thinly sliced with olive oil — Spain's answer to bresaola.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Beef — kosher if from a certified source.", halal:"Halal with certified zabiha beef." }},
+
+  { name:"Speck",               cat:"Pork & Charcuterie",
+    desc:"South Tyrolean smoked cured ham; lighter than prosciutto with a distinctive cold-smoke and mountain-herb flavour.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Lonza",               cat:"Pork & Charcuterie",
+    desc:"Cured pork loin from central Italy; lean and delicately flavoured, similar to lomo ibérico.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  // ─── FISH (additional) ───────────────────────────────────────────────────
+  { name:"Loup de Mer",         cat:"Fish",
+    desc:"French name for European sea bass — the same fish as branzino. Roasted whole with fennel and pastis on the French Riviera.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"European sea bass has fins and scales — kosher. Same fish as branzino." }},
+
+  { name:"Omble Chevalier",     cat:"Fish",
+    desc:"Alpine char from deep mountain lakes; closely related to Arctic char but with exceptionally delicate, pink flesh. A Swiss and Savoyard speciality.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Char has fins and scales — kosher." }},
+
+  { name:"Grondin / Gurnard",   cat:"Fish",
+    desc:"Armoured sea fish that 'grunts' when caught; firm, sweet, affordable white flesh — a staple of bouillabaisse.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Gurnard has fins and scales — kosher." }},
+
+  { name:"Pageot / Dorade",     cat:"Fish",
+    desc:"Sea bream; a large family of Mediterranean fish — dorade royale (gilt-head), pagre, daurade — all with sweet white flesh.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Sea bream has fins and scales — kosher." }},
+
+  { name:"O-Toro",              cat:"Fish",
+    desc:"The fattiest cut of bluefin tuna belly — the ventral section nearest the head; buttery, melting texture. The most prized sushi cut.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Bluefin tuna has fins and scales — kosher." }},
+
+  { name:"Chu-Toro",            cat:"Fish",
+    desc:"Medium-fatty bluefin tuna belly; richer than lean akami but less fatty than o-toro. Often considered the ideal balance.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Bluefin tuna has fins and scales — kosher." }},
+
+  { name:"Katsuobushi",         cat:"Fish",
+    desc:"Dried, fermented, and smoked skipjack tuna shaved into thin flakes; the base of dashi broth and a ubiquitous Japanese umami garnish.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Skipjack tuna is a kosher fish; the fermentation process requires certification.", jain:"Fish product — not permitted in Jain diet." }},
+
+  { name:"Kombu Dashi",         cat:"Fish",
+    desc:"Vegetarian Japanese broth made solely from dried kombu seaweed; lighter than bonito dashi, with a pure oceanic umami.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Kombu itself is kosher (seaweed); must be checked for insects. Requires certification.", jain:"Seaweed is an aquatic plant — generally considered acceptable in Jain diet." }},
+
+  { name:"Beluga Caviar",       cat:"Fish",
+    desc:"Roe of the beluga sturgeon (Huso huso); the largest and most expensive caviar, pale grey and intensely creamy. Now mostly farmed due to near-extinction.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"y", lent:"y" },
+    notes:{ kosher:"Beluga sturgeon lacks the type of scales required by kashrut — not kosher according to Ashkenazi authorities. Some Sephardic authorities may differ." }},
+
+  { name:"Sevruga Caviar",      cat:"Fish",
+    desc:"Roe of the smallest Caspian sturgeon; smaller, more intensely flavoured grains than osetra or beluga. The most widely available of the classic caviars.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"y", lent:"y" },
+    notes:{ kosher:"Sturgeon lacks kosher scales — not kosher by most authorities." }},
+
+  { name:"Almas Caviar",        cat:"Fish",
+    desc:"Pale gold caviar from albino beluga sturgeon, aged over 60 years; considered the rarest and most expensive food in the world.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"n", halal:"y", lent:"y" },
+    notes:{ kosher:"Albino beluga sturgeon — same kashrus issue as all sturgeon: not kosher by most authorities." }},
+
+  // ─── VEGETARIAN / VEGAN (additional) ─────────────────────────────────────
+  { name:"Crosnes",             cat:"Vegetarian / Vegan",
+    desc:"Tiny segmented tubers (Chinese artichoke / Japanese artichoke); nutty, crunchy, and sweet. Notoriously difficult to peel.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Underground tuber — not permitted in Jain diet." }},
+
+  { name:"Scorzonera",          cat:"Vegetarian / Vegan",
+    desc:"Black-skinned root vegetable (black salsify); sweet, slightly bitter white flesh with an oyster-like flavour when cooked.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A root vegetable — not permitted in Jain diet." }},
+
+  { name:"Ramson / Wild Garlic",cat:"Vegetarian / Vegan",
+    desc:"Wild garlic with broad leaves and white flowers; the leaves, flowers, and buds all eaten. Intense garlic flavour, strong spring season.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Garlic — not permitted in Jain diet." }},
+
+  { name:"Ramps",               cat:"Vegetarian / Vegan",
+    desc:"North American wild leek with a garlicky, onion-like flavour; intensely seasonal in early spring. Hugely popular in New American cooking.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A wild allium (garlic/onion family) — not permitted in Jain diet." }},
+
+  { name:"Matsutake",           cat:"Vegetarian / Vegan",
+    desc:"Prized Japanese pine mushroom harvested in autumn; spicy, cinnamon-like aroma. Among the most expensive mushrooms in the world.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Wild mushrooms must be checked for insects.", jain:"Matsutake grows above ground — permitted in Jain diet." }},
+
+  { name:"Black Truffle",       cat:"Vegetarian / Vegan",
+    desc:"Périgord truffle (Tuber melanosporum); the 'black diamond of the kitchen', intensely earthy and aromatic. Shaved over dishes or cooked whole.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Truffles are fungi — kosher; must be checked for insects.", jain:"Truffles grow underground but are fungi, not root vegetables; accepted by most Jain traditions." }},
+
+  { name:"White Truffle",       cat:"Vegetarian / Vegan",
+    desc:"Alba truffle (Tuber magnatum); more pungent and complex than black truffle, always served raw — shaved tableside. The most expensive truffle.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Fungi — kosher; insect inspection required.", jain:"As with black truffle, accepted by most Jain traditions despite growing underground." }},
+
+  // ─── CHEESE (new category) ───────────────────────────────────────────────
+  { name:"Brillat-Savarin",     cat:"Cheese",
+    desc:"Triple-cream French cow's milk cheese, 75% fat; named after the gastronome. Impossibly rich, like edible butter.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Traditional French cheeses use animal rennet — not strictly vegetarian; microbial rennet versions exist.", kosher:"Requires kosher certification (kosher rennet and rabbinical supervision)." }},
+
+  { name:"Époisses",            cat:"Cheese",
+    desc:"Pungent Burgundian washed-rind cheese rinsed in Marc de Bourgogne; banned on French public transport. Napoleon's favourite.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification; Marc de Bourgogne (marc brandy) wash may be an issue.", halal:"Washed in marc brandy (alcohol) — not halal in the traditional preparation." }},
+
+  { name:"Vacherin Mont-d'Or",  cat:"Cheese",
+    desc:"Seasonal Swiss/French soft cheese sold in a spruce-bark box; eaten by the spoonful, baked in its box in winter.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet in traditional production.", kosher:"Requires kosher certification." }},
+
+  { name:"Reblochon",           cat:"Cheese",
+    desc:"Soft washed-rind Savoyard cheese; the key ingredient of tartiflette. Made from milk of cows that were 'incompletely milked' to avoid a medieval tax.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification." }},
+
+  { name:"Comté",               cat:"Cheese",
+    desc:"French mountain hard cheese from the Jura; nutty, fruity, and complex — aged from 4 to 36 months. France's most consumed AOC cheese.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification." }},
+
+  { name:"Beaufort",            cat:"Cheese",
+    desc:"Alpine hard cheese from Savoie; creamier than Gruyère with a concave rind. Essential in fondue and gratin savoyard.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification." }},
+
+  { name:"Brie de Meaux",       cat:"Cheese",
+    desc:"The original Brie — AOC-protected, with an edible white rind and runny golden paste. Called the 'king of cheeses' by Talleyrand.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification." }},
+
+  { name:"Camembert de Normandie", cat:"Cheese",
+    desc:"Soft Norman cow's milk cheese in a wooden box; must be made from raw milk by hand-ladling to carry the AOC designation.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet; AOC version made with raw (unpasteurised) milk.", kosher:"Raw milk cheeses have additional kashrus considerations; requires certification." }},
+
+  { name:"Ossau-Iraty",         cat:"Cheese",
+    desc:"Firm Basque sheep's milk cheese with a smooth, buttery paste and herbal notes; one of France's oldest recorded cheeses.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification; sheep's milk cheeses are pareve in some traditions but dairy in most." }},
+
+  { name:"Mimolette",           cat:"Cheese",
+    desc:"Bright orange French hard cheese aged up to 36 months; the colour comes from annatto. Its pitted rind is created by cheese mites.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"Uses animal rennet.", kosher:"Requires kosher certification; the presence of cheese mites on the rind is a specific kashrus concern." }},
+
+  // ─── JAPANESE (additional) ────────────────────────────────────────────────
+  { name:"Kaiseki",             cat:"Other",
+    desc:"Japanese multi-course haute cuisine; a precisely ordered sequence of small dishes celebrating seasonal ingredients. The Japanese equivalent of a tasting menu.",
+    r:{ vegetarian:"p", vegan:"p", pescatarian:"p", vegequarian:"p", noRedMeat:"p", jain:"p", kosher:"p", halal:"p", lent:"p" },
+    notes:{ vegetarian:"Traditional kaiseki includes fish and often meat; vegetarian kaiseki exists (shōjin-ryōri inspired) but must be requested.", vegan:"Vegan kaiseki is rare — request in advance.", kosher:"Virtually never kosher-certified.", halal:"Can accommodate halal requests at some restaurants with advance notice." }},
+
+  { name:"Omakase",             cat:"Other",
+    desc:"'I'll leave it to you' — the diner surrenders all menu decisions to the chef. Common in sushi restaurants but used across Japanese fine dining.",
+    r:{ vegetarian:"p", vegan:"p", pescatarian:"p", vegequarian:"p", noRedMeat:"p", jain:"p", kosher:"p", halal:"p", lent:"p" },
+    notes:{ vegetarian:"Inform the chef of all restrictions when booking; omakase chefs can usually accommodate if warned in advance.", pescatarian:"At a sushi restaurant, omakase is typically all fish and seafood.", kosher:"Virtually never kosher-certified.", halal:"Inform the restaurant when booking." }},
+
+  { name:"Yakitori",            cat:"Poultry",
+    desc:"Japanese skewered grilled chicken — every part of the bird used: breast, thigh, skin, liver, heart, cartilage, and tail.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Chicken is kosher; requires certified shechita slaughter. Tare (soy/mirin glaze) must also be certified.", halal:"Chicken is halal with zabiha slaughter; check that mirin (sweet rice wine) is absent or substituted." }},
+
+  { name:"Sunomono",            cat:"Soup & Broth",
+    desc:"Japanese vinegared salad, most often thinly sliced cucumber dressed with rice vinegar, sugar, and sesame; sometimes with crab or shrimp.",
+    r:{ vegetarian:"p", vegan:"p", pescatarian:"p", vegequarian:"p", noRedMeat:"y", jain:"p", kosher:"p", halal:"y", lent:"p" },
+    notes:{ vegetarian:"Plain cucumber sunomono is vegetarian; versions with crab or shrimp are not.", vegan:"Cucumber-only version is vegan.", jain:"Cucumber is above-ground — permitted; versions with seafood are not Jain.", kosher:"Requires certified ingredients; crab/shrimp versions are not kosher.", lent:"Cucumber-only version and shrimp versions are fine for Lent." }},
+
+  // ─── TECHNIQUE & SAUCE ───────────────────────────────────────────────────
+  { name:"Sous Vide",           cat:"Technique & Sauce",
+    desc:"Vacuum-sealing food in plastic and cooking it in a precisely temperature-controlled water bath; produces exceptionally even, tender results.",
+    r:{ vegetarian:"u", vegan:"u", pescatarian:"u", vegequarian:"u", noRedMeat:"u", jain:"u", kosher:"u", halal:"u", lent:"u" },
+    notes:{ vegetarian:"Sous vide is a cooking technique — dietary compatibility depends entirely on the ingredients, not the method." }},
+
+  { name:"En Papillote",        cat:"Technique & Sauce",
+    desc:"Cooking food sealed inside a folded parchment paper parcel; the food steams in its own juices and is opened at the table.",
+    r:{ vegetarian:"u", vegan:"u", pescatarian:"u", vegequarian:"u", noRedMeat:"u", jain:"u", kosher:"u", halal:"u", lent:"u" },
+    notes:{ vegetarian:"A cooking method — dietary compatibility depends on what is cooked inside the parcel." }},
+
+  { name:"Confit",              cat:"Technique & Sauce",
+    desc:"Preserving and slow-cooking meat (classically duck or goose) submerged in its own fat at low temperature; produces incomparably tender, flavourful results.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"p", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ vegetarian:"Confit nearly always refers to meat; vegetables can be confited in oil but this is rarely what the word means on a menu.", noRedMeat:"Duck or goose confit is no-red-meat; pork confit is not.", kosher:"Duck and goose confit can be kosher if all components are certified.", halal:"Halal with certified poultry; pork confit is never halal." }},
+
+  { name:"Meunière",            cat:"Technique & Sauce",
+    desc:"'Miller's wife style' — fish dredged in flour and pan-fried, finished with brown butter (beurre noisette), lemon juice, and parsley.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"A fish preparation — not vegetarian.", kosher:"Butter cannot be served with meat; meunière on fish is kosher if the fish is kosher and butter is certified. Cannot follow a meat course." }},
+
+  { name:"Grenobloise",         cat:"Technique & Sauce",
+    desc:"A variation of meunière sauce: brown butter with capers, diced lemon segments, and croutons. Classically served with skate wing.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ vegetarian:"A fish sauce — the dish is not vegetarian.", kosher:"Same dairy-fish considerations as meunière; skate (ray) is not kosher (lacks scales)." }},
+
+  { name:"Beurre Blanc",        cat:"Technique & Sauce",
+    desc:"Emulsified white wine and shallot reduction mounted with cold butter; a classic French sauce for fish and vegetables.",
+    r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"y" },
+    notes:{ vegetarian:"A butter sauce — vegetarian.", jain:"Contains shallots — not Jain.", kosher:"Butter sauce is dairy — cannot accompany a meat dish. Wine must be kosher.", halal:"White wine in the reduction makes it non-halal unless wine is omitted." }},
+
+  { name:"Bordelaise",          cat:"Technique & Sauce",
+    desc:"Classic Bordeaux-style red wine sauce with bone marrow, shallots, and demi-glace; the canonical sauce for steak.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Contains red wine (must be kosher) and bone marrow (meat); requires full kosher certification.", halal:"Red wine makes it non-halal in traditional preparation." }},
+
+  { name:"Périgourdine",        cat:"Technique & Sauce",
+    desc:"Rich sauce from the Périgord: demi-glace with Madeira wine, black truffle, and often foie gras. Served with tournedos Rossini.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Contains Madeira wine (must be kosher) and foie gras (must be kosher-certified).", halal:"Madeira wine makes it non-halal." }},
+
+  { name:"Grand Veneur",        cat:"Technique & Sauce",
+    desc:"'Master of the Hunt' sauce: a poivrade (peppercorn) base with red currant jelly and cream; the classic accompaniment to venison and hare.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Made with game stock; kosher if all components are certified. Red wine in the poivrade base must be kosher.", halal:"Can be halal with zabiha game and no prohibited wine." }},
+
+  { name:"Financière (sauce)",  cat:"Technique & Sauce",
+    desc:"Rich classical sauce with Madeira, mushrooms, olives, and cock's combs (crête de coq); garnish for vol-au-vent and quenelles. Not the dessert.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Madeira wine (must be kosher) and cock's combs require certification; rarely prepared kosher.", halal:"Madeira wine makes it non-halal in traditional form." }},
 ];
 
 // ── RENDER ────────────────────────────────────────────────────────────────
