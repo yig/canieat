@@ -2161,6 +2161,16 @@ const FOODS = [
     r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"p", lent:"y" },
     notes:{ kosher:"Requires kosher certification as a fermented soy product.", halal:"Traditionally brewed tamari is generally considered permissible; trace fermentation alcohol." }},
 
+  { name:"Bacon",                       cat:"Pork & Charcuterie",
+    desc:"Salt-cured and smoked pork belly (streaky) or back (back bacon / Canadian bacon). Crispy-fried as a breakfast staple, crumbled over salads, wrapped around other foods, or layered in sandwiches and burgers.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork is not kosher.", halal:"Pork is forbidden in Islam." }},
+
+  { name:"Cheeseburger",                cat:"Beef & Veal",
+    desc:"Ground beef patty grilled or pan-fried, topped with melted cheese on a bun with lettuce, tomato, onion, pickles, and condiments. The quintessential American fast food — also a fine-dining staple in wagyu form.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Beef and dairy (cheese) in the same dish is explicitly forbidden in kosher law — one of the most fundamental prohibitions.", halal:"Permissible if the beef is halal-certified and no pork-derived ingredients (bacon, lard in bun) are used." }},
+
 ];
 
 const INGREDIENTS = [
@@ -2574,6 +2584,8 @@ const CONTAINS_DATA = {
   "Lox":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"y", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
   "Nutritional Yeast":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
   "Tamari":{ gluten:"p", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"n", lamb:"n", game:"n", alcohol:"n", legumes:"y" },
+  "Bacon":{ gluten:"n", dairy:"n", eggs:"n", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"n", pork:"y", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
+  "Cheeseburger":{ gluten:"y", dairy:"y", eggs:"p", treenuts:"n", peanuts:"n", shellfish:"n", fish:"n", chicken:"n", beef:"y", pork:"p", lamb:"n", game:"n", alcohol:"n", legumes:"n" },
 };
 FOODS.forEach(f => { f.c = CONTAINS_DATA[f.name] || {}; });
 
