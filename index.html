@@ -803,6 +803,172 @@ const FOODS = [
     desc:"Provençal saffron and garlic mayonnaise; the traditional accompaniment to bouillabaisse.",
     r:{ vegetarian:"y", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
     notes:{ jain:"Contains garlic — not Jain-compatible.", kosher:"Eggs — may be certified kosher as a pareve condiment; cannot be served alongside unkosher food." }},
+
+  // ─── NEW: OFFAL ──────────────────────────────────────────────────────────
+  { name:"Cervelle de Veau",   cat:"Beef & Veal",
+    desc:"Veal brains, poached or pan-fried; prized for their delicate, creamy texture.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Brain and nerve tissue present insurmountable kashrus difficulties; not prepared kosher in practice.", halal:"Permissible if from a properly slaughtered animal; requires careful cleaning." }},
+
+  { name:"Tête de Veau",       cat:"Beef & Veal",
+    desc:"Calf's head, slow-boiled and served cold or warm with sauce gribiche or ravigote; a Lyonnaise bistro classic.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"p", lent:"n" },
+    notes:{ kosher:"Head meat involves significant kashrus complexities; virtually never served in kosher establishments.", halal:"Halal if from a properly slaughtered animal." }},
+
+  { name:"Joue de Bœuf",       cat:"Beef & Veal",
+    desc:"Beef cheek, braised very slowly until silky and gelatinous; intensely flavoured with a colloid-rich texture.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Cheek meat is kosher from a certified animal.", halal:"Halal with certified zabiha beef." }},
+
+  { name:"Langue de Bœuf",     cat:"Beef & Veal",
+    desc:"Beef tongue, braised whole then peeled and sliced; a staple of French bistros and Jewish delis alike.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"y", halal:"p", lent:"n" },
+    notes:{ kosher:"Tongue is among the most common and widely available kosher deli meats.", halal:"Halal with certified zabiha beef." }},
+
+  { name:"Andouillette",        cat:"Pork & Charcuterie",
+    desc:"Coarse-grained pork chitterling sausage with a pungent barnyard aroma; a beloved Lyonnaise specialty.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork intestine — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Pied de Cochon",      cat:"Pork & Charcuterie",
+    desc:"Braised pig's trotters, gelatinous and rich; often breaded and grilled after braising.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Guanciale",           cat:"Pork & Charcuterie",
+    desc:"Cured pork jowl or cheek; fattier and more aromatic than pancetta, essential for carbonara and amatriciana.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Lardo di Colonnata",  cat:"Pork & Charcuterie",
+    desc:"Cured pork fatback from the Carrara marble quarry region; aged in marble basins with rosemary and spices.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork fat — not kosher.", halal:"Pork — not halal." }},
+
+  { name:"Culatello di Zibello", cat:"Pork & Charcuterie",
+    desc:"Premium Italian cured pork rump from the Po Valley fog; silkier and more refined than prosciutto.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Pork — not kosher.", halal:"Pork — not halal." }},
+
+  // ─── NEW: GAME ────────────────────────────────────────────────────────────
+  { name:"Grouse",              cat:"Lamb & Game",
+    desc:"Wild game bird with a deep, heathery, gamey flavour; hung for several days. British season starts 'the Glorious Twelfth' (12 August).",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Wild birds must be slaughtered by shechita to be kosher; shot grouse are not kosher.", halal:"Birds killed by shooting are not considered zabiha — not halal." }},
+
+  { name:"Woodcock",            cat:"Lamb & Game",
+    desc:"Small wading game bird traditionally roasted undrawn with its intestines intact; rich, gamey, and prized.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Wild-shot and not a traditionally recognised kosher bird.", halal:"Shot in the field — not zabiha." }},
+
+  { name:"Faisan / Pheasant",   cat:"Lamb & Game",
+    desc:"Farm-raised or wild game bird; milder than grouse, often hung briefly, roasted with bacon and served with bread sauce.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Wild pheasant is not kosher; farm-raised pheasant can be kosher with shechita slaughter and full certification.", halal:"Farm-raised pheasant can be halal with zabiha slaughter; wild-shot is not." }},
+
+  { name:"Lièvre à la Royale",  cat:"Lamb & Game",
+    desc:"Whole hare boned and stuffed, braised in its own blood with Cognac and wine; one of the grand classics of French cuisine.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"n", jain:"n", kosher:"n", halal:"n", lent:"n" },
+    notes:{ kosher:"Hare is explicitly listed as non-kosher in the Torah.", halal:"Contains blood and alcohol (both prohibited); hare is also considered non-halal by most scholars." }},
+
+  // ─── NEW: FISH ────────────────────────────────────────────────────────────
+  { name:"Saint-Pierre / John Dory", cat:"Fish",
+    desc:"Bony Atlantic fish with firm, sweet white flesh; identified by the dark oval 'thumbprint' on its flank.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"John Dory has fins and scales — kosher." }},
+
+  { name:"Sandre / Zander",     cat:"Fish",
+    desc:"Freshwater pike-perch from European rivers; delicate, boneless white flesh prized in French and Central European cuisines.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Pike-perch has fins and scales — kosher." }},
+
+  { name:"Barbue / Brill",      cat:"Fish",
+    desc:"European flatfish closely related to turbot; sweet, firm flesh considered second only to turbot in quality.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Brill has scales — kosher." }},
+
+  { name:"Nodoguro",            cat:"Fish",
+    desc:"Japanese blackthroat sea perch; exceptionally fatty white flesh earns it the nickname 'the toro of white fish'.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Blackthroat sea perch has fins and scales — kosher." }},
+
+  { name:"Ankimo",              cat:"Fish",
+    desc:"Steamed and pressed monkfish liver, sliced and served cold; called the 'foie gras of the sea' for its richness.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Monkfish is a kosher fish; its liver is a permitted organ." }},
+
+  { name:"Shirako",             cat:"Fish",
+    desc:"Soft roe (milt) of male cod or fugu; custardy, mild, and delicate; a prized Japanese winter delicacy.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"y" },
+    notes:{ kosher:"Milt from a kosher fish such as cod is permitted; fugu (pufferfish) milt is not, as pufferfish lacks kosher scales.", halal:"Fish milt is generally considered halal; some stricter scholars debate it." }},
+
+  { name:"Bottarga",            cat:"Fish",
+    desc:"Pressed and salt-cured grey mullet or bluefin tuna roe, dried until firm and grated or shaved over pasta.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Grey mullet and tuna both have scales — their roe is kosher if certified." }},
+
+  { name:"Colatura di Alici",   cat:"Fish",
+    desc:"Fermented anchovy extract from Cetara, Amalfi Coast; Italy's ancient answer to fish sauce, used in drops as a condiment.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Anchovies have scales (kosher fish); colatura itself requires kosher certification of the production process." }},
+
+  { name:"Karasumi",            cat:"Fish",
+    desc:"Japanese salt-cured and wind-dried grey mullet roe; served thinly sliced with daikon and sake — Japan's answer to bottarga.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ kosher:"Grey mullet has scales — its roe is kosher." }},
+
+  // ─── NEW: POULTRY ─────────────────────────────────────────────────────────
+  { name:"Poularde Demi-Deuil", cat:"Poultry",
+    desc:"Hen poached in broth with black truffle slices slipped under the skin; 'in half-mourning', a Lyon classic of Mère Brazier.",
+    r:{ vegetarian:"n", vegan:"n", pescatarian:"n", vegequarian:"n", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"n" },
+    notes:{ kosher:"Chicken is kosher if certified; truffle and poaching broth must also meet kosher standards.", halal:"Halal with certified zabiha chicken." }},
+
+  // ─── NEW: SOUPS ────────────────────────────────────────────────────────────
+  { name:"Chawanmushi",         cat:"Soup & Broth",
+    desc:"Japanese silky steamed egg custard cooked in a lidded cup with ginkgo nuts, mitsuba, shrimp, and chicken.",
+    r:{ vegetarian:"p", vegan:"n", pescatarian:"p", vegequarian:"p", noRedMeat:"y", jain:"n", kosher:"p", halal:"p", lent:"p" },
+    notes:{ vegetarian:"Traditional chawanmushi contains shrimp and chicken; vegetarian versions with kombu dashi exist.", pescatarian:"Shrimp-only version without chicken is pescatarian-friendly.", kosher:"Traditional ingredients include shrimp (not kosher) and chicken in a custard (mixing categories); a kosher version requires reformulation.", halal:"Can be made halal with zabiha chicken and appropriate dashi.", lent:"Shrimp or vegetable version is fine for Lent; chicken version is not." }},
+
+  // ─── NEW: MUSHROOMS & VEGETABLES ─────────────────────────────────────────
+  { name:"Cèpes / Porcini",    cat:"Vegetarian / Vegan",
+    desc:"King bolete mushrooms; meaty, earthy, and nutty. Served fresh sautéed in butter or dried in sauces and risotto.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Wild mushrooms must be checked carefully for insect infestation before use." }},
+
+  { name:"Girolles / Chanterelles", cat:"Vegetarian / Vegan",
+    desc:"Golden wild mushrooms with a fruity, apricot-like aroma; sautéed simply in butter, parsley, and garlic.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Wild mushrooms must be checked for insects.", jain:"Garlic in the typical preparation is forbidden; the mushrooms themselves are permitted." }},
+
+  { name:"Trompettes de la Mort", cat:"Vegetarian / Vegan",
+    desc:"Dark, funnel-shaped wild mushrooms — 'trumpets of death' — with a smoky, earthy flavour despite their name.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Must be checked for insects." }},
+
+  { name:"Morels",              cat:"Vegetarian / Vegan",
+    desc:"Honeycomb-capped spring mushrooms with a rich, earthy, nutty flavour; toxic raw — always cooked.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"p", halal:"y", lent:"y" },
+    notes:{ kosher:"Morels have many cavities that harbour insects — thorough soaking and inspection required for kosher use." }},
+
+  { name:"Salsify",             cat:"Vegetarian / Vegan",
+    desc:"Slender root vegetable with a delicate oyster-like flavour; also called 'oyster plant'. White or black (scorzonera) varieties.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"n", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"A root vegetable — not permitted in Jain diet." }},
+
+  { name:"Cardoon",             cat:"Vegetarian / Vegan",
+    desc:"Large silver-leaved thistle related to the artichoke; blanched stalks gratin-ed with marrow and cheese.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{ jain:"Cardoon is a thistle stalk — an above-ground vegetable, compatible with Jain diet." }},
+
+  { name:"Agretti",             cat:"Vegetarian / Vegan",
+    desc:"Slender Italian coastal succulent ('monk's beard'); salty, mineral, and faintly grassy — briefly blanched and dressed with lemon.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{} },
+
+  { name:"Fiddlehead Ferns",    cat:"Vegetarian / Vegan",
+    desc:"Tightly coiled tips of young ostrich fern fronds; fleeting spring season, nutty and slightly grassy.",
+    r:{ vegetarian:"y", vegan:"y", pescatarian:"y", vegequarian:"y", noRedMeat:"y", jain:"y", kosher:"y", halal:"y", lent:"y" },
+    notes:{} },
 ];
 
 // ── RENDER ────────────────────────────────────────────────────────────────
